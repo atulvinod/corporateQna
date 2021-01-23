@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "CorporateQnA"
+    }
+  },
+  "defaultProject": "CorporateQnA",
+  "cli": {
+    "analytics": "91d3aac1-b9d0-4097-bb47-9708ee29da8d"
+  }
 }

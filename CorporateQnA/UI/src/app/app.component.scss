@@ -1,0 +1,91 @@
+$violet-dark: #524361;
+$violet-light: #76618b;
+$grey: #3E4249;
+$grey-light : #505661;
+
+body{
+    height: 100vh;
+}
+
+nav {
+  height: 61.3720929952px;
+  background-color: $violet-light;
+}
+
+.logo {
+  width: 108.066613824px;
+  background-color: $violet-dark;
+
+  &-img {
+    width: 64px;
+  }
+}
+
+.profile {
+  &-controls {
+    color: white;
+
+    & > * {
+        margin-right: 19.0705788944px;
+    }
+  }
+
+  &-pic {
+    width: 40px;
+    border-radius: 100%;
+  }
+}
+
+.sun-img{
+    width: 20px;
+}
+
+.side-bar{
+    height: 100%;
+    background-color: $grey;
+    width: 108.066613824px;
+
+    &-logos{
+        width: 25px;
+        display: block;
+    }
+
+    &-nav{
+        text-align: center;
+        display:flex;
+        justify-content:center;
+        flex-direction: column;
+        align-items: center;
+        color: white;
+        background-color: $grey-light;
+    }
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: 108.066613824px auto;
+    grid-template-rows: auto;
+    height: 100%;
+}
+
+.forum{
+    height: 5rem;
+    width: 100%;
+}
+
+.subnav{
+    margin-top: 10px;
+}
+
+.nav-item::before{
+    width: 2px;
+    background-color: black;
+    height: 1rem;
+    display: inline-block;
+    content:"";
+}
+
+.nav-link{
+    display: inline-block;
+    padding: .5rem 1rem;
+}
