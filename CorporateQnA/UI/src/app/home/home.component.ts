@@ -1,6 +1,6 @@
 import { FormControl, FormGroup } from '@angular/forms';
 import { Component } from '@angular/core';
-import { faSearch, faPlus, faRedo } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faPlus, faRedo, faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component
     ({
@@ -11,6 +11,8 @@ export class HomeComponent {
     faSearch = faSearch;
     faPlus = faPlus;
     faRedo = faRedo;
+    thumbsUp = faThumbsUp
+    thumbsDown = faThumbsDown
     searchForm: FormGroup
 
     constructor() {
