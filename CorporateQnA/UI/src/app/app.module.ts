@@ -8,6 +8,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SectionsNavComponent } from './sections-nav/sections-nav.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CategoriesModule } from './categories/categories.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   imports: [
     SharedModule,
     BrowserModule,
+    CategoriesModule,
     HomeModule,
     AppRoutingModule,
     ReactiveFormsModule,
