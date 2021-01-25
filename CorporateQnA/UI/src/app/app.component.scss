@@ -4,6 +4,8 @@ $grey: #3E4249;
 $grey-light : #505661;
 $text-muted : #757575;
 
+
+
 body{
     height: 100vh;
 }
@@ -34,6 +36,11 @@ nav {
   &-pic {
     width: 40px;
     border-radius: 100%;
+
+    &-sm{
+      border-radius: 100%;
+      width: 20px;
+    }
   }
 }
 
@@ -163,9 +170,102 @@ nav {
 
 //---------------- HOME Main content---------------------------
 
+.home-container{
+  padding: 20px;
+  background-color: #F4F5F8;
+ 
+}
 
+.home-grid{
+  display: grid;
+  grid-template-columns: 800px auto;
+  grid-template-rows: auto;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid lightgrey;
+}
+
+.home-questions{
+  background-color: red;
+  height: 50rem;
+}
+
+.home-answer-panel{
+  background-color: blue;
+}
+
+.view-answer{
+  padding: 20px;
+  background-color:#F2F1F0
+}
+
+.answer-count{
+  padding: 10px 20px;
+  background-color: #E4E6E9;
+  border: 1px solid lightgrey;
+}
+
+.report-img{
+  width: 20px;
+}
 
 //---------------- HOME Main content---------------------------
+
+//----------------- Question Card -----------------------------
+
+.question-card{
+  padding: 20px 15px 20px 20px;
+  border-right: 5px solid transparent;
+  background-color: #fff;
+  border-bottom: 1px solid lightgrey;
+  overflow: hidden;
+  position: relative;
+}
+
+.question-flag{
+  position: absolute;
+  width: 20px;
+  height: 60px;
+  background-color: #86C06A;
+  top: -20px;
+  left: -10px;
+  transform: rotate(45deg);
+}
+
+.current-question{
+  border-right: 5px solid $violet-dark;
+}
+
+.question-card-grid{
+  display: grid;
+  grid-template-columns: 40px auto;
+  grid-gap: 8px;
+}
+
+.question-content{
+  font-size: 14px;
+}
+
+.question-views{
+  font-size: 12px;
+}
+
+.question-ans-count{
+  font-size: 12px;
+  background-color: #F4F5F8;
+  margin-left: 20px;
+  border: 1px solid #D4D7DC;
+  padding: 3px 5px;
+  border-radius: 5px;
+  color: #8B8C8C;
+}
+
+.question-time{
+  font-size: 12px;
+}
+
+//>----------------- Question Card -----------------------------
+
 
 //------------------------ SECTION NAV-------------------------
 .keka-section-nav > li{
@@ -271,3 +371,19 @@ nav {
 }
 
 //-----------------------------SELECT----------------------------
+
+.fnt-14{
+  font-size: 14px;
+}
+
+.fnt-12{
+  font-size: 12px;
+}
+
+.mt-20{
+  margin-top: 20px;
+}
+
+.p-20{
+  padding: 20px;
+}
