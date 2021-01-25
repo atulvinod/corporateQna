@@ -77,15 +77,109 @@ nav {
     margin-top: 10px;
 }
 
-.nav-item::before{
-    width: 2px;
-    background-color: black;
-    height: 1rem;
-    display: inline-block;
-    content:"";
+//------------------------ SECTION NAV-------------------------
+.keka-section-nav > li{
+  position: relative;
+  margin-bottom: 0px !important;
+  text-transform: uppercase;
 }
 
-.nav-link{
+.current-section{
+  font-weight: bold;
+  color: black;
+
+  &::before {
+    content: "";
     display: inline-block;
-    padding: .5rem 1rem;
+    width: 10px;
+    background-color: #6e6c7b;
+    height: 10px;
+    position: absolute;
+    left: 45%;
+    top: 88%;
+    transform: rotate(45deg);
+  }
+
+  a{
+    color: black !important;
+  }
 }
+
+.keka-section-nav  a {
+  display: inline-block;
+  font-size: 12px;
+  color: #818181;
+}
+
+.keka-section-nav {
+  overflow: hidden;
+  padding-top: 8px;
+}
+
+//-----------------------SECTION Nav-------------------------
+
+
+// ----------------------- SELECT-----------------------------
+.keka-custom-select {
+  position: relative;
+  font-family: Arial;
+  margin-left: 10px;
+  border: 1px solid lightgrey;
+}
+
+.keka-custom-select select {
+  display: none; /*hide original SELECT element:*/
+}
+
+/*style the arrow inside the select element:*/
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #000 transparent transparent transparent;
+}
+
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #000 transparent;
+  top: 7px;
+}
+
+/*style the items (options), including the selected item:*/
+.select-items div,
+.select-selected {
+  color: #000;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+  user-select: none;
+}
+
+/*style items (options):*/
+.select-items {
+  position: absolute;
+  top: 90%;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  border: 1px solid lightgrey;
+  background-color: white;
+  box-shadow: 0px 0px 3px black;
+}
+
+/*hide the items when the select box is closed:*/
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover,
+.same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+//-----------------------------SELECT----------------------------
