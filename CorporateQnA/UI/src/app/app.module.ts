@@ -1,3 +1,4 @@
+import { UsersModule } from './users/users.module';
 import { HomeModule } from './home/home.module';
 import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -23,7 +24,8 @@ import { CategoriesModule } from './categories/categories.module';
     HomeModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    UsersModule
   ],
   providers: [],
   bootstrap: [AppComponent]

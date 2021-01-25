@@ -5,7 +5,7 @@
     <li class="nav-item" [ngClass]="{'current-section':getRoute()=='/categories'}">
       <a class="nav-link" href="categories" [routerLink]="['categories']">Categories</a>
     </li>
-    <li class="nav-item" [ngClass]="{'current-section':getRoute()=='/users'}">
-      <a class="nav-link" href="#">Users</a>
+    <li class="nav-item" [ngClass]="{'current-section':getRoute().indexOf('/users')!=-1}">
+      <a class="nav-link" href="users/all" [routerLink]="['users/all']">Users</a>
     </li> 
   </ul>
