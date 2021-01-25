@@ -1,11 +1,11 @@
 <ul class="nav nav-tabs keka-section-nav">
-    <li class="nav-item current-section">
-      <a class="nav-link" href="#">Home</a>
+    <li class="nav-item" [ngClass]="{'current-section':getRoute()=='/'}">
+      <a class="nav-link" href="/" [routerLink]="['/']">Home</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Category</a>
+    <li class="nav-item" [ngClass]="{'current-section':getRoute()=='/categories'}">
+      <a class="nav-link" href="categories" [routerLink]="['categories']">Categories</a>
     </li>
-    <li class="nav-item">
+    <li class="nav-item" [ngClass]="{'current-section':getRoute()=='/users'}">
       <a class="nav-link" href="#">Users</a>
     </li> 
   </ul>

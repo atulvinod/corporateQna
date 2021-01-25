@@ -4,8 +4,6 @@ $grey: #3E4249;
 $grey-light : #505661;
 $text-muted : #757575;
 
-
-
 body{
     height: 100vh;
 }
@@ -167,6 +165,33 @@ nav {
 
 
 //>--------------- HOME SEARCH FROM----------------------------  
+
+//---------------- Categories ---------------------------------
+.categories{
+  flex-basis: 450px;
+}
+
+.show-category{
+  flex-basis: 220px;
+  margin-left: 20px;
+}
+
+.categories-grid{
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.category-card{
+  border: 1px solid lightgrey;
+  padding: 18px;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.categories-content{
+  background-color: #F4F5F8;
+}
 
 //---------------- HOME Main content---------------------------
 
@@ -399,4 +424,8 @@ nav {
 
 .p-20{
   padding: 20px;
+}
+
+.fnt-wt-600{
+  font-weight: 600;
 }
