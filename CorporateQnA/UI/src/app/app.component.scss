@@ -2,6 +2,7 @@ $violet-dark: #524361;
 $violet-light: #76618b;
 $grey: #3E4249;
 $grey-light : #505661;
+$text-muted : #757575;
 
 body{
     height: 100vh;
@@ -77,6 +78,95 @@ nav {
     margin-top: 10px;
 }
 
+//--------------- HOME SEARCH FROM----------------------------  
+.search-form-container{
+  height: 115px;
+  width: 100%;
+  background-color: #F8F8F9;
+  border-bottom: 1px solid lightgrey;
+  padding: 20px;
+}
+
+.search-form{
+  display: flex;
+}
+
+.form-select{
+  flex: 160px;
+  margin-left: 20px;
+}
+
+.form-reset{
+  flex: 200px;
+  margin-left: 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.form-input{
+  label{
+    display: block;
+  }
+  input{
+    border: none;
+  }
+}
+
+.form-select, .form-input{
+  label{
+    font-weight: 600;
+  }
+}
+
+.search-bar{
+  border: 1px solid lightgrey;
+  padding: 6px 10px;
+  background-color:white;
+  input{
+    margin-left: 5px;
+    width: 90%;
+    &:focus{
+      border:none
+    }
+  }
+  fa-icon{
+    color:$text-muted;
+  }
+}
+
+.keywords{
+  flex: 318px;
+}
+
+.question-btn{
+  background-color: $violet-dark;
+  color: white;
+  height: 45px;
+  fa-icon{
+    margin-right: 5px;
+    font-size: 10px;
+  }
+}
+
+.reset-btn{
+  color: $text-muted;
+  height: 45px;
+  fa-icon{
+    margin-right: 5px;
+    font-size: 12px;
+  }
+}
+
+
+//>--------------- HOME SEARCH FROM----------------------------  
+
+//---------------- HOME Main content---------------------------
+
+
+
+//---------------- HOME Main content---------------------------
+
 //------------------------ SECTION NAV-------------------------
 .keka-section-nav > li{
   position: relative;
@@ -122,8 +212,6 @@ nav {
 // ----------------------- SELECT-----------------------------
 .keka-custom-select {
   position: relative;
-  font-family: Arial;
-  margin-left: 10px;
   border: 1px solid lightgrey;
 }
 
@@ -135,17 +223,17 @@ nav {
 .select-selected:after {
   position: absolute;
   content: "";
-  top: 14px;
+  top: 45%;
   right: 10px;
   width: 0;
   height: 0;
   border: 6px solid transparent;
-  border-color: #000 transparent transparent transparent;
+  border-color: #757575 transparent transparent transparent;
 }
 
 /*point the arrow upwards when the select box is open (active):*/
 .select-selected.select-arrow-active:after {
-  border-color: transparent transparent #000 transparent;
+  border-color: transparent transparent #757575 transparent;
   top: 7px;
 }
 
@@ -153,11 +241,11 @@ nav {
 .select-items div,
 .select-selected {
   color: #000;
-  padding: 8px 16px;
-  border: 1px solid transparent;
+  padding: 7px 16px;
   border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
   cursor: pointer;
   user-select: none;
+  background-color: white;
 }
 
 /*style items (options):*/

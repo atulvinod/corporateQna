@@ -1,5 +1,6 @@
 import { FormGroup } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
+import { faAd } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-keka-select',
@@ -9,14 +10,20 @@ export class KekaSelectComponent implements OnInit {
 
   @Input() formGroup:FormGroup;
   @Input() controlName: string;
-  
+  selectID:string
   constructor() { }
 
   ngOnInit(): void {
+      this.selectID = "_select-"+this.controlName
+      console.log(this.selectID);
   }
 
+  generated = false;
   ngAfterViewInit(){
+    if(this.generated == false){
     this.renderSelect()
+    this.generated = true
+    }
   }
 
   renderSelect() {
@@ -24,18 +31,18 @@ export class KekaSelectComponent implements OnInit {
     let i, j, l;
     let searchForm = this.formGroup;
     let control = this.controlName;
-    selects = document.getElementsByClassName("keka-custom-select");
+    selects = document.getElementById(this.selectID);
     console.log(selects)
-    l = selects.length;
+    l = 1;
 
     for (i = 0; i < l; i++) {
-        selectElement = selects[i].getElementsByTagName("select")[0];
+        selectElement = selects.getElementsByTagName("select")[0];
         selectsCount = selectElement.length;
         /*for each element, create a new DIV that will act as the selected item:*/
         selectedItemDiv = document.createElement("DIV");
         selectedItemDiv.setAttribute("class", "select-selected");
         selectedItemDiv.innerHTML = selectElement.options[selectElement.selectedIndex].innerHTML;
-        selects[i].appendChild(selectedItemDiv);
+        selects.appendChild(selectedItemDiv);
         /*for each element, create a new DIV that will contain the option list:*/
         optionsList = document.createElement("DIV");
         optionsList.setAttribute("class", "select-items select-hide");
@@ -75,7 +82,7 @@ export class KekaSelectComponent implements OnInit {
             optionsList.appendChild(optionItem);
         }
 
-        selects[i].appendChild(optionsList);
+        selects.appendChild(optionsList);
 
         selectedItemDiv.addEventListener("click", function (e) {
             e.stopPropagation();
