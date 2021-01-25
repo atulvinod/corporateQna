@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\My Projects\\Keka Internship Tasks\\New folder\\CorporateQnA\\CorporateQnA\\CorporateQnA.csproj": {}
+    "C:\\Users\\atulv\\Documents\\CorporateQnA\\CorporateQnA\\CorporateQnA\\CorporateQnA.csproj": {}
   },
   "projects": {
-    "D:\\My Projects\\Keka Internship Tasks\\New folder\\CorporateQnA\\CorporateQnA\\CorporateQnA.csproj": {
+    "C:\\Users\\atulv\\Documents\\CorporateQnA\\CorporateQnA\\CorporateQnA\\CorporateQnA.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\My Projects\\Keka Internship Tasks\\New folder\\CorporateQnA\\CorporateQnA\\CorporateQnA.csproj",
+        "projectUniqueName": "C:\\Users\\atulv\\Documents\\CorporateQnA\\CorporateQnA\\CorporateQnA\\CorporateQnA.csproj",
         "projectName": "CorporateQnA",
-        "projectPath": "D:\\My Projects\\Keka Internship Tasks\\New folder\\CorporateQnA\\CorporateQnA\\CorporateQnA.csproj",
+        "projectPath": "C:\\Users\\atulv\\Documents\\CorporateQnA\\CorporateQnA\\CorporateQnA\\CorporateQnA.csproj",
         "packagesPath": "C:\\Users\\atulv\\.nuget\\packages\\",
-        "outputPath": "D:\\My Projects\\Keka Internship Tasks\\New folder\\CorporateQnA\\CorporateQnA\\obj\\",
+        "outputPath": "C:\\Users\\atulv\\Documents\\CorporateQnA\\CorporateQnA\\CorporateQnA\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\atulv\\AppData\\Roaming\\NuGet\\NuGet.Config",

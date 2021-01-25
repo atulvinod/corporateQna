@@ -2,26 +2,16 @@
 <div class="grid">
   <div class="side-bar">
     <div class="forum side-bar-nav">
-      <img src="../assets/forum_logo.png" alt="" class="side-bar-logos">
+      <img src="../../assets/forum_logo.png" alt="" class="side-bar-logos" />
       <span>Forum</span>
     </div>
   </div>
   <div class="content">
-    <div class="subnav">
-      <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Active</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
-      </ul>
+    <div class="sections-nav">
+      <app-sections-nav></app-sections-nav>
+    </div>
+    <div>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>
