@@ -338,6 +338,62 @@ nav {
   &:not(:first-child) {
     border-left: 1px solid lightgrey;
   }
+
+  &-2{
+    text-align: center;
+    background-color: #f4f5f8;
+    padding: 20px;
+    border-radius:5px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    margin-left: 10px;
+
+  }
+
+  &-value{
+    align-self: center;
+    font-size: 20px;
+  }
+}
+
+.user-details-container{
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+}
+
+.user-info-detailed{
+  padding-right: 120px;
+}
+
+.user-details-footer{
+  border-top: 1px solid lightgrey;
+}
+
+.user-detail-grid{
+  display: grid;
+  grid-template-columns: 800px auto;
+  grid-template-rows: auto;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+}
+
+.user-answer-pane{
+  background-color:#F8F8F9;
+}
+
+.user-details-nav{
+  li{
+    border-bottom: 4px solid transparent;
+  }
+  a{
+    text-decoration: none;
+    color: black;
+  }
+}
+
+.user-details-current{
+  border-bottom: 4px solid $violet-dark !important;
 }
 
 //------------------------ SECTION NAV-------------------------
@@ -463,4 +519,8 @@ nav {
 
 .fnt-wt-600 {
   font-weight: 600;
+}
+
+.dark-violet-color{
+  color: $violet-dark;
 }

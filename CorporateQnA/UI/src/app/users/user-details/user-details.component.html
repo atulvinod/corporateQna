@@ -1,0 +1,59 @@
+<div class="p-20">
+  <div>
+    <a href="" class="" [routerLink]="['/users/all']">
+      <fa-icon [icon]="faArrowLeft" class="dark-violet-color"></fa-icon>
+      <span class="ml-2 dark-violet-color">Back to users</span>
+    </a>
+  </div>
+
+  <div class="user-details-container mt-3">
+    <div class="d-flex p-20">
+      <div class="user-info d-flex user-info-detailed">
+        <img class="profile-pic-lg" src="https://i.pravatar.cc/300" alt="" />
+        <div class="user-data ml-3">
+          <h5>Jhon Doe</h5>
+          <span class="text-muted fnt-14 mt-1 d-block">Role</span>
+          <span class="text-muted fnt-14">Location</span>
+          <div class="d-flex align-items-center mt-2">
+            <fa-icon [icon]="thumbsUp" class="mr-1"></fa-icon>
+            <span class="mr-4">20</span>
+            <fa-icon [icon]="thumbsDown" class="dislike mr-1"></fa-icon>
+            <span>30</span>
+          </div>
+        </div>
+      </div>
+      <div class="user-stat-2 asked">
+        <span class="user-stat-value">12</span>
+        <span class="d-block text-muted fnt-12">Questions Asked</span>
+      </div>
+      <div class="user-stat-2 answered">
+        <span class="user-stat-value">12</span>
+        <span class="d-block text-muted fnt-12">Questions Answered</span>
+      </div>
+      <div class="user-stat-2 solved">
+        <span class="user-stat-value">12</span>
+        <span class="d-block text-muted fnt-12">Questions Solved</span>
+      </div>
+    </div>
+    <div class="user-details-footer">
+      <ul class="nav user-details-nav">
+        <li class="nav-item user-details-current">
+          <a class="nav-link " href="#">All Questions</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Answered</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <div class="user-detail-grid">
+      <div class="user-questions">
+        <app-question></app-question>
+        <app-question></app-question>
+      </div>
+      <div class="user-answer-pane"></div>
+    </div>
+  </div>
+</div>

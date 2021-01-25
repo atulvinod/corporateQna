@@ -14,7 +14,7 @@ const routes : Routes = [
                 component: AllUsersComponent
             },
             {
-                path:"view/:id",
+                path:"view",
                 component: UserDetailsComponent
             }
         ]
