@@ -1,3 +1,5 @@
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FormGroup, FormControl } from '@angular/forms';
 import { Component } from '@angular/core';
 @Component
     ({
@@ -5,5 +7,12 @@ import { Component } from '@angular/core';
         templateUrl:"./user-details.component.html"
     })
 export class UserDetailsComponent{
-    constructor() {}
+
+    searchForm: FormGroup;
+    
+    constructor() {
+        this.searchForm = new FormGroup({
+            search: new FormControl()
+        })
+    }
 }

@@ -1,11 +1,11 @@
 $violet-dark: #524361;
 $violet-light: #76618b;
-$grey: #3E4249;
-$grey-light : #505661;
-$text-muted : #757575;
+$grey: #3e4249;
+$grey-light: #505661;
+$text-muted: #757575;
 
-body{
-    height: 100vh;
+body {
+  height: 100vh;
 }
 
 nav {
@@ -27,7 +27,7 @@ nav {
     color: white;
 
     & > * {
-        margin-right: 19.0705788944px;
+      margin-right: 19.0705788944px;
     }
   }
 
@@ -35,73 +35,79 @@ nav {
     width: 40px;
     border-radius: 100%;
 
-    &-sm{
+    &-sm {
       border-radius: 100%;
       width: 20px;
+    }
+
+    &-lg {
+      border-radius: 100%;
+      width: 60px;
+      height: 60px;
     }
   }
 }
 
-.sun-img{
-    width: 20px;
+.sun-img {
+  width: 20px;
 }
 
-.side-bar{
-    height: 100%;
-    background-color: $grey;
-    width: 108.066613824px;
+.side-bar {
+  height: 100%;
+  background-color: $grey;
+  width: 108.066613824px;
 
-    &-logos{
-        width: 25px;
-        display: block;
-    }
+  &-logos {
+    width: 25px;
+    display: block;
+  }
 
-    &-nav{
-        text-align: center;
-        display:flex;
-        justify-content:center;
-        flex-direction: column;
-        align-items: center;
-        color: white;
-        background-color: $grey-light;
-    }
+  &-nav {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    background-color: $grey-light;
+  }
 }
 
-.grid{
-    display: grid;
-    grid-template-columns: 108.066613824px auto;
-    grid-template-rows: auto;
-    height: 100%;
+.grid {
+  display: grid;
+  grid-template-columns: 108.066613824px auto;
+  grid-template-rows: auto;
+  height: 100%;
 }
 
-.forum{
-    height: 5rem;
-    width: 100%;
+.forum {
+  height: 5rem;
+  width: 100%;
 }
 
-.subnav{
-    margin-top: 10px;
+.subnav {
+  margin-top: 10px;
 }
 
-//--------------- HOME SEARCH FROM----------------------------  
-.search-form-container{
+//--------------- HOME SEARCH FROM----------------------------
+.search-form-container {
   height: 115px;
   width: 100%;
-  background-color: #F8F8F9;
+  background-color: #f8f8f9;
   border-bottom: 1px solid lightgrey;
   padding: 20px;
 }
 
-.search-form{
+.search-form {
   display: flex;
 }
 
-.form-select{
+.form-select {
   flex: 160px;
   margin-left: 20px;
 }
 
-.form-reset{
+.form-reset {
   flex: 200px;
   margin-left: 20px;
   display: flex;
@@ -109,99 +115,98 @@ nav {
   justify-content: space-between;
 }
 
-.form-input{
-  label{
+.form-input {
+  label {
     display: block;
   }
-  input{
+  input {
     border: none;
   }
 }
 
-.form-select, .form-input{
-  label{
+.form-select,
+.form-input {
+  label {
     font-weight: 600;
   }
 }
 
-.search-bar{
+.search-bar {
   border: 1px solid lightgrey;
   padding: 6px 10px;
-  background-color:white;
-  input{
+  background-color: white;
+  input {
     margin-left: 5px;
     width: 90%;
-    &:focus{
-      border:none
+    &:focus {
+      border: none;
     }
   }
-  fa-icon{
-    color:$text-muted;
+  fa-icon {
+    color: $text-muted;
   }
 }
 
-.keywords{
+.keywords {
   flex: 318px;
 }
 
-.question-btn{
+.question-btn {
   background-color: $violet-dark;
   color: white;
   height: 45px;
-  fa-icon{
+  fa-icon {
     margin-right: 5px;
     font-size: 10px;
   }
 }
 
-.reset-btn{
+.reset-btn {
   color: $text-muted;
   height: 45px;
-  fa-icon{
+  fa-icon {
     margin-right: 5px;
     font-size: 12px;
   }
 }
 
-
-//>--------------- HOME SEARCH FROM----------------------------  
+//>--------------- HOME SEARCH FROM----------------------------
 
 //---------------- Categories ---------------------------------
-.categories{
+.categories {
   flex-basis: 450px;
 }
 
-.show-category{
+.show-category {
   flex-basis: 220px;
   margin-left: 20px;
 }
 
-.categories-grid{
+.standard-grid {
   display: grid;
   grid-gap: 20px;
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-.category-card{
+.category-card {
   border: 1px solid lightgrey;
   padding: 18px;
   border-radius: 5px;
   background-color: white;
 }
 
-.categories-content{
-  background-color: #F4F5F8;
+.categories-content {
+  background-color: #f4f5f8;
 }
 
 //---------------- HOME Main content---------------------------
 
-.home-container{
+.home-container {
   padding: 20px;
-  background-color: #F4F5F8;
- 
+  background-color: #f4f5f8;
 }
 
-.home-grid{
+.home-grid {
   display: grid;
   grid-template-columns: 800px auto;
   grid-template-rows: auto;
@@ -210,47 +215,47 @@ nav {
   border: 1px solid lightgrey;
 }
 
-.home-questions{
+.home-questions {
   height: 50rem;
 }
 
-.home-answer-panel{
+.home-answer-panel {
   border-left: 1px solid lightgrey;
 }
 
-.view-answer{
+.view-answer {
   padding: 20px;
-  background-color:#F2F1F0
+  background-color: #f2f1f0;
 }
 
-.answer-count{
+.answer-count {
   padding: 10px 20px;
-  background-color: #E4E6E9;
+  background-color: #e4e6e9;
   border: 1px solid lightgrey;
 }
 
-.answer-icons{
+.answer-icons {
   width: 20px;
   margin-right: 3px;
 }
 
-.dislike{
-  margin-top: 6px; 
+.dislike {
+  margin-top: 6px;
 }
 
-.answer{
-  background-color: #F8F8F9;
+.answer {
+  background-color: #f8f8f9;
 }
 
-.editor{
-  background-color: #F8F8F9;
+.editor {
+  background-color: #f8f8f9;
 }
 
-//---------------- HOME Main content---------------------------
+//>---------------- HOME Main content---------------------------
 
 //----------------- Question Card -----------------------------
 
-.question-card{
+.question-card {
   padding: 20px 15px 20px 20px;
   border-right: 5px solid transparent;
   background-color: #fff;
@@ -259,59 +264,90 @@ nav {
   position: relative;
 }
 
-.question-flag{
+.question-flag {
   position: absolute;
   width: 20px;
   height: 60px;
-  background-color: #86C06A;
+  background-color: #86c06a;
   top: -20px;
   left: -10px;
   transform: rotate(45deg);
 }
 
-.current-question{
+.current-question {
   border-right: 5px solid $violet-dark;
 }
 
-.question-card-grid{
+.question-card-grid {
   display: grid;
   grid-template-columns: 40px auto;
   grid-gap: 8px;
 }
 
-.question-content{
+.question-content {
   font-size: 14px;
 }
 
-.question-views{
+.question-views {
   font-size: 12px;
 }
 
-.question-ans-count{
+.question-ans-count {
   font-size: 12px;
-  background-color: #F4F5F8;
+  background-color: #f4f5f8;
   margin-left: 20px;
-  border: 1px solid #D4D7DC;
+  border: 1px solid #d4d7dc;
   padding: 3px 5px;
   border-radius: 5px;
-  color: #8B8C8C;
+  color: #8b8c8c;
 }
 
-.question-time{
+.question-time {
   font-size: 12px;
 }
 
 //>----------------- Question Card -----------------------------
 
+//------------------ Users -------------------------------------
+
+.user-search {
+  flex-basis: 400px;
+}
+
+.users-content {
+  background-color: #f4f5f8;
+}
+
+.user-card {
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.user-card-footer {
+  border-top: 1px solid lightgrey;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.user-stat {
+  text-align: center;
+  padding: 10px 5px;
+  flex: 1;
+  &:not(:first-child) {
+    border-left: 1px solid lightgrey;
+  }
+}
 
 //------------------------ SECTION NAV-------------------------
-.keka-section-nav > li{
+.keka-section-nav > li {
   position: relative;
   margin-bottom: 0px !important;
   text-transform: uppercase;
 }
 
-.current-section{
+.current-section {
   font-weight: bold;
   color: black;
 
@@ -327,12 +363,12 @@ nav {
     transform: rotate(45deg);
   }
 
-  a{
+  a {
     color: black !important;
   }
 }
 
-.keka-section-nav  a {
+.keka-section-nav a {
   display: inline-block;
   font-size: 12px;
   color: #818181;
@@ -344,7 +380,6 @@ nav {
 }
 
 //-----------------------SECTION Nav-------------------------
-
 
 // ----------------------- SELECT-----------------------------
 .keka-custom-select {
@@ -394,7 +429,7 @@ nav {
   z-index: 100;
   border: 1px solid lightgrey;
   background-color: white;
-  box-shadow: 0px 2px 10px rgb(0,0,0,0.2);
+  box-shadow: 0px 2px 10px rgb(0, 0, 0, 0.2);
   border-radius: 5px;
 }
 
@@ -410,22 +445,22 @@ nav {
 
 //-----------------------------SELECT----------------------------
 
-.fnt-14{
+.fnt-14 {
   font-size: 14px;
 }
 
-.fnt-12{
+.fnt-12 {
   font-size: 12px;
 }
 
-.mt-20{
+.mt-20 {
   margin-top: 20px;
 }
 
-.p-20{
+.p-20 {
   padding: 20px;
 }
 
-.fnt-wt-600{
+.fnt-wt-600 {
   font-weight: 600;
 }
