@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "xO3g8NM9eWlC1ttYx+s07hUg+872my+y8bfJS32n8eQwc9zKM0MWZYZgkBt9W5UyTHNkoPSAdZ3M3dgs63Bqlg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\atulv\\Documents\\CorporateQnA\\CorporateQnA\\CorporateQnA.Models\\CorporateQnA.Models.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\atulv\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\atulv\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

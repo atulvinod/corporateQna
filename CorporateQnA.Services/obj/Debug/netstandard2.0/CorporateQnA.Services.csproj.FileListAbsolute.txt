@@ -1,0 +1,9 @@
+C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA.Services\bin\Debug\netstandard2.0\CorporateQnA.Services.deps.json
+C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA.Services\bin\Debug\netstandard2.0\CorporateQnA.Services.dll
+C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA.Services\bin\Debug\netstandard2.0\CorporateQnA.Services.pdb
+C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA.Services\obj\Debug\netstandard2.0\CorporateQnA.Services.csprojAssemblyReference.cache
+C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA.Services\obj\Debug\netstandard2.0\CorporateQnA.Services.AssemblyInfoInputs.cache
+C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA.Services\obj\Debug\netstandard2.0\CorporateQnA.Services.AssemblyInfo.cs
+C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA.Services\obj\Debug\netstandard2.0\CorporateQnA.Services.csproj.CoreCompileInputs.cache
+C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA.Services\obj\Debug\netstandard2.0\CorporateQnA.Services.dll
+C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA.Services\obj\Debug\netstandard2.0\CorporateQnA.Services.pdb
