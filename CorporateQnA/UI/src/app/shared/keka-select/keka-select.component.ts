@@ -16,9 +16,7 @@ export class KekaSelectComponent implements OnInit {
 
     constructor() { }
 
-    ngOnInit(): void {
-        this.selectID = "_select-" + this.controlName
-    }
+    ngOnInit(): void {}
 
     generated = false;
     ngAfterViewInit() {

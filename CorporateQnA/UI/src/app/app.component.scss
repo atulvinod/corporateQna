@@ -5,6 +5,7 @@ $grey-light: #505661;
 $text-muted: #757575;
 $body-color: #f4f5f8;
 $sidebar-width: 100px;
+$modal-header-bg : #515968;
 
 body {
   height: 100vh;
@@ -112,7 +113,6 @@ nav {
 
 .form-select {
   flex: 160px;
-  margin-left: 20px;
 }
 
 .form-reset {
@@ -159,7 +159,7 @@ nav {
   flex: 318px;
 }
 
-.question-btn {
+.btn-question {
   background-color: $violet-dark;
   color: white;
   height: 45px;
@@ -519,6 +519,34 @@ nav {
 
 //-----------------------------SELECT----------------------------
 
+//----------------------------- Modals---------------------------
+.add-question{
+  max-width: 700px;
+}
+.modal-header{
+  background-color: $modal-header-bg;
+  color: white;
+  height: 68px;
+  border-radius: 0px;
+}
+
+.modal-content{
+  border: none;
+  border-radius: 0px;
+}
+
+.new-question-select{
+  width: 240px;
+}
+
+.new-question-input{
+  width: 450px;
+}
+
+//----------------------------- Modals---------------------------
+
+//------------------------------Utility --------------------------
+
 .fnt-14 {
   font-size: 14px;
 }
@@ -541,4 +569,14 @@ nav {
 
 .dark-violet-color {
   color: $violet-dark;
+}
+
+.btn-post{
+  background-color: $violet-dark;
+  color:white;
+}
+
+.btn-cancel{
+  background-color: #A4AAB2;
+  color:white;
 }
