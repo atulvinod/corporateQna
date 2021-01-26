@@ -17,7 +17,14 @@ export class KekaSelectComponent implements OnInit {
     constructor() { }
 
     ngOnInit(): void {
-        this.selectID = "from select: _select-" + this.controlName
+        this.selectID = "_select-" + this.controlName
+        this.formGroup.get(this.controlName).valueChanges.subscribe(value=>{
+            console.log("Change from keka select ",value);
+            //when the form has been reset, then  the value is null
+            if(value==null){
+                this.resetSelect();
+            }
+        })
     }
 
     generated = false;
@@ -29,25 +36,28 @@ export class KekaSelectComponent implements OnInit {
     }
 
     renderSelect() {
-        let selects, selectsCount, selectElement, selectedItemDiv, optionsList, optionItem;
+        let selects, optionsCount, selectElement, selectedItemDiv, optionsList, optionItem;
       
         let searchForm = this.formGroup;
         let control = this.controlName;
         selects = document.getElementById(this.selectID);
 
         selectElement = selects.getElementsByTagName("select")[0];
-        selectsCount = selectElement.length;
-        /*for each element, create a new DIV that will act as the selected item:*/
+        optionsCount = selectElement.length;
+
         selectedItemDiv = document.createElement("DIV");
         selectedItemDiv.setAttribute("class", "select-selected");
-        selectedItemDiv.innerHTML = selectElement.options[selectElement.selectedIndex].innerHTML;
+
+        let selectIndex = selectElement.selectedIndex == -1 ? 0 : selectElement.selectedIndex;
+        selectedItemDiv.innerHTML = selectElement.options[selectIndex].innerHTML;
+
         selects.appendChild(selectedItemDiv);
         /*for each element, create a new DIV that will contain the option list:*/
         optionsList = document.createElement("DIV");
         optionsList.setAttribute("class", "select-items select-hide");
 
       
-        for (let j = 1; j < selectsCount; j++) {
+        for (let j = 1; j < optionsCount; j++) {
             /*for each option in the original select element,
             create a new DIV that will act as an option item:*/
             optionItem = document.createElement("DIV");
@@ -112,5 +122,12 @@ export class KekaSelectComponent implements OnInit {
             }
         }
         document.addEventListener("click", closeAllSelect);
+    }
+
+    resetSelect(){
+        let select = document.getElementById(this.selectID);
+        let selectElement = select.getElementsByTagName("select")[0];
+        let selectedItemDiv = select.querySelector(".select-selected")
+        selectedItemDiv.innerHTML = selectElement.options[0].innerHTML;
     }
 }

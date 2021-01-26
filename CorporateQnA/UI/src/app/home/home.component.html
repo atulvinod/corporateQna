@@ -4,7 +4,7 @@
       <label for="">Keywords</label>
       <div class="search-bar">
         <fa-icon [icon]="faSearch"></fa-icon>
-        <input type="text" name="" id="" placeholder="Search" />
+        <input type="text" name="" id="" placeholder="Search" formControlName="searchInput"/>
       </div>
     </div>
     <div class="category form-select ml-3">
@@ -32,7 +32,7 @@
       ></app-keka-select>
     </div>
     <div class="recent form-reset">
-      <button class="reset-btn btn ml-2">
+      <button class="reset-btn btn ml-2" (click)="searchForm.reset()">
         <fa-icon [icon]="faRedo"></fa-icon>Reset
       </button>
       <button class="btn btn-question" (click)="openModal(template)">
@@ -80,56 +80,12 @@
       </div>
       <div class="d-flex flex-column justifiy-content-between">
         <div class="answers">
-          <div class="answer p-20">
-            <div class="d-flex justify-content-between">
-              <div class="user-info">
-                <div>
-                  <img
-                    src="https://i.pravatar.cc/300"
-                    alt=""
-                    class="profile-pic-sm"
-                  />
-                  <span class="ml-3">Samantha</span>
-                  <span class="ml-3 text-muted fnt-12">3 Hrs Ago</span>
-                </div>
-              </div>
-              <div class="d-flex align-items-center">
-                <button class="btn mr-1 btn-response">
-                  <fa-icon [icon]="thumbsUp" class=" like"></fa-icon>
-                  <span class="mr-2">20</span>
-                </button>
-
-                <button class="btn mr-1 btn-response">
-                  <fa-icon [icon]="thumbsDown" class="dislike "></fa-icon>
-                  <span>30</span>
-                </button>
-           
-              </div>
-            </div>
-            <p class="mt-20 fnt-14">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam
-              at facere eos voluptates atque ea vel culpa sunt, eius debitis
-              minima qui quia natus! Tempora similique sapiente minima laborum
-              nobis.
-            </p>
-            <div class="d-flex align-items-center">
-              <div class="checkbox d-inline-block">
-                <input
-                  type="checkbox"
-                  name="checkbox1"
-                  id="checkbox1"
-                  class="child-checkbox"
-                />
-                <label for="checkbox1"></label>
-              </div>
-              <span class="ml-2">Mark as solution</span>
-            </div>
-          </div>
+          <app-answer></app-answer>
         </div>
         <div class="editor">
-          <div class="big-editor">
+          <div class="big-editor" *ngIf="toggleFlyoutEditor">
             <div class="big-editor-head d-flex align-items-center justify-content-end">
-              <button class="btn big-editor-close"><fa-icon [icon]="faCompressAlt"></fa-icon></button>
+              <button class="btn big-editor-close" (click)="toggleFlyoutEditor=false"><fa-icon [icon]="faCompressAlt"></fa-icon></button>
             </div>
             <div class="big-editor-container">
               <app-editor></app-editor>
@@ -139,7 +95,7 @@
             </div>
           </div>
           <div class="mini-editor">
-            <button class="btn editor-expand">
+            <button class="btn editor-expand" (click)="toggleFlyoutEditor=true">
               <fa-icon [icon]="faExpandAlt"></fa-icon>
             </button>
             <app-editor class="editor-mini"></app-editor>
@@ -167,7 +123,7 @@
       <div class="form-input modal-form-input">
         <label for="">Question</label>
         <div class="input-bar">
-          <input type="text" name="" id="" placeholder="Enter your question" />
+          <input type="text" name="" id="" placeholder="Enter your question" formControlName="title"/>
         </div>
       </div>
       <div class="mt-3 form-input">

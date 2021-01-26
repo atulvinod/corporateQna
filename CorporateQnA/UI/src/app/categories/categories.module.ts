@@ -6,16 +6,19 @@ import { CommonModule } from '@angular/common';
 import { CategoriesRoutingModule } from './categories.routing';
 import { CategoriesComponent } from './categories.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { CategoryCardComponent } from './category-card/category-card.component';
 
 @NgModule({
   declarations: [
-    CategoriesComponent
+    CategoriesComponent,
+    CategoryCardComponent
   ],
   imports: [
     CategoriesRoutingModule,
     SharedModule,
   ],
   exports: [
+    CategoryCardComponent,
     CategoriesComponent
   ]
 })

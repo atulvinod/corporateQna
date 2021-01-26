@@ -1,3 +1,4 @@
+import { AnswerComponent } from './answer/answer.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from "@angular/core";
@@ -18,9 +19,11 @@ import { NgxEditorModule } from 'ngx-editor';
     ],
     declarations: [
         EidtorAComponent,
-        HomeComponent
+        HomeComponent,
+        AnswerComponent
     ],
     exports: [
+        AnswerComponent,
         EidtorAComponent,
         HomeComponent
     ]

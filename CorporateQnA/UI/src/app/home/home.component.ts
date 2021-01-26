@@ -14,14 +14,13 @@ export class HomeComponent implements OnInit{
     faSearch = faSearch;
     faPlus = faPlus;
     faRedo = faRedo;
-    thumbsUp = faThumbsUp
-    thumbsDown = faThumbsDown
     faExpandAlt = faExpandAlt
     faCompressAlt = faCompressAlt
 
     searchForm: FormGroup;
     newQuestionForm: FormGroup;
     
+    toggleFlyoutEditor = false;
     modalRef: BsModalRef;
 
     categoryOptions: string[] = ["all", "asp.net", "java", "node.js", "dev ops", "ux design"]
@@ -44,7 +43,11 @@ export class HomeComponent implements OnInit{
         })
     }
 
-    ngOnInit(){}
+    ngOnInit(){
+        this.searchForm.get("category").valueChanges.subscribe(value=>{
+            console.log(value);
+        })
+    }
 
     openModal(template: TemplateRef<any>) {
         this.modalRef = this.modalService.show(template,{class:"custom-modal"});

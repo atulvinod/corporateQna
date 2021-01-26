@@ -16,7 +16,7 @@
       ></app-keka-select>
     </div>
     <div class="d-flex align-items-end justify-content-between w-100">
-      <button class="reset-btn btn">
+      <button class="reset-btn btn" (click)="searchForm.reset()">
         <fa-icon [icon]="faRedo"></fa-icon>Reset
       </button>
       <button class="btn btn-question"  (click)="openModal(template)">
@@ -28,30 +28,8 @@
 </div>
 <div class="categories-content p-20">
     <div class="standard-grid">
-        <div class="category-card">
-            <div class="d-flex justify-content-between">
-                <h5 class="font-weight-bold">Name</h5>
-                <span>(tags)</span>
-            </div>
-            <p class="text-muted fnt-14 mt-2">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia iste cupiditate nisi. Hic nisi itaque nemo expedita
-            </p>
-            <div class="category-stats mt-4">
-                <span class="text-muted fnt-12">Tagged 5 this week, 103 this month</span>
-            </div>
-        </div>
-        <div class="category-card">
-            <div class="d-flex justify-content-between">
-                <h5 class="font-weight-bold">Name</h5>
-                <span>(tags)</span>
-            </div>
-            <p class="text-muted fnt-14 mt-2">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia iste cupiditate nisi. Hic nisi itaque nemo expedita
-            </p>
-            <div class="category-stats mt-4">
-                <span class="text-muted fnt-12">Tagged 5 this week, 103 this month</span>
-            </div>
-        </div>
+ 
+   <app-category></app-category>
     </div>
 </div>
 <ng-template #template>

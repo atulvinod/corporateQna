@@ -6,6 +6,7 @@ import { NgModule } from "@angular/core";
 import { UsersComponent } from "./users.component";
 import { UsersRoutingModule } from "./users.routing";
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { UserCardComponent } from './user-card/user-card.component';
 
 @NgModule({
     imports:[
@@ -13,11 +14,13 @@ import { UserDetailsComponent } from './user-details/user-details.component';
         SharedModule,
     ],
     declarations:[
+        UserCardComponent,
         UsersComponent,
         AllUsersComponent,
         UserDetailsComponent
     ],
     exports:[
+        UserCardComponent,
         UsersComponent,
         AllUsersComponent,
         UserDetailsComponent
