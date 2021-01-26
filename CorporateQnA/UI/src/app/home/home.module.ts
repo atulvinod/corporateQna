@@ -5,14 +5,15 @@ import { HomeComponent } from "./home.component";
 import { HomeRoutingModule } from "./home.routing";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SharedModule } from '../shared/shared.module';
-
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
     imports:[
         HomeRoutingModule,
         ReactiveFormsModule,
         FontAwesomeModule,
-        SharedModule
+        SharedModule,
+        ModalModule.forChild()
     ],
     declarations:[
         HomeComponent

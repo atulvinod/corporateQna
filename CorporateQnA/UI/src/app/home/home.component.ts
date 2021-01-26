@@ -1,6 +1,7 @@
 import { FormControl, FormGroup } from '@angular/forms';
-import { Component } from '@angular/core';
+import { Component, TemplateRef } from '@angular/core';
 import { faSearch, faPlus, faRedo, faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component
     ({
@@ -14,12 +15,12 @@ export class HomeComponent {
     thumbsUp = faThumbsUp
     thumbsDown = faThumbsDown
     searchForm: FormGroup
+    modalRef: BsModalRef;
+    categoryOptions: string[] = ["all", "asp.net", "java", "node.js", "dev ops", "ux design"]
+    showOptions: string[] = ["all", "my questions", "my participation", "hot", "solved", "unsolved"]
+    sortByOptions: string[] = ["all", "recent", "last 10 days", "last 30 days"]
 
-    categoryOptions :string[] = ["all","asp.net","java","node.js","dev ops","ux design"]
-    showOptions :string[] =["all","my questions","my participation","hot","solved","unsolved"]
-    sortByOptions:string[] = ["all","recent","last 10 days","last 30 days"]
-
-    constructor() {
+    constructor(private modalService: BsModalService) {
 
         this.searchForm = new FormGroup({
             searchInput: new FormControl(""),
@@ -27,6 +28,9 @@ export class HomeComponent {
             show: new FormControl("0"),
             sortBy: new FormControl("0")
         })
+    }
 
+    openModal(template: TemplateRef<any>) {
+        this.modalRef = this.modalService.show(template);
     }
 }
