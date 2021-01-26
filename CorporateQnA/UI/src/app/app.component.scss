@@ -1,4 +1,3 @@
-
 //COLORS
 $violet-dark: #524361;
 $violet-light: #76618b;
@@ -8,28 +7,36 @@ $text-muted: #757575;
 $body-color: #f4f5f8;
 $sidebar-width: 100px;
 $modal-header-bg: #515968;
-$checkbox-color:green;
+$checkbox-color: green;
 
 //MEASUREMENTS
 $checkbox-width: 20px;
-$logo-img-width:64px;
-$nav-height:61.3720929952px;
-$profile-right-margin:19.0705788944px;
-$profile-pic-regular-width:40px;
-$profile-pic-sm-width:20px;
-$profile-pic-lg-width:40px;
+$logo-img-width: 64px;
+$nav-height: 61.3720929952px;
+$profile-right-margin: 19.0705788944px;
+$profile-pic-regular-width: 40px;
+$profile-pic-sm-width: 20px;
+$profile-pic-lg-width: 40px;
 $sun-img-width: 20px;
 $sidebar-logos-width: 25px;
-$form-select-flex : 160px;
-$form-reset-flex :  200px;
-$keywords-input-flex:  318px;
+$form-select-flex: 160px;
+$form-reset-flex: 200px;
+$keywords-input-flex: 318px;
 $categories-flex: 450px;
-$show-categories-flex : 220px;
+$show-categories-flex: 220px;
 $default-grid-gap: 20px;
 $custom-modal-width: 700px;
 $modal-input-width: 450px;
+
+//GRID
 $home-grid-width: 58%;
 
+//BIG EDITOR
+$big-editor-height: 30rem;
+$big-editor-width: 45rem;
+$big-editor-top: -375%;
+$big-editor-left: -30%;
+$big-editor-head: 45px;
 
 body {
   height: 100vh;
@@ -290,6 +297,16 @@ nav {
   margin: 0px 12px;
   border-radius: 5px;
   border: 1px solid lightgrey;
+  position: relative;
+}
+
+.editor-expand {
+  // position: absolute;
+  padding: 0px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
 }
 
 //>---------------- HOME Main content---------------------------
@@ -634,7 +651,7 @@ nav {
       top: 0;
       background-color: $checkbox-color;
       border-radius: 3px;
-      left: -2px;  
+      left: -2px;
     }
 
     &:checked ~ label::after {
@@ -660,11 +677,65 @@ nav {
   }
 }
 
-.NgxEditor__MenuBar{
-  background-color: white;
-  border: none !important;
+.editor-mini {
+  .NgxEditor__Wrapper {
+    border: none !important;
+  }
+  .NgxEditor__MenuBar {
+    background-color: white;
+    border: none !important;
+  }
 }
 
-.NgxEditor__Wrapper{
-  border: none !important;
+.big-editor {
+
+  
+
+  height: $big-editor-height;
+  width: $big-editor-width;
+  position: absolute;
+  top: $big-editor-top;
+  left: $big-editor-left;
+  z-index: 2;
+  background-color: #fff;
+  box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.5),
+    0 -4px 13px 0 rgba(0, 0, 0, 0.16);
+  border: 1px solid #d4d7dc;
+
+  &-head {
+    height: $big-editor-head;
+    background-color: #505661;
+  }
+
+  &-close {
+    color: #aeb1b6;
+  }
+
+  &-container {
+    height: 100%;
+    padding: 20px 20px 65px 20px;
+  }
+
+  &-save {
+    position: absolute;
+    right: 15px;
+    bottom: 22px;
+  }
+
+  .editor-container {
+    height: 100%;
+    background-color: #fff;
+    .NgxEditor__Wrapper {
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      border: none;
+    }
+
+    .NgxEditor__MenuBar {
+      background-color: white;
+      border: none !important;
+    }
+  }
 }

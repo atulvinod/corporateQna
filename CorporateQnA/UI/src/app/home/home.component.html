@@ -120,8 +120,24 @@
             </div>
           </div>
         </div>
-        <div class="editor ">
-          <app-editor></app-editor>
+        <div class="editor">
+          <div class="big-editor">
+            <div class="big-editor-head d-flex align-items-center justify-content-end">
+              <button class="btn big-editor-close"><fa-icon [icon]="faCompressAlt"></fa-icon></button>
+            </div>
+            <div class="big-editor-container">
+              <app-editor></app-editor>
+              <button class="btn">
+                <img src="../../assets/send-plane.svg" alt="" class="big-editor-save">
+              </button>
+            </div>
+          </div>
+          <div class="mini-editor">
+            <button class="btn editor-expand">
+              <fa-icon [icon]="faExpandAlt"></fa-icon>
+            </button>
+            <app-editor class="editor-mini"></app-editor>
+          </div>
         </div>
       </div>
     </div>

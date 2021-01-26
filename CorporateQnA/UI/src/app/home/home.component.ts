@@ -1,6 +1,6 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, TemplateRef, OnInit } from '@angular/core';
-import { faSearch, faPlus, faRedo, faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faPlus, faRedo, faThumbsUp, faThumbsDown, faExpand, faExpandAlt, faCompress, faCompressArrowsAlt, faCompressAlt } from '@fortawesome/free-solid-svg-icons';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component
@@ -10,12 +10,15 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
     })
 export class HomeComponent implements OnInit{
    
+    //Icons
     faSearch = faSearch;
     faPlus = faPlus;
     faRedo = faRedo;
     thumbsUp = faThumbsUp
     thumbsDown = faThumbsDown
-    
+    faExpandAlt = faExpandAlt
+    faCompressAlt = faCompressAlt
+
     searchForm: FormGroup;
     newQuestionForm: FormGroup;
     
