@@ -11,8 +11,6 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     imports:[
         UsersRoutingModule,
         SharedModule,
-        ReactiveFormsModule,
-        FontAwesomeModule
     ],
     declarations:[
         UsersComponent,

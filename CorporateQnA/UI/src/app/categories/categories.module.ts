@@ -12,14 +12,10 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     CategoriesComponent
   ],
   imports: [
-    CommonModule,
     CategoriesRoutingModule,
     SharedModule,
-    ReactiveFormsModule,
-    FontAwesomeModule,
-    ModalModule.forChild()
   ],
-  exports:[
+  exports: [
     CategoriesComponent
   ]
 })

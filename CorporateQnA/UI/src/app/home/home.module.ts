@@ -12,10 +12,7 @@ import { NgxEditorModule } from 'ngx-editor';
 @NgModule({
     imports: [
         HomeRoutingModule,
-        ReactiveFormsModule,
-        FontAwesomeModule,
         SharedModule,
-        ModalModule.forChild(),
         NgxEditorModule,
         FormsModule
     ],
