@@ -144,6 +144,7 @@ nav {
 
 .form-select {
   flex: $form-select-flex;
+  border-radius: 3px;
 }
 
 .form-reset {
@@ -162,6 +163,14 @@ nav {
   }
 }
 
+.text-area {
+  background-color: #f8f8f9;
+  padding: 10px;
+  border: 1px solid lightgrey;
+  resize: none;
+  border-radius: 3px;
+}
+
 .form-select,
 .form-input {
   label {
@@ -174,6 +183,7 @@ nav {
   padding: 6px 10px;
   background-color: white;
   display: flex;
+  border-radius: 3px;
   input {
     margin-left: 5px;
     flex: 1;
@@ -183,6 +193,20 @@ nav {
   }
   fa-icon {
     color: $text-muted;
+  }
+}
+
+.input-bar {
+  border: 1px solid lightgrey;
+  padding: 6px 10px;
+  background-color: white;
+  display: flex;
+  border-radius: 3px;
+  input {
+    flex: 1;
+    &:focus {
+      border: none;
+    }
   }
 }
 
@@ -504,6 +528,7 @@ nav {
 .keka-custom-select {
   position: relative;
   border: 1px solid lightgrey;
+  border-radius: 3px;
 }
 
 .keka-custom-select select {
@@ -537,6 +562,7 @@ nav {
   cursor: pointer;
   user-select: none;
   background-color: white;
+  border-radius: 3px;
 }
 
 /*style items (options):*/
@@ -588,7 +614,96 @@ nav {
   width: $modal-input-width;
 }
 
+.new-question-desc {
+  height: 15rem;
+  border: 1px solid lightgray;
+  padding: 10px;
+  .editor-container {
+    height: 100%;
+  }
+  .NgxEditor__Wrapper {
+    border: none;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .NgxEditor__MenuBar {
+    background-color: white;
+    border: none !important;
+  }
+}
+
 //----------------------------- Modals---------------------------
+
+//------------------------------- Editor styling ----------------
+
+.editor-mini {
+  .NgxEditor__Wrapper {
+    border: none !important;
+  }
+  .NgxEditor__MenuBar {
+    background-color: white;
+    border: none !important;
+  }
+}
+
+.big-editor {
+  //
+  display: none;
+  //
+
+  height: $big-editor-height;
+  width: $big-editor-width;
+  position: absolute;
+  top: $big-editor-top;
+  left: $big-editor-left;
+  z-index: 2;
+  background-color: #fff;
+  box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.5),
+    0 -4px 13px 0 rgba(0, 0, 0, 0.16);
+  border: 1px solid #d4d7dc;
+
+  &-head {
+    height: $big-editor-head;
+    background-color: #505661;
+  }
+
+  &-close {
+    color: #aeb1b6;
+  }
+
+  &-container {
+    height: 100%;
+    padding: 20px 20px 65px 20px;
+  }
+
+  &-save {
+    position: absolute;
+    right: 15px;
+    bottom: 22px;
+  }
+
+  .editor-container {
+    height: 100%;
+    background-color: #fff;
+    .NgxEditor__Wrapper {
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      border: none;
+    }
+
+    .NgxEditor__MenuBar {
+      background-color: white;
+      border: none !important;
+    }
+  }
+}
+
+//------------------------------- Editor styling--------------------
 
 //------------------------------Utility --------------------------
 
@@ -674,68 +789,5 @@ nav {
     user-select: none;
     left: -1px;
     margin-top: -2px;
-  }
-}
-
-.editor-mini {
-  .NgxEditor__Wrapper {
-    border: none !important;
-  }
-  .NgxEditor__MenuBar {
-    background-color: white;
-    border: none !important;
-  }
-}
-
-.big-editor {
-
-  
-
-  height: $big-editor-height;
-  width: $big-editor-width;
-  position: absolute;
-  top: $big-editor-top;
-  left: $big-editor-left;
-  z-index: 2;
-  background-color: #fff;
-  box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.5),
-    0 -4px 13px 0 rgba(0, 0, 0, 0.16);
-  border: 1px solid #d4d7dc;
-
-  &-head {
-    height: $big-editor-head;
-    background-color: #505661;
-  }
-
-  &-close {
-    color: #aeb1b6;
-  }
-
-  &-container {
-    height: 100%;
-    padding: 20px 20px 65px 20px;
-  }
-
-  &-save {
-    position: absolute;
-    right: 15px;
-    bottom: 22px;
-  }
-
-  .editor-container {
-    height: 100%;
-    background-color: #fff;
-    .NgxEditor__Wrapper {
-      height: 100%;
-      display: flex;
-      justify-content: space-between;
-      flex-direction: column;
-      border: none;
-    }
-
-    .NgxEditor__MenuBar {
-      background-color: white;
-      border: none !important;
-    }
   }
 }

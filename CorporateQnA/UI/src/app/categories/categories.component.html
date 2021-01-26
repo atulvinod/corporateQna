@@ -65,17 +65,17 @@
     <form [formGroup]="newCategoryForm">
       <div class="form-input modal-form-input">
         <label for="">Category Name</label>
-        <div class="search-bar">
+        <div class="input-bar">
           <input type="text" name="" id="" placeholder="Enter category name" />
         </div>
       </div>
       <div class="mt-3 form-input">
         <label for="">Discription</label>
-        <textarea></textarea>
+        <textarea placeholder="Enter your text here" class="text-area" cols="59" rows="5" ></textarea>
       </div>
     </form>
     <div class="d-flex justify-content-end mt-4">
-      <button class="btn btn-cancel mr-2">Cancel</button>
+      <button class="btn btn-cancel mr-2"(click)="modalRef.hide()">Cancel</button>
       <button class="btn btn-post">Save</button>
     </div>
   </div>
