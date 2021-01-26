@@ -28,6 +28,8 @@ $show-categories-flex : 220px;
 $default-grid-gap: 20px;
 $custom-modal-width: 700px;
 $modal-input-width: 450px;
+$home-grid-width: 58%;
+
 
 body {
   height: 100vh;
@@ -238,7 +240,7 @@ nav {
 
 .home-grid {
   display: grid;
-  grid-template-columns: 58% auto;
+  grid-template-columns: $home-grid-width auto;
   grid-template-rows: auto;
   border-radius: 5px;
   overflow: hidden;
@@ -283,7 +285,11 @@ nav {
 }
 
 .editor {
-  background-color: #f8f8f9;
+  background-color: white;
+  padding: 10px;
+  margin: 0px 12px;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
 }
 
 //>---------------- HOME Main content---------------------------
@@ -654,3 +660,11 @@ nav {
   }
 }
 
+.NgxEditor__MenuBar{
+  background-color: white;
+  border: none !important;
+}
+
+.NgxEditor__Wrapper{
+  border: none !important;
+}
