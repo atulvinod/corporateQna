@@ -5,7 +5,9 @@ $grey-light: #505661;
 $text-muted: #757575;
 $body-color: #f4f5f8;
 $sidebar-width: 100px;
-$modal-header-bg : #515968;
+$modal-header-bg: #515968;
+$checkbox-color:green;
+$checkbox-width: 20px;
 
 body {
   height: 100vh;
@@ -252,7 +254,7 @@ nav {
   color: red;
 }
 
-.like{
+.like {
   color: green;
 }
 
@@ -391,7 +393,7 @@ nav {
   border: 1px solid lightgrey;
 }
 
-.user-details-content{
+.user-details-content {
   background-color: white;
 }
 
@@ -520,26 +522,26 @@ nav {
 //-----------------------------SELECT----------------------------
 
 //----------------------------- Modals---------------------------
-.add-question{
+.add-question {
   max-width: 700px;
 }
-.modal-header{
+.modal-header {
   background-color: $modal-header-bg;
   color: white;
   height: 68px;
   border-radius: 0px;
 }
 
-.modal-content{
+.modal-content {
   border: none;
   border-radius: 0px;
 }
 
-.new-question-select{
+.new-question-select {
   width: 240px;
 }
 
-.new-question-input{
+.modal-form-input {
   width: 450px;
 }
 
@@ -571,12 +573,64 @@ nav {
   color: $violet-dark;
 }
 
-.btn-post{
+.btn-post {
   background-color: $violet-dark;
-  color:white;
+  color: white;
 }
 
-.btn-cancel{
-  background-color: #A4AAB2;
-  color:white;
+.btn-cancel {
+  background-color: #a4aab2;
+  color: white;
 }
+
+.checkbox {
+  width: $checkbox-width;
+  border: 1px solid white;
+  height: $checkbox-width;
+  position: relative;
+  border: 2px solid lightgrey;
+  border-radius: 3px;
+
+  &:hover {
+    // background-color: rgb(9, 24, 43);
+  }
+
+  input {
+    opacity: 0;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+
+    &:checked ~ label {
+      display: block;
+      width: $checkbox-width;
+      height: $checkbox-width;
+      top: 0;
+      background-color: $checkbox-color;
+      border-radius: 3px;
+      left: -2px;  
+    }
+
+    &:checked ~ label::after {
+      content: "";
+      cursor: pointer;
+      display: block;
+      height: 17px;
+      width: 8px;
+      transform: rotate(45deg);
+      border-bottom: 3px solid white;
+      border-right: 3px solid white;
+      margin-left: 6px;
+    }
+  }
+
+  label {
+    position: absolute;
+    display: none;
+    top: 0;
+    user-select: none;
+    left: -1px;
+    margin-top: -2px;
+  }
+}
+

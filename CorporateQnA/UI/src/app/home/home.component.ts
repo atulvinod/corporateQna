@@ -9,14 +9,18 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
         templateUrl: "./home.component.html"
     })
 export class HomeComponent implements OnInit{
+   
     faSearch = faSearch;
     faPlus = faPlus;
     faRedo = faRedo;
     thumbsUp = faThumbsUp
     thumbsDown = faThumbsDown
+    
     searchForm: FormGroup;
     newQuestionForm: FormGroup;
+    
     modalRef: BsModalRef;
+
     categoryOptions: string[] = ["all", "asp.net", "java", "node.js", "dev ops", "ux design"]
     showOptions: string[] = ["all", "my questions", "my participation", "hot", "solved", "unsolved"]
     sortByOptions: string[] = ["all", "recent", "last 10 days", "last 30 days"]

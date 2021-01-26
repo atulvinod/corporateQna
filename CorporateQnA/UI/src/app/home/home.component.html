@@ -7,7 +7,7 @@
         <input type="text" name="" id="" placeholder="Search" />
       </div>
     </div>
-    <div class="category form-select">
+    <div class="category form-select ml-3">
       <label for="">Category</label>
       <app-keka-select
         [formGroup]="searchForm"
@@ -15,7 +15,7 @@
         [options]="categoryOptions"
       ></app-keka-select>
     </div>
-    <div class="show form-select">
+    <div class="show form-select ml-3">
       <label for="">Show</label>
       <app-keka-select
         [formGroup]="searchForm"
@@ -23,7 +23,7 @@
         [options]="showOptions"
       ></app-keka-select>
     </div>
-    <div class="recent form-select">
+    <div class="recent form-select ml-3">
       <label for="">Sort By</label>
       <app-keka-select
         [formGroup]="searchForm"
@@ -100,9 +100,12 @@
         <p class="mt-20 fnt-14">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam at facere eos voluptates atque ea vel culpa sunt, eius debitis minima qui quia natus! Tempora similique sapiente minima laborum nobis.
         </p>
-        <div>
-          <input type="checkbox" name="" id="">
-          <label for="">Mark as solution</label>
+        <div class="d-flex align-items-center">
+          <div class="checkbox d-inline-block">
+            <input type="checkbox" name="checkbox1" id="checkbox1" class="child-checkbox"/>
+            <label for="checkbox1"></label>
+          </div>
+          <span class="ml-2">Mark as solution</span>
         </div>
         </div>
       </div>
@@ -112,7 +115,6 @@
     </div>
   </div>
 </div>
- <!-- <button type="button" class="btn btn-primary" (click)="openModal(template)">Create template modal</button> -->
  
 <ng-template #template>
   <div class="modal-header">
@@ -123,7 +125,7 @@
   </div>
   <div class="modal-body p-20">
     <form [formGroup]="newQuestionForm">
-      <div class="form-input new-question-input">
+      <div class="form-input modal-form-input">
         <label for="">Question</label>
         <div class="search-bar">
           <input type="text" name="" id="" placeholder="Enter your question" />

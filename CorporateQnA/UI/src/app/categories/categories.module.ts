@@ -5,8 +5,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CategoriesRoutingModule } from './categories.routing';
 import { CategoriesComponent } from './categories.component';
-
-
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -17,7 +16,8 @@ import { CategoriesComponent } from './categories.component';
     CategoriesRoutingModule,
     SharedModule,
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ModalModule.forChild()
   ],
   exports:[
     CategoriesComponent
