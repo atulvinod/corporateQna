@@ -67,59 +67,76 @@
           </div>
         </div>
         <p class="mt-20">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem vero explicabo accusantium mollitia incidunt id libero, 
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem vero
+          explicabo accusantium mollitia incidunt id libero,
         </p>
         <p class="text-muted mt-2 fnt-14">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem vero explicabo accusantium mollitia incidunt id libero, 
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem vero
+          explicabo accusantium mollitia incidunt id libero,
         </p>
       </div>
       <div class="answer-count">
         <span>Answers (3)</span>
       </div>
-      <div class="answers">
-        <div class="answer p-20">
-          <div class="d-flex justify-content-between">
-            <div class="user-info">
-              <div>
-                <img
-                  src="https://i.pravatar.cc/300"
-                  alt=""
-                  class="profile-pic-sm"
-                />
-                <span class="ml-3">Samantha</span>
-                <span class="ml-3 text-muted fnt-12">3 Hrs Ago</span>
+      <div class="d-flex flex-column justifiy-content-between">
+        <div class="answers">
+          <div class="answer p-20">
+            <div class="d-flex justify-content-between">
+              <div class="user-info">
+                <div>
+                  <img
+                    src="https://i.pravatar.cc/300"
+                    alt=""
+                    class="profile-pic-sm"
+                  />
+                  <span class="ml-3">Samantha</span>
+                  <span class="ml-3 text-muted fnt-12">3 Hrs Ago</span>
+                </div>
+              </div>
+              <div class="d-flex align-items-center">
+                <fa-icon [icon]="thumbsUp" class="mr-1 like"></fa-icon>
+                <span class="mr-2">20</span>
+                <fa-icon [icon]="thumbsDown" class="dislike mr-1"></fa-icon>
+                <span>30</span>
               </div>
             </div>
+            <p class="mt-20 fnt-14">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam
+              at facere eos voluptates atque ea vel culpa sunt, eius debitis
+              minima qui quia natus! Tempora similique sapiente minima laborum
+              nobis.
+            </p>
             <div class="d-flex align-items-center">
-              <fa-icon [icon]="thumbsUp" class="mr-1 like"></fa-icon>
-              <span class="mr-2">20</span>
-              <fa-icon [icon]="thumbsDown" class="dislike mr-1"></fa-icon>
-              <span>30</span>
+              <div class="checkbox d-inline-block">
+                <input
+                  type="checkbox"
+                  name="checkbox1"
+                  id="checkbox1"
+                  class="child-checkbox"
+                />
+                <label for="checkbox1"></label>
+              </div>
+              <span class="ml-2">Mark as solution</span>
             </div>
           </div>
-        <p class="mt-20 fnt-14">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam at facere eos voluptates atque ea vel culpa sunt, eius debitis minima qui quia natus! Tempora similique sapiente minima laborum nobis.
-        </p>
-        <div class="d-flex align-items-center">
-          <div class="checkbox d-inline-block">
-            <input type="checkbox" name="checkbox1" id="checkbox1" class="child-checkbox"/>
-            <label for="checkbox1"></label>
-          </div>
-          <span class="ml-2">Mark as solution</span>
         </div>
+        <div class="editor p-20">
+          <span>editor will be here</span>
         </div>
-      </div>
-      <div class="editor p-20">
-        <span>editor will be here</span>
       </div>
     </div>
   </div>
 </div>
- 
+
 <ng-template #template>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Add Question</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -149,4 +166,4 @@
       <button class="btn btn-post">Post</button>
     </div>
   </div>
-</ng-template> 
+</ng-template>

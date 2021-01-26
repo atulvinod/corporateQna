@@ -44,6 +44,6 @@ export class HomeComponent implements OnInit{
     ngOnInit(){}
 
     openModal(template: TemplateRef<any>) {
-        this.modalRef = this.modalService.show(template,{class:"add-question"});
+        this.modalRef = this.modalService.show(template,{class:"custom-modal"});
     }
 }
