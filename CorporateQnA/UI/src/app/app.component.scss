@@ -3,9 +3,17 @@ $violet-light: #76618b;
 $grey: #3e4249;
 $grey-light: #505661;
 $text-muted: #757575;
+$body-color: #f4f5f8;
+$sidebar-width: 100px;
 
 body {
   height: 100vh;
+  background-color: $body-color;
+}
+
+input:focus,
+input:active {
+  outline: none;
 }
 
 nav {
@@ -14,7 +22,7 @@ nav {
 }
 
 .logo {
-  width: 108.066613824px;
+  width: $sidebar-width;
   background-color: $violet-dark;
 
   &-img {
@@ -55,7 +63,7 @@ nav {
 .side-bar {
   height: 100%;
   background-color: $grey;
-  width: 108.066613824px;
+  width: $sidebar-width;
 
   &-logos {
     width: 25px;
@@ -75,7 +83,7 @@ nav {
 
 .grid {
   display: grid;
-  grid-template-columns: 108.066613824px auto;
+  grid-template-columns: $sidebar-width auto;
   grid-template-rows: auto;
   height: 100%;
 }
@@ -108,8 +116,7 @@ nav {
 }
 
 .form-reset {
-  flex: 200px;
-  margin-left: 20px;
+  flex: 220px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -135,9 +142,10 @@ nav {
   border: 1px solid lightgrey;
   padding: 6px 10px;
   background-color: white;
+  display: flex;
   input {
     margin-left: 5px;
-    width: 90%;
+    flex: 1;
     &:focus {
       border: none;
     }
@@ -196,19 +204,19 @@ nav {
 }
 
 .categories-content {
-  background-color: #f4f5f8;
+  background-color: $body-color;
 }
 
 //---------------- HOME Main content---------------------------
 
 .home-container {
   padding: 20px;
-  background-color: #f4f5f8;
+  background-color: $body-color;
 }
 
 .home-grid {
   display: grid;
-  grid-template-columns: 800px auto;
+  grid-template-columns: 58% auto;
   grid-template-rows: auto;
   border-radius: 5px;
   overflow: hidden;
@@ -241,6 +249,11 @@ nav {
 
 .dislike {
   margin-top: 6px;
+  color: red;
+}
+
+.like{
+  color: green;
 }
 
 .answer {
@@ -294,7 +307,7 @@ nav {
 
 .question-ans-count {
   font-size: 12px;
-  background-color: #f4f5f8;
+  background-color: $body-color;
   margin-left: 20px;
   border: 1px solid #d4d7dc;
   padding: 3px 5px;
@@ -315,7 +328,7 @@ nav {
 }
 
 .users-content {
-  background-color: #f4f5f8;
+  background-color: $body-color;
 }
 
 .user-card {
@@ -339,60 +352,65 @@ nav {
     border-left: 1px solid lightgrey;
   }
 
-  &-2{
+  &-2 {
     text-align: center;
-    background-color: #f4f5f8;
+    background-color: $body-color;
     padding: 20px;
-    border-radius:5px;
+    border-radius: 5px;
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
     margin-left: 10px;
-
   }
 
-  &-value{
+  &-value {
     align-self: center;
     font-size: 20px;
   }
 }
 
-.user-details-container{
+.user-details-container {
   border: 1px solid lightgrey;
   border-radius: 5px;
+  overflow: hidden;
 }
 
-.user-info-detailed{
+.user-info-detailed {
   padding-right: 120px;
 }
 
-.user-details-footer{
+.user-details-footer {
   border-top: 1px solid lightgrey;
 }
 
-.user-detail-grid{
+.user-detail-grid {
   display: grid;
-  grid-template-columns: 800px auto;
+  grid-template-columns: 60% auto;
   grid-template-rows: auto;
   border-radius: 5px;
   border: 1px solid lightgrey;
 }
 
-.user-answer-pane{
-  background-color:#F8F8F9;
+.user-details-content{
+  background-color: white;
 }
 
-.user-details-nav{
-  li{
+.user-answer-pane {
+  background-color: #f8f8f9;
+}
+
+.user-details-nav {
+  li {
     border-bottom: 4px solid transparent;
+    padding: 5px 10px;
   }
-  a{
+  a {
     text-decoration: none;
     color: black;
   }
 }
 
-.user-details-current{
+.user-details-current {
   border-bottom: 4px solid $violet-dark !important;
 }
 
@@ -461,8 +479,8 @@ nav {
 
 /*point the arrow upwards when the select box is open (active):*/
 .select-selected.select-arrow-active:after {
-  border-color: transparent transparent #757575 transparent;
-  top: 7px;
+  border-color: #757575 transparent transparent transparent;
+  top: 45%;
 }
 
 /*style the items (options), including the selected item:*/
@@ -496,7 +514,7 @@ nav {
 
 .select-items div:hover,
 .same-as-selected {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: #eaeef1;
 }
 
 //-----------------------------SELECT----------------------------
@@ -521,6 +539,6 @@ nav {
   font-weight: 600;
 }
 
-.dark-violet-color{
+.dark-violet-color {
   color: $violet-dark;
 }

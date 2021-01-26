@@ -15,6 +15,10 @@ export class HomeComponent {
     thumbsDown = faThumbsDown
     searchForm: FormGroup
 
+    categoryOptions :string[] = ["all","asp.net","java","node.js","dev ops","ux design"]
+    showOptions :string[] =["all","my questions","my participation","hot","solved","unsolved"]
+    sortByOptions:string[] = ["all","recent","last 10 days","last 30 days"]
+
     constructor() {
 
         this.searchForm = new FormGroup({

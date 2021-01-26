@@ -8,6 +8,7 @@ import { faSearch, faRedo, faPlus } from '@fortawesome/free-solid-svg-icons';
     })
 export class CategoriesComponent {
     
+    categoryOptions :string[] = ["all","asp.net","java","node.js","dev ops","ux design"]
     faSearch = faSearch;
     searchForm: FormGroup
     faRedo = faRedo;

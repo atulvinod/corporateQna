@@ -12,6 +12,7 @@
       <app-keka-select
         [formGroup]="searchForm"
         [controlName]="'category'"
+        [options]="categoryOptions"
       ></app-keka-select>
     </div>
     <div class="show form-select">
@@ -19,6 +20,7 @@
       <app-keka-select
         [formGroup]="searchForm"
         [controlName]="'show'"
+        [options]="showOptions"
       ></app-keka-select>
     </div>
     <div class="recent form-select">
@@ -26,10 +28,11 @@
       <app-keka-select
         [formGroup]="searchForm"
         [controlName]="'sortBy'"
+        [options]="sortByOptions"
       ></app-keka-select>
     </div>
     <div class="recent form-reset">
-      <button class="reset-btn btn">
+      <button class="reset-btn btn ml-2">
         <fa-icon [icon]="faRedo"></fa-icon>Reset
       </button>
       <button class="btn question-btn">
@@ -88,7 +91,7 @@
               </div>
             </div>
             <div class="d-flex align-items-center">
-              <fa-icon [icon]="thumbsUp" class="mr-1"></fa-icon>
+              <fa-icon [icon]="thumbsUp" class="mr-1 like"></fa-icon>
               <span class="mr-2">20</span>
               <fa-icon [icon]="thumbsDown" class="dislike mr-1"></fa-icon>
               <span>30</span>
