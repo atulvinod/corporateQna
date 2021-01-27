@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "yrI4ajkMfq9xhRRsTSWNrfRVFe92/ElKZcvI+XoTWWco6b9cfMwrYoQz1Uo47rn6FOmAKJOFFdPxSlP9R+chXA==",
+  "dgSpecHash": "dA0AabHvg91bLFvV+eKt5ckq17eReV6QldhmR4fxwAXkm92DRe3HFSg38aN+jpJF6FBJujqm9aCY5u1JPcyosg==",
   "success": true,
   "projectFilePath": "C:\\Users\\atulv\\Documents\\CorporateQnA\\CorporateQnA\\CorporateQnA.Services\\CorporateQnA.Services.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,7 @@
     "C:\\Users\\atulv\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\atulv\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\atulv\\.nuget\\packages\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
+    "C:\\Users\\atulv\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512",
     "C:\\Users\\atulv\\.nuget\\packages\\system.configuration.configurationmanager\\5.0.0\\system.configuration.configurationmanager.5.0.0.nupkg.sha512",
     "C:\\Users\\atulv\\.nuget\\packages\\system.data.sqlclient\\4.8.2\\system.data.sqlclient.4.8.2.nupkg.sha512",
     "C:\\Users\\atulv\\.nuget\\packages\\system.drawing.common\\5.0.0\\system.drawing.common.5.0.0.nupkg.sha512",

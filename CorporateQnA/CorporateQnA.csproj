@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Include="Models\ApplicationUser.cs" />
+    <None Include="Views\Shared\_Layout.cshtml" />
     <None Include="wwwroot\lib\twitter-bootstrap\css\bootstrap-grid.css" />
     <None Include="wwwroot\lib\twitter-bootstrap\css\bootstrap-grid.css.map" />
     <None Include="wwwroot\lib\twitter-bootstrap\css\bootstrap-grid.min.css" />
