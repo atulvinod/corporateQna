@@ -7,26 +7,23 @@ using PetaPoco;
 
 namespace CorporateQnA.Services.Models
 {
-    [TableName("Answer")]
+    [TableName("QuestionActivity")]
     [PrimaryKey("Id")]
-    public class Answer
+    public class QuestionActivity
     {
         [Column]
         public int Id { get; set; }
 
         [Column]
-        public int AnsweredBy { get; set; }
+        public int UserId { get; set; }
 
         [Column]
-        public int CategoryId { get; set; }
+        public int QuestionId { get; set; }
 
         [Column]
-        public string Content { get; set; }
+        public int ActivityType{ get; set; }
 
         [Column]
-        public bool IsBestSolution { get; set; }
-
-        [Column]
-        public DateTime AnsweredOn { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

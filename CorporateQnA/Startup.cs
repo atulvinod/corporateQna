@@ -2,6 +2,7 @@ using AutoMapper;
 using CorporateQnA.Config;
 using CorporateQnA.Data;
 using CorporateQnA.Models;
+using CorporateQnA.Services;
 using CorporateQnA.Services.Auth;
 using CorporateQnA.Services.ModelMaps;
 using IdentityServer4;
@@ -53,7 +54,7 @@ namespace CorporateQnA
 
             services.AddLocalApiAuthentication();
 
-            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            services.AddIdentity<AppIdentityUser, IdentityRole>(options =>
             {
                 //email should be unique
                 options.User.RequireUniqueEmail = true;
@@ -66,7 +67,7 @@ namespace CorporateQnA
 
             services
               .AddIdentityServer()
-              .AddAspNetIdentity<ApplicationUser>()
+              .AddAspNetIdentity<AppIdentityUser>()
               .AddInMemoryApiResources(IdentityServerConfig.GetApis())
               .AddInMemoryClients(IdentityServerConfig.GetClients())
               .AddInMemoryApiScopes(IdentityServerConfig.GetApiScopes())
@@ -91,6 +92,9 @@ namespace CorporateQnA
             services.AddAutoMapper(typeof(AnswerMap), typeof(QuestionMap), typeof(CategoryMap));
 
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IQuestionService, QuestionService>();
+            services.AddScoped<IAnswerService, AnswerService>();
+            services.AddScoped<IUserService, UserService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

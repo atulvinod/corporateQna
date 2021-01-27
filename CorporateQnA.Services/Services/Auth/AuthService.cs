@@ -8,16 +8,18 @@ namespace CorporateQnA.Services.Auth
 {
     public class AuthService : IAuthService
     {
-        private readonly SignInManager<ApplicationUser> signInManager;
-        private readonly UserManager<ApplicationUser> userManager;
+        private readonly SignInManager<AppIdentityUser> signInManager;
+        private readonly UserManager<AppIdentityUser> userManager;
         private readonly IIdentityServerInteractionService interactionService;
+        private readonly IUserService userService;
 
-        public AuthService(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager,
-              IIdentityServerInteractionService interactionService)
+        public AuthService(SignInManager<AppIdentityUser> signInManager, UserManager<AppIdentityUser> userManager,
+              IIdentityServerInteractionService interactionService, IUserService userService)
         {
             this.signInManager = signInManager;
             this.userManager = userManager;
             this.interactionService = interactionService;
+            this.userService = userService;
             this.userManager = userManager;
             this.interactionService = interactionService;
             this.signInManager = signInManager;
@@ -44,14 +46,20 @@ namespace CorporateQnA.Services.Auth
                 return false;
             }
 
-            var newUser = new ApplicationUser
+            var appUser = new AppUser
             {
-                Email = email,
-                UserName = username,
-                Name = name,
-                Location = location,
                 Department = department,
-                Position = position
+                Location = location,
+                Email = email,
+                Name = name
+            };
+
+            var userId = this.userService.Create(appUser);
+            var newUser = new AppIdentityUser
+            {
+                UserId = userId,
+                Email = email,
+                UserName = username
             };
 
             var result = await this.userManager.CreateAsync(newUser, password);

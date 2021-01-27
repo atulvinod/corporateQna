@@ -97,3 +97,4 @@ C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA\bin\Debug\netcor
 C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA\bin\Debug\netcoreapp5.0\IdentityServer4.AspNetIdentity.dll
 C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA\bin\Debug\netcoreapp5.0\IdentityServer4.Storage.dll
 C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA\bin\Debug\netcoreapp5.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
+C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA\bin\Debug\netcoreapp5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

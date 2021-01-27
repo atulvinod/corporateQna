@@ -8,25 +8,17 @@ namespace CorporateQnA.Models
 {
     public class Question
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
-        public string CategoryId { get; set; }
+        public int CategoryId { get; set; }
 
-        public string UserId { get; set; }
+        public int AskedBy { get; set; }
 
         public string Title { get; set; }
 
         public string Content { get; set; }
 
-        public string ViewCount { get; set; }
-
-        public string TotalAnswerCount { get; set; }
-
-        public string UpvoteCount { get; set; }
-
-        public string IsResolved { get; set; }
-
-        public string CreatedAt { get; set; }
+        public DateTime AskedOn { get; set; }
 
     }
 }

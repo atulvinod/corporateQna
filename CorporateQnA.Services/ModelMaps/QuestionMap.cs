@@ -14,12 +14,9 @@ namespace CorporateQnA.Services.ModelMaps
             //data to core
             CreateMap<CorporateQnA.Services.Models.Question, CorporateQnA.Models.Question>();
 
-            //TODO: is resolved
             //core to data
-            CreateMap<CorporateQnA.Models.Question, CorporateQnA.Services.Models.Question>()
-                .ForMember(m => m.CategoryId, opt => opt.MapFrom(x => int.Parse(x.CategoryId)))
-                .ForMember(m => m.ViewCount, opt => opt.MapFrom(x => int.Parse(x.ViewCount)))
-                .ForMember(m => m.UpvoteCount, opt => opt.MapFrom(x => int.Parse(x.UpvoteCount)));
+            CreateMap<CorporateQnA.Models.Question, CorporateQnA.Services.Models.Question>();
+
         }
     }
 }

@@ -8,20 +8,16 @@ namespace CorporateQnA.Models
 {
     public class Answer
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
-        public string UserId { get; set; }
+        public int AnsweredBy { get; set; }
 
-        public string CategoryId { get; set; }
+        public int CategoryId { get; set; }
 
         public string Content { get; set; }
 
-        public string IsBestSolution { get; set; }
+        public bool IsBestSolution { get; set; }
 
-        public string LikeCount { get; set; }
-
-        public string DislikeCount { get; set; }
-
-        public string CreatedAt { get; set; }
+        public DateTime AnsweredOn { get; set; }
     }
 }

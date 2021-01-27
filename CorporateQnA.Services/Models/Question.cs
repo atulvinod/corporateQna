@@ -18,7 +18,7 @@ namespace CorporateQnA.Services.Models
         public int CategoryId { get; set; }
 
         [Column]
-        public string UserId { get; set; }
+        public int AskedBy { get; set; }
 
         [Column]
         public string Title { get; set; }
@@ -27,18 +27,6 @@ namespace CorporateQnA.Services.Models
         public string Content { get; set; }
 
         [Column]
-        public int ViewCount { get; set; }
-
-        [Column]
-        public int UpvoteCount { get; set; }
-
-        [Column]
-        public bool IsResolved { get; set; }
-
-        [Column]
-        public DateTime CreatedAt { get; set; }
-
-        [Column]
-        public DateTime ModifiedAt { get; set; }
+        public DateTime AskedOn{ get; set; }
     }
 }

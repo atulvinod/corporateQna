@@ -15,9 +15,8 @@ namespace CorporateQnA.Services.ModelMaps
             CreateMap<Services.Models.Category, CorporateQnA.Models.Category>();
 
             //core to data
-            CreateMap<CorporateQnA.Models.Category, Models.Category>().
-               ForMember(x => x.Id, opt => opt.MapFrom(z => int.Parse(z.Id)));
-
+            CreateMap<CorporateQnA.Models.Category, Models.Category>();
+              
         }
     }
 }

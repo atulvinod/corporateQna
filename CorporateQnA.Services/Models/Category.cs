@@ -21,9 +21,9 @@ namespace CorporateQnA.Services.Models
         public string Description { get; set; }
 
         [Column]
-        public DateTime CreatedAt { get; set; }
+        public int CreatedBy{ get; set; }
 
         [Column]
-        public DateTime ModifiedAt { get; set; }
+        public DateTime CreatedOn { get; set; }
     }
 }
