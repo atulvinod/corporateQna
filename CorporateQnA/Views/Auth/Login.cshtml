@@ -1,1 +1,23 @@
-﻿
+﻿@model LoginModel;
+
+<h1>Login</h1>
+<hr />
+<form asp-controller="Auth" asp-action="Login" method="post">
+    <input type="hidden" asp-for="ReturnUrl" />
+    <div class="form-group">
+        <label>Email</label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <input type="password" asp-for="Password" class="form-control" />
+    </div>
+    <div class="mt-1">
+        <input type="submit" value="Login" class="btn btn-success" />
+    </div>
+
+</form>
+<hr />
+<div class="mt-2">
+    @*<a asp-action="Register" asp-controller="Auth" asp-route-returnUrl="@Model.ReturnUrl" class="btn btn-primary">Register</a>*@
+</div>

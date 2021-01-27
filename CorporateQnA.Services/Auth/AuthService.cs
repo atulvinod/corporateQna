@@ -1,20 +1,22 @@
-﻿using CorporateQnA.Models.View;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Threading.Tasks;
 
 namespace CorporateQnA.Services.Auth
 {
     public class AuthService : IAuthService
     {
-        public Task<bool> Login(LoginModel login)
+
+        public AuthService()
+        {
+                
+        }
+
+        public Task<bool> Login(string email, string password)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> Register(RegisterModel register)
+        public Task<bool> Register(string username, string email, string password, string location, string designation)
         {
             throw new NotImplementedException();
         }

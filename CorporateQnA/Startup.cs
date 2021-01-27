@@ -1,4 +1,7 @@
+using CorporateQnA.Config;
 using CorporateQnA.Data;
+using CorporateQnA.Models;
+using IdentityServer4;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -35,6 +38,26 @@ namespace CorporateQnA
                         builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
                     });
             });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(IdentityServerConstants.LocalApi.PolicyName, policy =>
+                {
+                    policy.AddAuthenticationSchemes(IdentityServerConstants.LocalApi.AuthenticationScheme);
+                    policy.RequireAuthenticatedUser();
+                });
+            });
+
+            services.AddLocalApiAuthentication();
+
+            services
+              .AddIdentityServer()
+              .AddAspNetIdentity<ApplicationUser>()
+              .AddInMemoryApiResources(IdentityServerConfig.GetApis())
+              .AddInMemoryClients(IdentityServerConfig.GetClients())
+              .AddInMemoryApiScopes(IdentityServerConfig.GetApiScopes())
+              .AddInMemoryIdentityResources(IdentityServerConfig.GetIdentityResources())
+              .AddDeveloperSigningCredential();
 
             services.AddDbContext<AppDbContext>(options =>
             {
