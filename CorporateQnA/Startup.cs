@@ -1,6 +1,7 @@
 using CorporateQnA.Config;
 using CorporateQnA.Data;
 using CorporateQnA.Models;
+using CorporateQnA.Services.Auth;
 using IdentityServer4;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -50,6 +51,17 @@ namespace CorporateQnA
 
             services.AddLocalApiAuthentication();
 
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                //email should be unique
+                options.User.RequireUniqueEmail = true;
+                options.Password.RequireDigit = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+            })
+             .AddEntityFrameworkStores<AppDbContext>()
+             .AddDefaultTokenProviders();
+
             services
               .AddIdentityServer()
               .AddAspNetIdentity<ApplicationUser>()
@@ -64,18 +76,6 @@ namespace CorporateQnA
                 options.UseSqlServer(configuration.GetConnectionString("DB"));
             });
 
-
-            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-            {
-                //email should be unique
-                options.User.RequireUniqueEmail = true;
-                options.Password.RequireDigit = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequireLowercase = false;
-            })
-                .AddEntityFrameworkStores<AppDbContext>()
-                .AddDefaultTokenProviders();
-
             services.ConfigureApplicationCookie(config =>
             {
                 config.Cookie.Name = "IdentityServer.Cookie";
@@ -85,6 +85,8 @@ namespace CorporateQnA
                 //to logout
                 config.LogoutPath = "/Auth/Logout";
             });
+
+            services.AddScoped<IAuthService, AuthService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -99,6 +101,8 @@ namespace CorporateQnA
             app.UseRouting();
 
             app.UseCors();
+
+            app.UseIdentityServer();
 
             app.UseAuthorization();
 

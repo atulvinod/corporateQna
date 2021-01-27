@@ -92,3 +92,8 @@ C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA\obj\Debug\netcor
 C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA\obj\Debug\netcoreapp5.0\ref\CorporateQnA.dll
 C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA\obj\Debug\netcoreapp5.0\CorporateQnA.pdb
 C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA\obj\Debug\netcoreapp5.0\CorporateQnA.genruntimeconfig.cache
+C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA\bin\Debug\netcoreapp5.0\IdentityModel.dll
+C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA\bin\Debug\netcoreapp5.0\IdentityServer4.dll
+C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA\bin\Debug\netcoreapp5.0\IdentityServer4.AspNetIdentity.dll
+C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA\bin\Debug\netcoreapp5.0\IdentityServer4.Storage.dll
+C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA\bin\Debug\netcoreapp5.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll

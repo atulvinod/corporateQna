@@ -21,8 +21,11 @@ namespace CorporateQnA.Models.View
         [Required]
         public string Location { get; set; }
 
-        public string Department { get; set; }
+        [Required]
+        public string Position{ get; set; }
 
+        [Required]
+        public string Department { get; set; }
 
         [Required]
         public string Password { get; set; }

@@ -45,7 +45,7 @@ namespace CorporateQnA.Config
                 },
                 RedirectUris =
                 {
-                    "http://localhost:4200/#/login",
+                    "http://localhost:4200",
                     "https://localhost:44384/Home/Signin"
                 },
                 PostLogoutRedirectUris =

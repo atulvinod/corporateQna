@@ -23,6 +23,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "angular-auth-oidc-client": "^11.4.3",
+    "moment": "^2.29.1",
     "ngx-bootstrap": "^6.2.0",
     "ngx-editor": "^7.0.4",
     "rxjs": "~6.6.0",

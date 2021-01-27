@@ -5,14 +5,21 @@
     </div>
   </a>
   <div class="profile-controls d-flex align-items-center">
-    <span class="current-date">14 March 2020</span>
+    <span class="current-date">{{getCurrentDate()}}</span>
     <img src="../../assets/sun_logo.png" alt="" class="sun-img">
-    <span class="user-name">Vijay Prakash</span>
-    <img
-      src="https://i.pravatar.cc/300
-    "
-      alt=""
-      class="profile-pic"
-    />
+    <div class="d-inline-block" *ngIf="loggedIn">
+      <button class ="btn text-white mr-3" (click)="logout()">Logout</button>
+      <span class="user-name mr-3">{{userName}}</span>
+      <img
+        src="https://i.pravatar.cc/300
+      "
+        alt=""
+        class="profile-pic"
+      />
+    </div>
+    <button class="btn text-white" *ngIf="loggedIn==false" (click)="login()">
+      Login
+    </button>
+   
   </div>
 </nav>

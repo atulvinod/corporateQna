@@ -1636,6 +1636,7 @@
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
           "CorporateQnA.Models": "1.0.0",
+          "IdentityServer4": "4.1.1",
           "System.Configuration.ConfigurationManager": "5.0.0",
           "System.Data.SqlClient": "4.8.2",
           "automapper": "10.1.1"
@@ -1645,7 +1646,10 @@
         },
         "runtime": {
           "bin/placeholder/CorporateQnA.Services.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
