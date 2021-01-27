@@ -215,6 +215,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[5.0.1, )"
+            },
+            "automapper": {
+              "target": "Package",
+              "version": "[10.1.1, )"
             }
           },
           "imports": [
