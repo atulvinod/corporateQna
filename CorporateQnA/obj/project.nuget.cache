@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "fORhqASdA/u9HZDBIZ+ZEYs+ZrP0mbArNd/7DR4SPO4pn7VpeGYkfLJ5ytTzRKxzu8mJ9dwBjR2gt2t+sDZScg==",
+  "dgSpecHash": "ZAxxNs6YpRhtmMxRslIIfk5QbYcQFVXlcb5KbFzMyU8XRprb67SmrpCErIvrHpWOsXBVX1oqPPPz+w4xwm5T+Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\atulv\\Documents\\CorporateQnA\\CorporateQnA\\CorporateQnA\\CorporateQnA.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\atulv\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
+    "C:\\Users\\atulv\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.0\\automapper.extensions.microsoft.dependencyinjection.8.1.0.nupkg.sha512",
     "C:\\Users\\atulv\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\atulv\\.nuget\\packages\\identitymodel\\4.4.0\\identitymodel.4.4.0.nupkg.sha512",
     "C:\\Users\\atulv\\.nuget\\packages\\identityserver4\\4.1.1\\identityserver4.4.1.1.nupkg.sha512",

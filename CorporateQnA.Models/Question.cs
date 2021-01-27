@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CorporateQnA.Services.Models
+namespace CorporateQnA.Models
 {
     public class Question
     {
@@ -19,6 +19,8 @@ namespace CorporateQnA.Services.Models
         public string Content { get; set; }
 
         public string ViewCount { get; set; }
+
+        public string TotalAnswerCount { get; set; }
 
         public string UpvoteCount { get; set; }
 

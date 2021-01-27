@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CorporateQnA.Services.Models
+namespace CorporateQnA.Models
 {
     public class Category
     {
@@ -14,8 +14,13 @@ namespace CorporateQnA.Services.Models
 
         public string Description { get; set; }
 
+        public string TagsThisWeek { get; set; }
+
+        public string TagsThisMonth { get; set; }
+
+        public string TotalTags { get; set; }
+
         public string CreatedAt { get; set; }
 
-        public string ModifiedAt { get; set; }
     }
 }

@@ -1,7 +1,9 @@
+using AutoMapper;
 using CorporateQnA.Config;
 using CorporateQnA.Data;
 using CorporateQnA.Models;
 using CorporateQnA.Services.Auth;
+using CorporateQnA.Services.ModelMaps;
 using IdentityServer4;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -85,6 +87,8 @@ namespace CorporateQnA
                 //to logout
                 config.LogoutPath = "/Auth/Logout";
             });
+
+            services.AddAutoMapper(typeof(AnswerMap), typeof(QuestionMap), typeof(CategoryMap));
 
             services.AddScoped<IAuthService, AuthService>();
         }
