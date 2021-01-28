@@ -11,6 +11,6 @@ namespace CorporateQnA.Services
     {
         public int Create(Category category);
 
-        public IEnumerable<Category> GetAllCategories();
+        public IEnumerable<Category> GetCategories();
     }
 }

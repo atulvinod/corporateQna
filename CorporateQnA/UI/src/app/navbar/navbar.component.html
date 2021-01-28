@@ -8,7 +8,7 @@
     <span class="current-date">{{getCurrentDate()}}</span>
     <img src="../../assets/sun_logo.png" alt="" class="sun-img">
     <div class="d-inline-block" *ngIf="loggedIn">
-      <button class ="btn text-white mr-3" (click)="logout()">Logout</button>
+      <a class="text-white mr-3" href="#" (click)="logout()">Logout</a>
       <span class="user-name mr-3">{{userName}}</span>
       <img
         src="https://i.pravatar.cc/300

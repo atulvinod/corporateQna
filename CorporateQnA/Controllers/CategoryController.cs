@@ -34,5 +34,11 @@ namespace CorporateQnA.Controllers
                 return BadRequest(new { message = e.Message });
             }
         }
+
+        [HttpGet]
+        public  IActionResult GetCategory()
+        {
+            return Ok(this.categoryService.GetCategories());
+        }
     }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {OidcSecurityService} from 'angular-auth-oidc-client';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 import * as moment from 'moment';
 
 @Component
@@ -7,41 +7,38 @@ import * as moment from 'moment';
         selector: "app-nav",
         templateUrl: "./navbar.component.html"
     })
-export class NavbarComponent implements OnInit{
+export class NavbarComponent implements OnInit {
 
     loggedIn = false;
-    userName:string = ""
-    constructor(public oidcSecurityService: OidcSecurityService) {
+    userName: string = ""
+    constructor(public oidcSecurityService: OidcSecurityService) {}
 
+    ngOnInit() {
+        this.oidcSecurityService.checkAuth().subscribe(value => {
+            console.log("FROM NAV ,is authenticated => ", value);
+            this.loggedIn = value
+            if (value) {
+                this.getUserName()
+            }
+        })
     }
 
-    ngOnInit(){
-    this.oidcSecurityService.checkAuth().subscribe(value=>{
-        console.log("FROM NAV ,is authenticated => ",value);
-        this.loggedIn = value
-        if(value){
-            this.getUserName()
-        }
-    })
-    }
-
-    login(){
+    login() {
         this.oidcSecurityService.authorize();
     }
 
-    logout(){
+    logout() {
         this.oidcSecurityService.logoff();
     }
 
-    getUserName(){
-        this.oidcSecurityService.userData$.subscribe(value=>{
+    getUserName() {
+        this.oidcSecurityService.userData$.subscribe(value => {
             this.userName = value["name"]
         })
     }
 
-    getCurrentDate(){
-        console.log(moment())
-        return new Date()
+    getCurrentDate() {
+        return moment().format("D MMM YYYY");
     }
 
 }

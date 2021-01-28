@@ -33,11 +33,12 @@ namespace CorporateQnA.Services
             }
         }
 
-        public IEnumerable<Category> GetAllCategories()
+        public IEnumerable<Category> GetCategories()
         {
             try
             {
-                throw new NotImplementedException();
+                var category = this.database.Query<CorporateQnA.Services.Models.Category>("SELECT * FROM Category").Select(z => this.mapper.Map<CorporateQnA.Models.Category>(z));
+                return category;
             }
             catch (Exception)
             {
