@@ -6,6 +6,7 @@ using CorporateQnA.Services;
 using CorporateQnA.Services.Auth;
 using CorporateQnA.Services.ModelMaps;
 using IdentityServer4;
+using IdentityServer4.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -96,6 +97,7 @@ namespace CorporateQnA
             services.AddScoped<IAnswerService, AnswerService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IActivityService, ActivityService>();
+            services.AddScoped<IProfileService, ProfileService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
