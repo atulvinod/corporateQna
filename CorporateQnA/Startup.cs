@@ -90,7 +90,7 @@ namespace CorporateQnA
                 config.LogoutPath = "/Auth/Logout";
             });
 
-            services.AddAutoMapper(typeof(AnswerMap), typeof(QuestionMap), typeof(CategoryMap));
+            services.AddAutoMapper(typeof(AnswerMap), typeof(QuestionMap), typeof(CategoryMap), typeof(AnswerActivityMap), typeof(QuestionActivityMap));
 
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IQuestionService, QuestionService>();
@@ -98,6 +98,7 @@ namespace CorporateQnA
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IActivityService, ActivityService>();
             services.AddScoped<IProfileService, ProfileService>();
+            services.AddScoped<ICategoryService, CategoryService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -25,6 +25,7 @@ namespace CorporateQnA.Services
             try
             {
                 var data = this.mapper.Map<CorporateQnA.Services.Models.Answer>(answer);
+                data.AnsweredOn = DateTime.Now;
                 var id = this.database.Insert(data);
                 return (int)id;
             }

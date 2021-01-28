@@ -37,7 +37,7 @@ namespace CorporateQnA.Config
             claims.Add(new Claim("Location", userData.Location));
             claims.Add(new Claim("Department", userData.Department));
             claims.Add(new Claim("Position", userData.Position));
-            claims.Add(new Claim("Name", userData.Name);
+            claims.Add(new Claim("Name", userData.Name));
             context.IssuedClaims = claims;
         }
 

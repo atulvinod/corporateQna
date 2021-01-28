@@ -12,7 +12,7 @@ namespace CorporateQnA.Models
 
         public int AnsweredBy { get; set; }
 
-        public int CategoryId { get; set; }
+        public int QuestionId { get; set; }
 
         public string Content { get; set; }
 

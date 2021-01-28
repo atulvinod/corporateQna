@@ -35,7 +35,7 @@ namespace CorporateQnA.Controllers
         }
 
 
-        [Route("auestion")]
+        [Route("question")]
         [HttpPost]
         public IActionResult CreateQuestionAcitvity(QuestionActivity questionAcitvity)
         {

@@ -18,7 +18,7 @@ namespace CorporateQnA.Services.Models
         public int AnsweredBy { get; set; }
 
         [Column]
-        public int CategoryId { get; set; }
+        public int QuestionId { get; set; }
 
         [Column]
         public string Content { get; set; }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CorporateQnA.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ namespace CorporateQnA.Models
 
         public int AnswerId { get; set; }
 
-        public int ActivityType { get; set; }
+        public AnswerActivityType ActivityType { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

@@ -25,6 +25,7 @@ namespace CorporateQnA.Services
             try
             {
                 var data = this.mapper.Map<CorporateQnA.Services.Models.AnswerActivity>(answerActivity);
+                data.CreatedAt = DateTime.Now;
                 var id = this.database.Insert(data);
                 return (int)id;
 
@@ -40,6 +41,7 @@ namespace CorporateQnA.Services
             try
             {
                 var data = this.mapper.Map<CorporateQnA.Services.Models.QuestionActivity>(questionActivity);
+                data.CreatedAt = DateTime.Now;
                 var id = this.database.Insert(data);
                 return (int)id;
             }
