@@ -12,7 +12,7 @@
       <app-keka-select
         [formGroup]="searchForm"
         [controlName]="'category'"
-        [options]="categoryOptions"
+        [categoryOptions]="categoryOptions"
       ></app-keka-select>
     </div>
     <div class="show form-select ml-3">
@@ -89,10 +89,10 @@
             </div>
             <div class="big-editor-container">
               <form [formGroup]="newAnswer" class="h-100">
-                <app-editor [formGroup]="newAnswer" [formControlName]="'content'"></app-editor>
+                <app-editor [formGroup]="newAnswer" [controlName]="'content'"></app-editor>
               </form>
-              <button class="btn">
-                <img src="../../assets/send-plane.svg" alt="" class="big-editor-save">
+              <button class="btn big-editor-save">
+                <img src="../../assets/send-plane.svg" alt="" class="">
               </button>
             </div>
           </div>
@@ -101,8 +101,11 @@
               <fa-icon [icon]="faExpandAlt"></fa-icon>
             </button>
             <form [formGroup]="newAnswer" class="h-100">
-              <app-editor [formGroup]="newAnswer" [formControlName]="'content'" class="editor-mini"></app-editor>
+              <app-editor [formGroup]="newAnswer" [controlName]="'content'" class="editor-mini"></app-editor>
             </form>
+            <button class="btn small-editor-save">
+              <img src="../../assets/send-plane.svg" alt="" >
+            </button>
           </div>
         </div>
       </div>
@@ -133,7 +136,7 @@
       <div class="mt-3 form-input">
         <label for="">Discription</label>
         <div class="new-question-desc">
-          <app-editor></app-editor>
+          <app-editor [formGroup]="newQuestionForm" [controlName]="'content'"></app-editor>
         </div>
       </div>
       <div class="form-select new-question-select mt-3">
@@ -141,7 +144,7 @@
         <app-keka-select
           [formGroup]="newQuestionForm"
           [controlName]="'questionCategory'"
-          [options]="categoryOptions"
+          [categoryOptions]="categoryOptions"
         ></app-keka-select>
       </div>
     </form>

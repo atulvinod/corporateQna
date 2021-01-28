@@ -1,7 +1,7 @@
 export class CategoryModel {
-    name: string;
-    description: string;
-    id: string
+    public name: string;
+    public description: string;
+    public id: string
     constructor(args: {}) {
         this.name = args['name'];
         this.description = args['description'];

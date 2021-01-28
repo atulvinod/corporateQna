@@ -1,5 +1,18 @@
-<div class="keka-custom-select" [formGroup]="formGroup" id={{selectID}}>
-    <select formControlName={{controlName}}>
-      <option value="k" *ngFor="let i of options ; let k = index">{{i}}</option>
+<div class="keka-custom-select" [formGroup]="formGroup" id="{{ selectID }}">
+  <ng-container *ngIf="categoryOptions.length == 0">
+    <select formControlName="{{ controlName }}">
+      <option value="k" *ngFor="let i of options; let k = index">
+        {{ i }}
+      </option>
     </select>
-  </div>
+  </ng-container>
+
+  <select
+    formControlName="{{ controlName }}"
+    *ngIf="categoryOptions.length != 0"
+  >
+    <option value="i.id" *ngFor="let i of categoryOptions; let k = index">
+      {{ i.name }}
+    </option>
+  </select>
+</div>

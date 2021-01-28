@@ -1,7 +1,6 @@
 import { CategoryModel } from './../../../models/category.model';
 import { FormGroup } from '@angular/forms';
-import { Component, Input, OnInit } from '@angular/core';
-import { faAd } from '@fortawesome/free-solid-svg-icons';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
     selector: 'app-keka-select',
@@ -20,6 +19,8 @@ export class KekaSelectComponent implements OnInit {
 
     ngOnInit(): void {
         this.selectID = "_select-" + this.controlName
+        console.log("ng on init");
+        console.log(this.categoryOptions);
         this.formGroup.get(this.controlName).valueChanges.subscribe(value=>{
             console.log("Change from keka select ",value);
             //when the form has been reset, then  the value is null
@@ -31,11 +32,19 @@ export class KekaSelectComponent implements OnInit {
 
     generated = false;
     ngAfterViewInit() {
+        console.log("after view init");
+        console.log(this.categoryOptions);
         if (this.generated == false) {
             this.renderSelect()
             this.generated = true
         }
     }
+
+    ngOnChanges(changes: SimpleChanges) {
+        // changes.prop contains the old and the new value...
+        console.log(this.categoryOptions);
+
+      }
 
     renderSelect() {
         let selects, optionsCount, selectElement, selectedItemDiv, optionsList, optionItem;

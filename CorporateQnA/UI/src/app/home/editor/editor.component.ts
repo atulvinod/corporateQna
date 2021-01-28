@@ -21,7 +21,7 @@ export class EidtorAComponent implements OnInit, OnDestroy {
     html: '';
     text
     @Input() formGroup:FormGroup
-    @Input() fromControlName: string
+    @Input() controlName: string
     
     constructor() { }
 
@@ -29,6 +29,7 @@ export class EidtorAComponent implements OnInit, OnDestroy {
         this.editor = new Editor();
         console.log(this.text);
         console.log(this.formGroup);
+        console.log(this.controlName)
     }
 
     ngOnChanges(changes: SimpleChanges) {
