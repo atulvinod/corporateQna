@@ -16,7 +16,11 @@ namespace CorporateQnA.Services.ModelMaps
 
             //core to data
             CreateMap<CorporateQnA.Models.Category, Models.Category>();
-              
+
+
+            CreateMap<CorporateQnA.Models.CategoryDetails, CorporateQnA.Services.Models.CategoryDetails>();
+            CreateMap<CorporateQnA.Services.Models.CategoryDetails, CorporateQnA.Models.CategoryDetails>();
+
         }
     }
 }

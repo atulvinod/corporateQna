@@ -34,10 +34,11 @@ namespace CorporateQnA.Config
             var principal = await userClaimsPrincipalFactory.CreateAsync(user);
 
             var claims = principal.Claims.ToList();
-            claims.Add(new Claim("Location", userData.Location));
-            claims.Add(new Claim("Department", userData.Department));
-            claims.Add(new Claim("Position", userData.Position));
-            claims.Add(new Claim("Name", userData.Name));
+            claims.Add(new Claim("location", userData.Location));
+            claims.Add(new Claim("department", userData.Department));
+            claims.Add(new Claim("position", userData.Position));
+            claims.Add(new Claim("name", userData.Name));
+            claims.Add(new Claim("userId", userData.Id.ToString()));
             context.IssuedClaims = claims;
         }
 

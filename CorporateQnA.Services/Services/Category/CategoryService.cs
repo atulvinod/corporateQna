@@ -45,5 +45,10 @@ namespace CorporateQnA.Services
                 throw;
             }
         }
+
+        public IEnumerable<CategoryDetails> GetCategoryDetails()
+        {
+            return this.database.Query<CorporateQnA.Services.Models.CategoryDetails>("SELECT * FROM [master].[dbo].CategoryDetails").Select(s => this.mapper.Map<CorporateQnA.Models.CategoryDetails>(s));
+        }
     }
 }

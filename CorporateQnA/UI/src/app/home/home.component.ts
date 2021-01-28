@@ -1,3 +1,6 @@
+import { QuestionModel } from './../../models/question.model';
+import { AnswerModel } from './../../models/answer.model';
+import { AnswerService } from './../services/answer.service';
 import { CategoryModel } from './../../models/category.model';
 import { CategoryService } from './../services/category.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -34,7 +37,10 @@ export class HomeComponent implements OnInit {
 
     text: string = "";
 
-    constructor(private modalService: BsModalService, private categoryService: CategoryService, private oidcService: OidcSecurityService) {
+    userData: any
+    currentQuestion: number;
+
+    constructor(private modalService: BsModalService, private categoryService: CategoryService, private oidcService: OidcSecurityService, private answerService: AnswerService) {
 
         this.searchForm = new FormGroup({
             searchInput: new FormControl(""),
@@ -53,7 +59,7 @@ export class HomeComponent implements OnInit {
             content: new FormControl("", [Validators.required]),
         })
 
-        this.categoryOptions.push({ name: "All", id:"0", description: "none" });
+        // this.categoryOptions.push({ name: "All", id: "0", description: "none" });
         console.log("on init", this.categoryOptions);
     }
 
@@ -64,15 +70,22 @@ export class HomeComponent implements OnInit {
 
         this.categoryService.getCategories().subscribe(categories => {
             this.categoryOptions = [...this.categoryOptions, ...categories]
-            console.log("Categories:",this.categoryOptions)
+            console.log("Categories:", this.categoryOptions)
         })
 
         this.newAnswer.get('content').valueChanges.subscribe(value => {
             console.log(this.removeTags(value))
         })
 
-        this.newQuestionForm.get('content').valueChanges.subscribe(value=>{
+        this.newQuestionForm.get('content').valueChanges.subscribe(value => {
             console.log(value)
+        })
+
+        //TODO: check if logged in, if not, redirect to login screen
+        this.oidcService.userData$.subscribe(value => {
+            this.userData = value;
+            console.log("userdata :", this.userData);
+
         })
     }
 
@@ -92,11 +105,23 @@ export class HomeComponent implements OnInit {
         return str.replace(/(<([^>]+)>)/ig, '');
     }
 
-    createQuestion(){
-
+    createQuestion() {
+        let askedBy = this.userData['userId']
+        let categoryId = this.newQuestionForm.get("questionCategory").value;
+        let content = this.newQuestionForm.get("content").value;
+        let title = this.newQuestionForm.get("title").value;
+        let question:QuestionModel = new QuestionModel({askedBy,categoryId,content,title})
+        console.log(question);
     }
 
-    answer(){
-
+    postAnswer() {
+        let answeredBy = this.userData['userId']
+        let questionId = this.currentQuestion;
+        let content = this.newAnswer.get('content').value;
+        let answerModel:AnswerModel = new AnswerModel({answeredBy,questionId,content})
+        console.log(answerModel);
+        // this.answerService.createAnswer(answerModel).subscribe(value=>{
+        //     console.log("Created answer ",value);
+        // })
     }
 }

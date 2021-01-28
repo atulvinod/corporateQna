@@ -40,5 +40,12 @@ namespace CorporateQnA.Controllers
         {
             return Ok(this.categoryService.GetCategories());
         }
+
+        [HttpGet]
+        [Route("details")]
+        public IActionResult GetCategoryDetails()
+        {
+            return Ok(this.categoryService.GetCategoryDetails());
+        }
     }
 }

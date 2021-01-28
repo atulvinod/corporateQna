@@ -91,7 +91,7 @@
               <form [formGroup]="newAnswer" class="h-100">
                 <app-editor [formGroup]="newAnswer" [controlName]="'content'"></app-editor>
               </form>
-              <button class="btn big-editor-save">
+              <button class="btn big-editor-save" (click)="postAnswer()">
                 <img src="../../assets/send-plane.svg" alt="" class="">
               </button>
             </div>
@@ -103,7 +103,7 @@
             <form [formGroup]="newAnswer" class="h-100">
               <app-editor [formGroup]="newAnswer" [controlName]="'content'" class="editor-mini"></app-editor>
             </form>
-            <button class="btn small-editor-save">
+            <button class="btn small-editor-save" (click)="postAnswer()">
               <img src="../../assets/send-plane.svg" alt="" >
             </button>
           </div>
@@ -150,7 +150,7 @@
     </form>
     <div class="d-flex justify-content-end mt-4">
       <button class="btn btn-cancel mr-2"  (click)="modalRef.hide()">Cancel</button>
-      <button class="btn btn-post">Post</button>
+      <button class="btn btn-post" (click)="createQuestion()">Post</button>
     </div>
   </div>
 </ng-template>

@@ -12,5 +12,7 @@ namespace CorporateQnA.Services
         public int Create(Category category);
 
         public IEnumerable<Category> GetCategories();
+
+        public IEnumerable<CategoryDetails> GetCategoryDetails();
     }
 }

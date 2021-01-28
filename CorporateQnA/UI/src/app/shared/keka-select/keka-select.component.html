@@ -11,7 +11,7 @@
     formControlName="{{ controlName }}"
     *ngIf="categoryOptions.length != 0"
   >
-    <option value="i.id" *ngFor="let i of categoryOptions; let k = index">
+    <option value={{i.id}} *ngFor="let i of categoryOptions; let k = index">
       {{ i.name }}
     </option>
   </select>

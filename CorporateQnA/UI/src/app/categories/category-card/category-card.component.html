@@ -1,12 +1,12 @@
 <div class="category-card">
     <div class="d-flex justify-content-between">
-        <h5 class="font-weight-bold">Name</h5>
-        <span>(tags)</span>
+        <h5 class="font-weight-bold">{{categoryDetail.name}}</h5>
+        <span>{{categoryDetail.total}}</span>
     </div>
     <p class="text-muted fnt-14 mt-2">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia iste cupiditate nisi. Hic nisi itaque nemo expedita
+        {{categoryDetail.description}}
     </p>
     <div class="category-stats mt-4">
-        <span class="text-muted fnt-12">Tagged 5 this week, 103 this month</span>
+        <span class="text-muted fnt-12">Tagged {{categoryDetail.thisWeek}} this week, {{categoryDetail.thisMonth}} this month</span>
     </div>
 </div>

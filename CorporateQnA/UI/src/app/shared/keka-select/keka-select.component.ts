@@ -10,7 +10,7 @@ export class KekaSelectComponent implements OnInit {
 
     @Input() formGroup: FormGroup;
     @Input() controlName: string;
-    @Input() options:string[] = []
+    @Input() options: string[] = []
     @Input() categoryOptions: CategoryModel[] = []
 
     selectID: string
@@ -19,12 +19,10 @@ export class KekaSelectComponent implements OnInit {
 
     ngOnInit(): void {
         this.selectID = "_select-" + this.controlName
-        console.log("ng on init");
-        console.log(this.categoryOptions);
-        this.formGroup.get(this.controlName).valueChanges.subscribe(value=>{
-            console.log("Change from keka select ",value);
+        this.formGroup.get(this.controlName).valueChanges.subscribe(value => {
+            console.log("Change from keka select ", value);
             //when the form has been reset, then  the value is null
-            if(value==null){
+            if (value == null) {
                 this.resetSelect();
             }
         })
@@ -32,23 +30,14 @@ export class KekaSelectComponent implements OnInit {
 
     generated = false;
     ngAfterViewInit() {
-        console.log("after view init");
+        console.log("after view init", this.selectID);
         console.log(this.categoryOptions);
-        if (this.generated == false) {
-            this.renderSelect()
-            this.generated = true
-        }
+        this.renderSelect()
     }
-
-    ngOnChanges(changes: SimpleChanges) {
-        // changes.prop contains the old and the new value...
-        console.log(this.categoryOptions);
-
-      }
 
     renderSelect() {
         let selects, optionsCount, selectElement, selectedItemDiv, optionsList, optionItem;
-      
+
         let searchForm = this.formGroup;
         let control = this.controlName;
         selects = document.getElementById(this.selectID);
@@ -67,7 +56,7 @@ export class KekaSelectComponent implements OnInit {
         optionsList = document.createElement("DIV");
         optionsList.setAttribute("class", "select-items select-hide");
 
-      
+
         for (let j = 1; j < optionsCount; j++) {
             /*for each option in the original select element,
             create a new DIV that will act as an option item:*/
@@ -117,7 +106,7 @@ export class KekaSelectComponent implements OnInit {
             selectedOptions = document.getElementsByClassName("select-selected");
             optionsLength = options.length;
             selectedLength = selectedOptions.length;
-            
+
             let i;
             for (i = 0; i < selectedLength; i++) {
                 if (elmnt == selectedOptions[i]) {
@@ -135,10 +124,24 @@ export class KekaSelectComponent implements OnInit {
         document.addEventListener("click", closeAllSelect);
     }
 
-    resetSelect(){
+    resetSelect() {
         let select = document.getElementById(this.selectID);
         let selectElement = select.getElementsByTagName("select")[0];
         let selectedItemDiv = select.querySelector(".select-selected")
         selectedItemDiv.innerHTML = selectElement.options[0].innerHTML;
+    }
+
+    refreshSelect() {
+        if (this.selectID != null) {
+            console.log(`#${this.selectID}`);
+            try {
+                document.querySelector(`#${this.selectID}`).querySelector('.select-selected').remove()
+                document.querySelector(`#${this.selectID}`).querySelector('.select-items').remove()
+                this.renderSelect()
+            } catch (e) {
+
+            }
+
+        }
     }
 }

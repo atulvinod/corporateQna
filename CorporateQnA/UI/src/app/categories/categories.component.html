@@ -29,7 +29,7 @@
 <div class="categories-content p-20">
     <div class="standard-grid">
  
-   <app-category></app-category>
+   <app-category *ngFor="let i of categoryDetails" [categoryDetail]=i></app-category>
     </div>
 </div>
 <ng-template #template>
@@ -44,17 +44,17 @@
       <div class="form-input modal-form-input">
         <label for="">Category Name</label>
         <div class="input-bar">
-          <input type="text" name="" id="" placeholder="Enter category name" />
+          <input type="text" name="" id="" placeholder="Enter category name"  formControlName="categoryName"/>
         </div>
       </div>
       <div class="mt-3 form-input">
-        <label for="">Discription</label>
-        <textarea placeholder="Enter your text here" class="text-area" cols="59" rows="5" ></textarea>
+        <label for="">Description</label>
+        <textarea placeholder="Enter your text here" class="text-area" cols="59" rows="5" formControlName="categoryDescription"></textarea>
       </div>
     </form>
     <div class="d-flex justify-content-end mt-4">
       <button class="btn btn-cancel mr-2"(click)="modalRef.hide()">Cancel</button>
-      <button class="btn btn-post">Save</button>
+      <button class="btn btn-post" (click)="createCategory()">Save</button>
     </div>
   </div>
 </ng-template> 
