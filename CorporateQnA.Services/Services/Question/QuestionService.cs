@@ -48,9 +48,16 @@ namespace CorporateQnA.Services
             }
         }
 
-        public IEnumerable<Question> GetQuestions()
+        public IEnumerable<QuestionDetails> GetQuestions()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return this.database.Query<CorporateQnA.Services.Models.QuestionDetails>(" SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails]").Select(s => this.mapper.Map<CorporateQnA.Models.QuestionDetails>(s));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void Update(Question question)

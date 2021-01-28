@@ -16,7 +16,7 @@ namespace CorporateQnA.Services
 
         public void Delete(int questionId);
 
-        public IEnumerable<Question> GetQuestions();
+        public IEnumerable<QuestionDetails> GetQuestions();
 
     }
 }

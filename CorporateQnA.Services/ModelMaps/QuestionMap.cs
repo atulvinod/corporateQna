@@ -17,6 +17,12 @@ namespace CorporateQnA.Services.ModelMaps
             //core to data
             CreateMap<CorporateQnA.Models.Question, CorporateQnA.Services.Models.Question>();
 
+            //data to core
+            CreateMap<CorporateQnA.Services.Models.QuestionDetails, CorporateQnA.Models.QuestionDetails>();
+
+            //core to data
+            CreateMap<CorporateQnA.Models.QuestionDetails, CorporateQnA.Services.Models.QuestionDetails>();
+
         }
     }
 }

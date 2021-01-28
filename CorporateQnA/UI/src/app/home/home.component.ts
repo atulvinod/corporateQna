@@ -1,3 +1,4 @@
+import { QuestionService } from './../services/question.service';
 import { QuestionModel } from './../../models/question.model';
 import { AnswerModel } from './../../models/answer.model';
 import { AnswerService } from './../services/answer.service';
@@ -8,6 +9,7 @@ import { Component, TemplateRef, OnInit } from '@angular/core';
 import { faSearch, faPlus, faRedo, faThumbsUp, faThumbsDown, faExpand, faExpandAlt, faCompress, faCompressArrowsAlt, faCompressAlt } from '@fortawesome/free-solid-svg-icons';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { QuestionDetailsModel } from 'src/models/question-details.model';
 
 @Component
     ({
@@ -40,7 +42,10 @@ export class HomeComponent implements OnInit {
     userData: any
     currentQuestion: number;
 
-    constructor(private modalService: BsModalService, private categoryService: CategoryService, private oidcService: OidcSecurityService, private answerService: AnswerService) {
+    allQuestions:QuestionDetailsModel[] = []
+    showQuestions: QuestionDetailsModel[] = []
+
+    constructor(private modalService: BsModalService, private categoryService: CategoryService, private oidcService: OidcSecurityService, private answerService: AnswerService, private questionService: QuestionService) {
 
         this.searchForm = new FormGroup({
             searchInput: new FormControl(""),
@@ -78,15 +83,19 @@ export class HomeComponent implements OnInit {
         })
 
         this.newQuestionForm.get('content').valueChanges.subscribe(value => {
-            console.log(value)
+            console.log(this.removeTags(value))
         })
 
         //TODO: check if logged in, if not, redirect to login screen
         this.oidcService.userData$.subscribe(value => {
             this.userData = value;
             console.log("userdata :", this.userData);
-
         })
+
+        this.questionService.getQuestions().subscribe(value=>{
+            this.allQuestions = [...value];
+            this.showQuestions = [...value];
+        });
     }
 
     openModal(template: TemplateRef<any>) {
@@ -108,20 +117,20 @@ export class HomeComponent implements OnInit {
     createQuestion() {
         let askedBy = this.userData['userId']
         let categoryId = this.newQuestionForm.get("questionCategory").value;
-        let content = this.newQuestionForm.get("content").value;
+        let content = this.removeTags(this.newQuestionForm.get("content").value);
         let title = this.newQuestionForm.get("title").value;
-        let question:QuestionModel = new QuestionModel({askedBy,categoryId,content,title})
+        let question: QuestionModel = new QuestionModel({ askedBy, categoryId, content, title })
         console.log(question);
     }
 
     postAnswer() {
         let answeredBy = this.userData['userId']
         let questionId = this.currentQuestion;
-        let content = this.newAnswer.get('content').value;
-        let answerModel:AnswerModel = new AnswerModel({answeredBy,questionId,content})
+        let content = this.removeTags(this.newAnswer.get('content').value);
+        let answerModel: AnswerModel = new AnswerModel({ answeredBy, questionId, content })
         console.log(answerModel);
-        // this.answerService.createAnswer(answerModel).subscribe(value=>{
-        //     console.log("Created answer ",value);
-        // })
+        this.answerService.createAnswer(answerModel).subscribe(value=>{
+            console.log("Created answer ",value);
+        })
     }
 }

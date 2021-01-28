@@ -13,20 +13,20 @@
           <button class="btn">
               <fa-icon [icon]="faChevronUp" class="text-muted"></fa-icon>
           </button>
-          <span>50</span>
+          <span>{{question.likeCount}}</span>
         </div>
         <div class="question">
-            <h5>Question header</h5>
+            <h5>{{question.questionTitle}}</h5>
             <p class="text-muted question-content">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident quos quis recusandae, asperiores repellendus perspiciatis eveniet assumenda esse qui ducimus eos quo fugit. Ullam error suscipit omnis a cupiditate illum.
+                {{question.content}}
             </p>
             <div class="mt-4 d-flex align-items-center justify-content-between">
                 <div>
-                    <fa-icon [icon]="faEye" class="text-muted"></fa-icon> <span class="question-views ml-1 text-muted">150 Views</span>
-                    <span class="question-ans-count">5 Answers</span>
+                    <fa-icon [icon]="faEye" class="text-muted"></fa-icon> <span class="question-views ml-1 text-muted">{{question.viewCount}} Views</span>
+                    <span class="question-ans-count">{{question.answerCount}} Answers</span>
                 </div>
                 <div>
-                    <span class="text-muted" class="question-time">1 hr ago</span>
+                    <span class="text-muted" class="question-time">{{timeAgo}}</span>
                 </div>
               
             </div>

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace CorporateQnA.Controllers
 {
 
-    [Route("question")]
+    [Route("questions")]
     [AllowAnonymous]
     [ApiController]
     public class QuestionController : ControllerBase
@@ -35,6 +35,12 @@ namespace CorporateQnA.Controllers
             {
                 return BadRequest(new { message = e.Message });
             }
+        }
+
+        [HttpGet]
+        public IActionResult GetQuestions()
+        {
+            return Ok(this.questionService.GetQuestions());
         }
 
     }

@@ -45,7 +45,7 @@
 <div class="home-container">
   <div class="home-grid">
     <div class="home-questions">
-      <app-question></app-question>
+      <app-question *ngFor="let i of showQuestions" [question]=i></app-question>
     </div>
     <div class="home-answer-panel">
       <div class="view-answer">
