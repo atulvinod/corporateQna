@@ -1,3 +1,4 @@
+import { CategoryModel } from './../../models/category.model';
 import { HttpClient } from "@angular/common/http";
 import { Injectable, isDevMode } from "@angular/core";
 
@@ -14,7 +15,7 @@ export class CategoryService{
         }
     }
 
-    getCategories(){
-        return this.http.get()
+    public getCategories(){
+        return this.http.get<CategoryModel[]>(this.httpRoot+"/category")
     }
 }

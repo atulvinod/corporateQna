@@ -88,7 +88,9 @@
               <button class="btn big-editor-close" (click)="toggleFlyoutEditor=false"><fa-icon [icon]="faCompressAlt"></fa-icon></button>
             </div>
             <div class="big-editor-container">
-              <app-editor></app-editor>
+              <form [formGroup]="newAnswer" class="h-100">
+                <app-editor [formGroup]="newAnswer" [formControlName]="'content'"></app-editor>
+              </form>
               <button class="btn">
                 <img src="../../assets/send-plane.svg" alt="" class="big-editor-save">
               </button>
@@ -98,7 +100,9 @@
             <button class="btn editor-expand" (click)="toggleFlyoutEditor=true">
               <fa-icon [icon]="faExpandAlt"></fa-icon>
             </button>
-            <app-editor class="editor-mini"></app-editor>
+            <form [formGroup]="newAnswer" class="h-100">
+              <app-editor [formGroup]="newAnswer" [formControlName]="'content'" class="editor-mini"></app-editor>
+            </form>
           </div>
         </div>
       </div>

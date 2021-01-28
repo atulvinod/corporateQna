@@ -1,9 +1,10 @@
 <div class="editor-container">
-    <div class="NgxEditor__Wrapper">
+    <div class="NgxEditor__Wrapper"  [formGroup]="formGroup">
         <ngx-editor
         [editor]="editor"
-        [ngModel]="html"
+        formControlName="content"
         ></ngx-editor>
         <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
     </div>
+    {{html}}
 </div>

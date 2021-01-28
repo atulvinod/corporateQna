@@ -1,3 +1,4 @@
+import { CategoryModel } from './../../../models/category.model';
 import { FormGroup } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
 import { faAd } from '@fortawesome/free-solid-svg-icons';
@@ -11,7 +12,8 @@ export class KekaSelectComponent implements OnInit {
     @Input() formGroup: FormGroup;
     @Input() controlName: string;
     @Input() options:string[] = []
-    
+    @Input() categoryOptions: CategoryModel[] = []
+
     selectID: string
 
     constructor() { }

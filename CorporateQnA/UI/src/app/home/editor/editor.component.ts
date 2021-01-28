@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { Component, Input, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { Editor, Toolbar } from 'ngx-editor';
 
 @Component
@@ -18,12 +19,22 @@ export class EidtorAComponent implements OnInit, OnDestroy {
         ['link'],
     ];
     html: '';
-
+    text
+    @Input() formGroup:FormGroup
+    @Input() fromControlName: string
+    
     constructor() { }
 
     ngOnInit(): void {
         this.editor = new Editor();
+        console.log(this.text);
+        console.log(this.formGroup);
     }
+
+    ngOnChanges(changes: SimpleChanges) {
+        // changes.prop contains the old and the new value...
+        console.log(this.text);
+      }
 
     ngOnDestroy(): void {
         this.editor.destroy();
