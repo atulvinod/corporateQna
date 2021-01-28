@@ -23,6 +23,12 @@ namespace CorporateQnA.Services
             return (int)this.database.Insert(user);
         }
 
+        public AppUser GetUser(int userid)
+        {
+            var user = this.database.Query<AppUser>("SELECT * FROM Users WHERE Id = @0", userid).FirstOrDefault();
+            return user;
+        }
+
 
     }
 }

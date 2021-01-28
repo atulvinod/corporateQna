@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CorporateQnA.Services.Models
+namespace CorporateQnA.Models
 {
     public class QuestionActivity
     {

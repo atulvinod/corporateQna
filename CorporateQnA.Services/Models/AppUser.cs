@@ -8,7 +8,7 @@ using PetaPoco;
 namespace CorporateQnA.Models
 {
     
-    [TableName("User")]
+    [TableName("Users")]
     [PrimaryKey("Id")]
     public class AppUser
     {

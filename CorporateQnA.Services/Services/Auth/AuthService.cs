@@ -51,7 +51,8 @@ namespace CorporateQnA.Services.Auth
                 Department = department,
                 Location = location,
                 Email = email,
-                Name = name
+                Name = name,
+                Position = position
             };
 
             var userId = this.userService.Create(appUser);

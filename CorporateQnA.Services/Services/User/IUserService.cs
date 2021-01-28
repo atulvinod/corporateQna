@@ -11,6 +11,6 @@ namespace CorporateQnA.Services
     {
         public int Create(AppUser user);
 
-
+        public AppUser GetUser(int userid);
     }
 }

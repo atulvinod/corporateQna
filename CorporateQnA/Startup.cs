@@ -95,6 +95,7 @@ namespace CorporateQnA
             services.AddScoped<IQuestionService, QuestionService>();
             services.AddScoped<IAnswerService, AnswerService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IActivityService, ActivityService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

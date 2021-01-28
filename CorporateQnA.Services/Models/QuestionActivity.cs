@@ -21,7 +21,7 @@ namespace CorporateQnA.Services.Models
         public int QuestionId { get; set; }
 
         [Column]
-        public int ActivityType{ get; set; }
+        public short ActivityType { get; set; }
 
         [Column]
         public DateTime CreatedAt { get; set; }
