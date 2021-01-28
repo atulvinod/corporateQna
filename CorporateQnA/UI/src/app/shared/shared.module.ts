@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { KekaSelectComponent } from "./keka-select/keka-select.component";
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     imports:[
@@ -12,7 +13,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
         ReactiveFormsModule,
         FontAwesomeModule,
         ReactiveFormsModule,
-        ModalModule.forChild()
+        ModalModule.forChild(),
+        HttpClientModule
     ],
     declarations:[
         KekaSelectComponent,
@@ -24,7 +26,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
         FontAwesomeModule,
         ReactiveFormsModule,
         ModalModule,
-        CommonModule
+        CommonModule,
+        HttpClientModule
     ]
 })
 export class SharedModule{}
