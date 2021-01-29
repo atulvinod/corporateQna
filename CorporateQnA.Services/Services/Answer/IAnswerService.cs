@@ -11,7 +11,7 @@ namespace CorporateQnA.Services
     {
         public int Create(Answer answer);
 
-        public IEnumerable<Answer> GetAnswersForQues(string questionId);
+        public IEnumerable<AnswerDetails> GetAnswersForQues(int questionId);
 
     }
 }

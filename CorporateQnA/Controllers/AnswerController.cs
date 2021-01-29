@@ -33,5 +33,18 @@ namespace CorporateQnA.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult GetAnswerForQuestion([FromQuery] int qId)
+        {
+            try
+            {
+                return Ok(this.answerService.GetAnswersForQues(qId));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = e.Message });
+            }
+        }
+
     }
 }
