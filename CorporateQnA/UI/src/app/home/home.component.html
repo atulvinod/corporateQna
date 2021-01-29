@@ -45,7 +45,7 @@
 <div class="home-container">
   <div class="home-grid">
     <div class="home-questions">
-      <app-question *ngFor="let i of showQuestions" [question]=i></app-question>
+      <app-question class="d-block app-question" [ngClass]="{'current-question':currentQuestion == i}" *ngFor="let i of showQuestions" [question]=i (click)="currentQuestion = i"></app-question>
     </div>
     <div class="home-answer-panel">
       <ng-container *ngIf ="currentQuestion != null">

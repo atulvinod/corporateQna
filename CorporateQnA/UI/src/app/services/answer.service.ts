@@ -1,3 +1,4 @@
+import { AnswerDetailsModel } from './../../models/answer-details.model';
 import { AnswerModel } from './../../models/answer.model';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, isDevMode } from "@angular/core"
@@ -16,5 +17,9 @@ export class AnswerService{
 
     createAnswer(ans:AnswerModel){
         return this.http.post(this.httpRoot+"/answer",ans);
+    }
+
+    getAnswersForQuestion(questionId: number){
+        return this.http.get<AnswerDetailsModel[]>(this.httpRoot+"/answer?qId="+questionId);
     }
 }

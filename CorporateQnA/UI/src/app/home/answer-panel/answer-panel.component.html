@@ -7,8 +7,8 @@
             alt=""
             class="profile-pic-sm"
           />
-          <span class="ml-3">Samantha</span>
-          <span class="ml-3 text-muted fnt-12">3 Hrs Ago</span>
+          <span class="ml-3">{{question.userName}}</span>
+          <span class="ml-3 text-muted fnt-12">{{questionTimeAgo}}</span>
         </div>
       </div>
       <div class="d-flex align-items-center">
@@ -17,22 +17,20 @@
       </div>
     </div>
     <p class="mt-20">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem vero
-      explicabo accusantium mollitia incidunt id libero,
+        {{question.questionTitle}}
     </p>
     <p class="text-muted mt-2 fnt-14">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem vero
-      explicabo accusantium mollitia incidunt id libero,
+      {{question.content}}
     </p>
   </div>
   <div class="answer-count">
-    <span>Answers (3)</span>
+    <span>Answers {{answerCount}}</span>
   </div>
   <div class="d-flex flex-column justifiy-content-between">
     <div class="answers">
-      <app-answer></app-answer>
+      <app-answer *ngFor="let i of answers" [answer]= i></app-answer>
     </div>
-    <div class="editor">
+    <div class="editor mt-3">
       <div class="big-editor" *ngIf="toggleFlyoutEditor">
         <div class="big-editor-head d-flex align-items-center justify-content-end">
           <button class="btn big-editor-close" (click)="toggleFlyoutEditor=false"><fa-icon [icon]="faCompressAlt"></fa-icon></button>
