@@ -7,7 +7,7 @@ using PetaPoco;
 
 namespace CorporateQnA.Services.Models
 {
-    [TableName("QuestionActivity")]
+    [TableName("AnswerActivity")]
     [PrimaryKey("Id")]
     public class AnswerActivity
     {

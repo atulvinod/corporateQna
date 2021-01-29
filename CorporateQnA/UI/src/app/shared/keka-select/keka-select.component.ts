@@ -13,6 +13,7 @@ export class KekaSelectComponent implements OnInit {
     @Input() options: string[] = []
     @Input() categoryOptions: CategoryModel[] = []
 
+    selection:string;
     selectID: string
 
     constructor() { }
@@ -23,7 +24,7 @@ export class KekaSelectComponent implements OnInit {
             console.log("Change from keka select ", value);
             //when the form has been reset, then  the value is null
             if (value == null) {
-                this.resetSelect();
+                // this.resetSelect();
             }
         })
     }
@@ -32,7 +33,16 @@ export class KekaSelectComponent implements OnInit {
     ngAfterViewInit() {
         console.log("after view init", this.selectID);
         console.log(this.categoryOptions);
-        this.renderSelect()
+        // this.renderSelect()
+        if(this.categoryOptions.length==0){
+            this.formGroup.get(this.controlName).patchValue(this.options[0])
+        }else{
+            this.formGroup.get(this.controlName).patchValue(this.categoryOptions[0].name)
+        }
+    }
+
+    ngOnChanges(changes: SimpleChanges){
+     
     }
 
     renderSelect() {

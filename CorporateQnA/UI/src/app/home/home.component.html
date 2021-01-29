@@ -4,7 +4,13 @@
       <label for="">Keywords</label>
       <div class="search-bar">
         <fa-icon [icon]="faSearch"></fa-icon>
-        <input type="text" name="" id="" placeholder="Search" formControlName="searchInput"/>
+        <input
+          type="text"
+          name=""
+          id=""
+          placeholder="Search"
+          formControlName="searchInput"
+        />
       </div>
     </div>
     <div class="category form-select ml-3">
@@ -17,19 +23,23 @@
     </div>
     <div class="show form-select ml-3">
       <label for="">Show</label>
-      <app-keka-select
-        [formGroup]="searchForm"
-        [controlName]="'show'"
-        [options]="showOptions"
-      ></app-keka-select>
+      <ng-select [(ngModel)]="showSelected"  [searchable]="false" formControlName="show">
+        <ng-option
+          *ngFor="let i of showOptions; let k = index"
+          value= {{k}}
+          >{{ k }}</ng-option
+        >
+      </ng-select>
     </div>
     <div class="recent form-select ml-3">
       <label for="">Sort By</label>
-      <app-keka-select
-        [formGroup]="searchForm"
-        [controlName]="'sortBy'"
-        [options]="sortByOptions"
-      ></app-keka-select>
+      <ng-select [(ngModel)]="showSelected"  [searchable]="false" formControlName="sortBy">
+        <ng-option
+          *ngFor="let i of sortByOptions; let k = index"
+          value= {{k}}
+          >{{ i }}</ng-option
+        >
+      </ng-select>
     </div>
     <div class="recent form-reset">
       <button class="reset-btn btn ml-2" (click)="searchForm.reset()">
@@ -45,11 +55,17 @@
 <div class="home-container">
   <div class="home-grid">
     <div class="home-questions">
-      <app-question class="d-block app-question" [ngClass]="{'current-question':currentQuestion == i}" *ngFor="let i of showQuestions" [question]=i (click)="currentQuestion = i"></app-question>
+      <app-question
+        class="d-block app-question"
+        [ngClass]="{ 'current-question': currentQuestion == i }"
+        *ngFor="let i of showQuestions"
+        [question]="i"
+        (click)="viewQuestion(i)"
+      ></app-question>
     </div>
     <div class="home-answer-panel">
-      <ng-container *ngIf ="currentQuestion != null">
-        <app-answer-panel [question]=currentQuestion></app-answer-panel>
+      <ng-container *ngIf="currentQuestion != null">
+        <app-answer-panel [question]="currentQuestion"></app-answer-panel>
       </ng-container>
     </div>
   </div>
@@ -72,13 +88,22 @@
       <div class="form-input modal-form-input">
         <label for="">Question</label>
         <div class="input-bar">
-          <input type="text" name="" id="" placeholder="Enter your question" formControlName="title"/>
+          <input
+            type="text"
+            name=""
+            id=""
+            placeholder="Enter your question"
+            formControlName="title"
+          />
         </div>
       </div>
       <div class="mt-3 form-input">
         <label for="">Discription</label>
         <div class="new-question-desc">
-          <app-editor [formGroup]="newQuestionForm" [controlName]="'content'"></app-editor>
+          <app-editor
+            [formGroup]="newQuestionForm"
+            [controlName]="'content'"
+          ></app-editor>
         </div>
       </div>
       <div class="form-select new-question-select mt-3">
@@ -91,7 +116,9 @@
       </div>
     </form>
     <div class="d-flex justify-content-end mt-4">
-      <button class="btn btn-cancel mr-2"  (click)="modalRef.hide()">Cancel</button>
+      <button class="btn btn-cancel mr-2" (click)="modalRef.hide()">
+        Cancel
+      </button>
       <button class="btn btn-post" (click)="createQuestion()">Post</button>
     </div>
   </div>

@@ -10,7 +10,7 @@
             alt=""
             class="profile-pic-sm mb-3"
           />
-          <button class="btn">
+          <button class="btn" (click)="upvote()"> 
               <fa-icon [icon]="faChevronUp" class="text-muted"></fa-icon>
           </button>
           <span>{{question.likeCount}}</span>

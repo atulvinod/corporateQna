@@ -1,7 +1,11 @@
+import { QuestionService } from 'src/app/services/question.service';
+import { QuestionActivityEnum } from './../../../models/enum/question-activity.enum';
 import { faChevronUp, faEye } from '@fortawesome/free-solid-svg-icons';
 import { Component, Input, OnInit } from '@angular/core';
 import { QuestionDetailsModel } from 'src/models/question-details.model';
 import * as moment from 'moment';
+import { QuestionActivityModel } from 'src/models/question-activity.model';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 @Component
     ({
@@ -11,14 +15,30 @@ import * as moment from 'moment';
 export class QuestionCardComponent implements OnInit{
     faChevronUp= faChevronUp
     faEye = faEye
-    
+    user:any;
     timeAgo = ""
-
+    
     @Input() question:QuestionDetailsModel
-    constructor() {
+    constructor(private questionService: QuestionService, private oidc: OidcSecurityService) {
     }
 
     ngOnInit(){
+        this.oidc.userData$.subscribe(value=>{
+            this.user = value;
+        })
         this.timeAgo = moment(this.question.askedOn).fromNow()
+    }
+
+    upvote(){
+         let act = new QuestionActivityModel({
+            userId:this.user['userId'],
+            questionId: this.question.questionId,
+            activityType : QuestionActivityEnum.Like
+         })
+         this.questionService.createQuestionActivity(act).subscribe(value=>{
+            if(value!=0){
+                this.question.likeCount++
+            }            
+         })
     }
 }

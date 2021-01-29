@@ -1,5 +1,5 @@
 <div class="keka-custom-select" [formGroup]="formGroup" id="{{ selectID }}">
-  <ng-container *ngIf="categoryOptions.length == 0">
+  <!-- <ng-container *ngIf="categoryOptions.length == 0">
     <select formControlName="{{ controlName }}">
       <option value="k" *ngFor="let i of options; let k = index">
         {{ i }}
@@ -14,5 +14,17 @@
     <option value={{i.id}} *ngFor="let i of categoryOptions; let k = index">
       {{ i.name }}
     </option>
-  </select>
+  </select> -->
+  <ng-container *ngIf="categoryOptions.length == 0">
+    <ng-select [(ngModel)]="selection" [searchable]=false formControlName={{controlName}}>
+      <ng-option *ngFor="let i of options; let k = index" value={{k}}  >{{i}}</ng-option>
+   </ng-select>
+  </ng-container>
+
+  <ng-container *ngIf="categoryOptions.length != 0">
+    <ng-select [(ngModel)]="selection" [searchable]=false formControlName={{controlName}}>
+      <ng-option *ngFor="let i of categoryOptions; let k = index" value={{i.id}}  >{{i.name}}</ng-option>
+   </ng-select>
+  </ng-container>
+ 
 </div>

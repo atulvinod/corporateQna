@@ -2,6 +2,7 @@ import { AnswerDetailsModel } from './../../models/answer-details.model';
 import { AnswerModel } from './../../models/answer.model';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, isDevMode } from "@angular/core"
+import { AnswerActivityModel } from 'src/models/answer-activity.model';
 
 @Injectable({
     providedIn:"root"
@@ -21,5 +22,9 @@ export class AnswerService{
 
     getAnswersForQuestion(questionId: number){
         return this.http.get<AnswerDetailsModel[]>(this.httpRoot+"/answer?qId="+questionId);
+    }
+
+    createAnswerActivity(activity:AnswerActivityModel){
+        return this.http.post(this.httpRoot+"/activity/answer",activity);
     }
 }

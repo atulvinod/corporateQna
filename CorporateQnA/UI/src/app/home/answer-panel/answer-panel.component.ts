@@ -68,14 +68,26 @@ export class AnswerPanelComponent implements OnInit{
     }
 
     postAnswer() {
+        
         let answeredBy = this.userData['userId']
         let questionId = this.question.questionId;
         let content = this.removeTags(this.newAnswer.get('content').value);
         let answerModel: AnswerModel = new AnswerModel({ answeredBy, questionId, content })
-        console.log(answerModel);
+
         this.answerService.createAnswer(answerModel).subscribe(value=>{
-            console.log("Created answer ",value);
+            let answerDetail:AnswerDetailsModel = new AnswerDetailsModel({
+                answerId : value,
+                likeCount:0,
+                dislikeCount : 0,
+                content,
+                answeredBy,
+                answeredOn : moment(),
+                questionId,
+                userName : this.userData['userName']
+            })
+            this.answers.push(answerDetail);
             this.newAnswer.reset();
+            this.answerCount++;
         })
     }
 }

@@ -1,3 +1,4 @@
+import { QuestionActivityEnum } from './../../models/enum/question-activity.enum';
 import { QuestionService } from './../services/question.service';
 import { QuestionModel } from './../../models/question.model';
 import { AnswerModel } from './../../models/answer.model';
@@ -10,6 +11,7 @@ import { faSearch, faPlus, faRedo, faThumbsUp, faThumbsDown, faExpand, faExpandA
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { QuestionDetailsModel } from 'src/models/question-details.model';
+import { QuestionActivityModel } from 'src/models/question-activity.model';
 
 @Component
     ({
@@ -35,11 +37,12 @@ export class HomeComponent implements OnInit {
     // categoryOptions: string[] = ["all", "asp.net", "java", "node.js", "dev ops", "ux design"]
     categoryOptions: CategoryModel[] = []
     showOptions: string[] = ["all", "my questions", "my participation", "hot", "solved", "unsolved"]
+    showSelected:string = ""
     sortByOptions: string[] = ["all", "recent", "last 10 days", "last 30 days"]
 
     text: string = "";
 
-    userData: any
+    user: any
     currentQuestion: QuestionDetailsModel;
 
     allQuestions:QuestionDetailsModel[] = []
@@ -49,9 +52,9 @@ export class HomeComponent implements OnInit {
 
         this.searchForm = new FormGroup({
             searchInput: new FormControl(""),
-            category: new FormControl("0"),
-            show: new FormControl("0"),
-            sortBy: new FormControl("0")
+            category: new FormControl(),
+            show: new FormControl(),
+            sortBy: new FormControl()
         })
 
         this.newQuestionForm = new FormGroup({
@@ -69,10 +72,6 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.searchForm.get("category").valueChanges.subscribe(value => {
-            console.log(value);
-        })
-
         this.categoryService.getCategories().subscribe(categories => {
             this.categoryOptions = [...this.categoryOptions, ...categories]
             console.log("Categories:", this.categoryOptions)
@@ -80,8 +79,8 @@ export class HomeComponent implements OnInit {
 
         //TODO: check if logged in, if not, redirect to login screen
         this.oidcService.userData$.subscribe(value => {
-            this.userData = value;
-            console.log("userdata :", this.userData);
+            this.user = value;
+            console.log("userdata :", this.user);
         })
 
         this.questionService.getQuestions().subscribe(value=>{
@@ -95,12 +94,47 @@ export class HomeComponent implements OnInit {
     }
 
     createQuestion() {
-        let askedBy = this.userData['userId']
+        let askedBy = this.user['userId']
         let categoryId = this.newQuestionForm.get("questionCategory").value;
         let content = this.removeTags(this.newQuestionForm.get("content").value);
         let title = this.newQuestionForm.get("title").value;
         let question: QuestionModel = new QuestionModel({ askedBy, categoryId, content, title })
         console.log(question);
+        this.questionService.createQuestion(question).subscribe(value=>{
+            let questionData = new QuestionDetailsModel({
+                questionId : value,
+                userName : this.user['userName'],
+                questionTitle: title,
+                content,
+                askedBy,
+                categoryId,
+                likeCount:0,
+                viewCount:0,
+                resolved:0,
+                answerCount:0
+            })
+            this.allQuestions.push(questionData)
+            this.showQuestions.push(questionData);
+            this.modalRef.hide();
+        })
+    }
+
+    viewQuestion(question:QuestionDetailsModel){
+        
+        this.currentQuestion = question;
+        //for view activity
+        let act = new QuestionActivityModel({
+            userId:this.user['userId'],
+            questionId: question.questionId,
+            activityType : QuestionActivityEnum.View 
+         })
+         //send view request
+         this.questionService.createQuestionActivity(act).subscribe(value=>{
+            if(value!=0){
+                this.currentQuestion.viewCount++;
+            }
+         })
+
     }
 
     removeTags(str) {

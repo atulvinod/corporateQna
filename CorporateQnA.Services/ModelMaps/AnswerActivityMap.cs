@@ -14,10 +14,10 @@ namespace CorporateQnA.Services.ModelMaps
         {
             //data to core
             CreateMap<Models.AnswerActivity, CorporateQnA.Models.AnswerActivity>()
-                .ForMember(x => x.ActivityType, opt => opt.MapFrom(z => (short)z.ActivityType));
+                .ForMember(x => x.ActivityType, opt => opt.MapFrom(z => (AnswerActivityType)z.ActivityType));
 
             CreateMap<CorporateQnA.Models.AnswerActivity, Models.AnswerActivity>()
-                .ForMember(x => x.ActivityType, opt => opt.MapFrom(z => (AnswerActivityType)(z.ActivityType)));
+                .ForMember(x => x.ActivityType, opt => opt.MapFrom(z => (short)(z.ActivityType)));
         }
     }
 }

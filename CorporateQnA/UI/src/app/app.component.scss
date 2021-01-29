@@ -344,7 +344,7 @@ nav {
   position: relative;
 }
 
-.app-question{
+.app-question {
   border-right: 5px solid white;
   border-bottom: 1px solid lightgrey;
   background-color: white;
@@ -529,67 +529,109 @@ nav {
 //-----------------------SECTION Nav-------------------------
 
 // ----------------------- SELECT-----------------------------
-.keka-custom-select {
-  position: relative;
+// .keka-custom-select {
+//   position: relative;
+//   border: 1px solid lightgrey;
+//   border-radius: 3px;
+// }
+
+// .keka-custom-select select {
+//   display: none; /*hide original SELECT element:*/
+// }
+
+// /*style the arrow inside the select element:*/
+// .select-selected:after {
+//   position: absolute;
+//   content: "";
+//   top: 45%;
+//   right: 10px;
+//   width: 0;
+//   height: 0;
+//   border: 6px solid transparent;
+//   border-color: #757575 transparent transparent transparent;
+// }
+
+// /*point the arrow upwards when the select box is open (active):*/
+// .select-selected.select-arrow-active:after {
+//   border-color: #757575 transparent transparent transparent;
+//   top: 45%;
+// }
+
+// /*style the items (options), including the selected item:*/
+// .select-items div,
+// .select-selected {
+//   color: #000;
+//   padding: 7px 16px;
+//   border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+//   cursor: pointer;
+//   user-select: none;
+//   background-color: white;
+//   border-radius: 3px;
+// }
+
+// /*style items (options):*/
+// .select-items {
+//   position: absolute;
+//   top: 90%;
+//   left: 0;
+//   right: 0;
+//   z-index: 100;
+//   border: 1px solid lightgrey;
+//   background-color: white;
+//   box-shadow: 0px 2px 10px rgb(0, 0, 0, 0.2);
+//   border-radius: 5px;
+// }
+
+// /*hide the items when the select box is closed:*/
+// .select-hide {
+//   display: none;
+// }
+
+// .select-items div:hover,
+// .same-as-selected {
+//   background-color: #eaeef1;
+// }
+
+.ng-option {
+  background-color: white;
+  padding: 10px 15px;
+
+  &:hover {
+    background-color: #eaeef1;
+  }
+}
+
+.ng-select {
+  border: 1px solid lightgray;
+  border-radius: 3px;
+  background-color: white;
+  padding: 7.2px 0px;
+
+  .ng-value{
+    margin-left: 10px;
+  }
+}
+
+.ng-arrow-wrapper {
+  width: 30px;
+}
+
+.ng-arrow {
+  border-color: #999999 transparent transparent;
+  border-style: solid;
+  border-width: 5px 5px 2.5px;
+}
+.ng-dropdown-panel {
   border: 1px solid lightgrey;
   border-radius: 3px;
+  max-height: unset;
+}
+.ng-dropdown-panel-items {
+  max-height: unset !important;
 }
 
-.keka-custom-select select {
-  display: none; /*hide original SELECT element:*/
-}
-
-/*style the arrow inside the select element:*/
-.select-selected:after {
-  position: absolute;
-  content: "";
-  top: 45%;
-  right: 10px;
-  width: 0;
-  height: 0;
-  border: 6px solid transparent;
-  border-color: #757575 transparent transparent transparent;
-}
-
-/*point the arrow upwards when the select box is open (active):*/
-.select-selected.select-arrow-active:after {
-  border-color: #757575 transparent transparent transparent;
-  top: 45%;
-}
-
-/*style the items (options), including the selected item:*/
-.select-items div,
-.select-selected {
-  color: #000;
-  padding: 7px 16px;
-  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-  cursor: pointer;
-  user-select: none;
-  background-color: white;
-  border-radius: 3px;
-}
-
-/*style items (options):*/
-.select-items {
-  position: absolute;
-  top: 90%;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  border: 1px solid lightgrey;
-  background-color: white;
-  box-shadow: 0px 2px 10px rgb(0, 0, 0, 0.2);
-  border-radius: 5px;
-}
-
-/*hide the items when the select box is closed:*/
-.select-hide {
-  display: none;
-}
-
-.select-items div:hover,
-.same-as-selected {
-  background-color: #eaeef1;
+.ng-clear-wrapper {
+  color: white;
 }
 
 //-----------------------------SELECT----------------------------
@@ -707,7 +749,7 @@ nav {
   }
 }
 
-.small-editor-save{
+.small-editor-save {
   position: absolute;
   bottom: 6px;
   right: 0;
@@ -746,10 +788,10 @@ nav {
   color: white;
 }
 
-.btn-response{
+.btn-response {
   padding-left: 2px;
   padding-right: 2px;
-  fa-icon{
+  fa-icon {
     margin-right: 5px;
   }
 }
