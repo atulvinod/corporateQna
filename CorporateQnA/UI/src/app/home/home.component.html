@@ -48,67 +48,9 @@
       <app-question *ngFor="let i of showQuestions" [question]=i></app-question>
     </div>
     <div class="home-answer-panel">
-      <div class="view-answer">
-        <div class="d-flex justify-content-between">
-          <div class="user-info">
-            <div>
-              <img
-                src="https://i.pravatar.cc/300"
-                alt=""
-                class="profile-pic-sm"
-              />
-              <span class="ml-3">Samantha</span>
-              <span class="ml-3 text-muted fnt-12">3 Hrs Ago</span>
-            </div>
-          </div>
-          <div class="d-flex align-items-center">
-            <img src="../../assets/report.png" alt="" class="answer-icons" />
-            <span class="fnt-14">Report this</span>
-          </div>
-        </div>
-        <p class="mt-20">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem vero
-          explicabo accusantium mollitia incidunt id libero,
-        </p>
-        <p class="text-muted mt-2 fnt-14">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem vero
-          explicabo accusantium mollitia incidunt id libero,
-        </p>
-      </div>
-      <div class="answer-count">
-        <span>Answers (3)</span>
-      </div>
-      <div class="d-flex flex-column justifiy-content-between">
-        <div class="answers">
-          <app-answer></app-answer>
-        </div>
-        <div class="editor">
-          <div class="big-editor" *ngIf="toggleFlyoutEditor">
-            <div class="big-editor-head d-flex align-items-center justify-content-end">
-              <button class="btn big-editor-close" (click)="toggleFlyoutEditor=false"><fa-icon [icon]="faCompressAlt"></fa-icon></button>
-            </div>
-            <div class="big-editor-container">
-              <form [formGroup]="newAnswer" class="h-100">
-                <app-editor [formGroup]="newAnswer" [controlName]="'content'"></app-editor>
-              </form>
-              <button class="btn big-editor-save" (click)="postAnswer()">
-                <img src="../../assets/send-plane.svg" alt="" class="">
-              </button>
-            </div>
-          </div>
-          <div class="mini-editor">
-            <button class="btn editor-expand" (click)="toggleFlyoutEditor=true">
-              <fa-icon [icon]="faExpandAlt"></fa-icon>
-            </button>
-            <form [formGroup]="newAnswer" class="h-100">
-              <app-editor [formGroup]="newAnswer" [controlName]="'content'" class="editor-mini"></app-editor>
-            </form>
-            <button class="btn small-editor-save" (click)="postAnswer()">
-              <img src="../../assets/send-plane.svg" alt="" >
-            </button>
-          </div>
-        </div>
-      </div>
+      <ng-container *ngIf ="currentQuestion != null">
+        <app-answer-panel [question]=currentQuestion></app-answer-panel>
+      </ng-container>
     </div>
   </div>
 </div>

@@ -26,8 +26,8 @@ export class HomeComponent implements OnInit {
     faCompressAlt = faCompressAlt
 
     searchForm: FormGroup;
-    newQuestionForm: FormGroup;
     newAnswer: FormGroup;
+    newQuestionForm: FormGroup;
 
     toggleFlyoutEditor = false;
     modalRef: BsModalRef;
@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
     text: string = "";
 
     userData: any
-    currentQuestion: number;
+    currentQuestion: QuestionDetailsModel;
 
     allQuestions:QuestionDetailsModel[] = []
     showQuestions: QuestionDetailsModel[] = []
@@ -78,14 +78,6 @@ export class HomeComponent implements OnInit {
             console.log("Categories:", this.categoryOptions)
         })
 
-        this.newAnswer.get('content').valueChanges.subscribe(value => {
-            console.log(this.removeTags(value))
-        })
-
-        this.newQuestionForm.get('content').valueChanges.subscribe(value => {
-            console.log(this.removeTags(value))
-        })
-
         //TODO: check if logged in, if not, redirect to login screen
         this.oidcService.userData$.subscribe(value => {
             this.userData = value;
@@ -102,6 +94,15 @@ export class HomeComponent implements OnInit {
         this.modalRef = this.modalService.show(template, { class: "custom-modal" });
     }
 
+    createQuestion() {
+        let askedBy = this.userData['userId']
+        let categoryId = this.newQuestionForm.get("questionCategory").value;
+        let content = this.removeTags(this.newQuestionForm.get("content").value);
+        let title = this.newQuestionForm.get("title").value;
+        let question: QuestionModel = new QuestionModel({ askedBy, categoryId, content, title })
+        console.log(question);
+    }
+
     removeTags(str) {
         if ((str === null) || (str === ''))
             return false;
@@ -112,25 +113,5 @@ export class HomeComponent implements OnInit {
         // the input string. Replacing the identified  
         // HTML tag with a null string. 
         return str.replace(/(<([^>]+)>)/ig, '');
-    }
-
-    createQuestion() {
-        let askedBy = this.userData['userId']
-        let categoryId = this.newQuestionForm.get("questionCategory").value;
-        let content = this.removeTags(this.newQuestionForm.get("content").value);
-        let title = this.newQuestionForm.get("title").value;
-        let question: QuestionModel = new QuestionModel({ askedBy, categoryId, content, title })
-        console.log(question);
-    }
-
-    postAnswer() {
-        let answeredBy = this.userData['userId']
-        let questionId = this.currentQuestion;
-        let content = this.removeTags(this.newAnswer.get('content').value);
-        let answerModel: AnswerModel = new AnswerModel({ answeredBy, questionId, content })
-        console.log(answerModel);
-        this.answerService.createAnswer(answerModel).subscribe(value=>{
-            console.log("Created answer ",value);
-        })
     }
 }

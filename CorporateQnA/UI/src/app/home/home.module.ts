@@ -9,23 +9,26 @@ import { SharedModule } from '../shared/shared.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { EidtorAComponent } from './editor/editor.component';
 import { NgxEditorModule } from 'ngx-editor';
+import { AnswerPanelComponent } from './answer-panel/answer-panel.component';
 
 @NgModule({
     imports: [
         HomeRoutingModule,
         SharedModule,
         NgxEditorModule,
-        FormsModule
+        FormsModule,
     ],
     declarations: [
         EidtorAComponent,
+        AnswerPanelComponent,
         HomeComponent,
         AnswerComponent
     ],
     exports: [
         AnswerComponent,
         EidtorAComponent,
-        HomeComponent
+        HomeComponent,
+        AnswerPanelComponent
     ]
 })
 export class HomeModule {
