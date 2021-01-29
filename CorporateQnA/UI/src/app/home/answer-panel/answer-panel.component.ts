@@ -83,7 +83,7 @@ export class AnswerPanelComponent implements OnInit{
                 answeredBy,
                 answeredOn : moment(),
                 questionId,
-                userName : this.userData['userName']
+                userName : this.userData['name']
             })
             this.answers.push(answerDetail);
             this.newAnswer.reset();

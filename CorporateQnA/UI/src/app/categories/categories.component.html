@@ -9,11 +9,10 @@
     </div>
     <div class="show-category">
       <label for="" class="fnt-wt-600">Show</label>
-      <app-keka-select
-        [formGroup]="searchForm"
-        [controlName]="'show'"
-        [options]="categoryOptions"
-      ></app-keka-select>
+      <select class="keka-custom-select" formControlName="show">
+        <option value="0" selected>All</option>
+        <option value={{i.id}} *ngFor="let i of categoryDetails;let k =index">{{i.name}}</option>
+      </select>
     </div>
     <div class="d-flex align-items-end justify-content-between w-100">
       <button class="reset-btn btn" (click)="searchForm.reset()">

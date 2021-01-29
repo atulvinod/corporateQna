@@ -52,23 +52,20 @@ export class HomeComponent implements OnInit {
 
         this.searchForm = new FormGroup({
             searchInput: new FormControl(""),
-            category: new FormControl(),
-            show: new FormControl(),
-            sortBy: new FormControl()
+            category: new FormControl(0),
+            show: new FormControl(0),
+            sortBy: new FormControl(0)
         })
 
         this.newQuestionForm = new FormGroup({
             title: new FormControl("", [Validators.required]),
             content: new FormControl("", [Validators.required]),
-            questionCategory: new FormControl("")
+            questionCategory: new FormControl("0")
         })
 
         this.newAnswer = new FormGroup({
             content: new FormControl("", [Validators.required]),
         })
-
-        // this.categoryOptions.push({ name: "All", id: "0", description: "none" });
-        console.log("on init", this.categoryOptions);
     }
 
     ngOnInit() {
@@ -87,6 +84,23 @@ export class HomeComponent implements OnInit {
             this.allQuestions = [...value];
             this.showQuestions = [...value];
         });
+
+        this.searchForm.valueChanges.subscribe(value=>{
+            console.log(value);
+            this.showQuestions = this.allQuestions.filter((e,i,a)=>{
+                let selected = true;
+            
+                if(value['searchInput'].length != 0){
+                    selected = new RegExp(value['searchInput'].replace(".","\\."),"ig").exec(e.questionTitle) != null;
+                }
+
+                if(value['category']!=0){
+                    selected =  e.categoryId == value['category'] && selected;
+                }
+
+                return selected;
+            })
+        })
     }
 
     openModal(template: TemplateRef<any>) {
@@ -147,5 +161,12 @@ export class HomeComponent implements OnInit {
         // the input string. Replacing the identified  
         // HTML tag with a null string. 
         return str.replace(/(<([^>]+)>)/ig, '');
+    }
+
+    resetSearch(){
+        this.searchForm.get("searchInput").patchValue("")
+        this.searchForm.get("category") .patchValue(0)
+        this.searchForm.get("show") .patchValue(0)
+        this.searchForm.get("sortBy") .patchValue(0)
     }
 }

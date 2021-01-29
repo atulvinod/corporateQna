@@ -15,34 +15,28 @@
     </div>
     <div class="category form-select ml-3">
       <label for="">Category</label>
-      <app-keka-select
-        [formGroup]="searchForm"
-        [controlName]="'category'"
-        [categoryOptions]="categoryOptions"
-      ></app-keka-select>
+      <select formControlName="category" class="keka-custom-select">
+        <option value="0" selected>All</option>
+        <option value={{i.id}} *ngFor="let i of categoryOptions;let k =index">{{i.name}}</option>
+      </select>
+
     </div>
     <div class="show form-select ml-3">
       <label for="">Show</label>
-      <ng-select [(ngModel)]="showSelected"  [searchable]="false" formControlName="show">
-        <ng-option
-          *ngFor="let i of showOptions; let k = index"
-          value= {{k}}
-          >{{ k }}</ng-option
-        >
-      </ng-select>
+      <select formControlName="show" class="keka-custom-select">
+        <option value={{k}} *ngFor="let i of showOptions;let k =index">{{i}}</option>
+      </select>
+
     </div>
     <div class="recent form-select ml-3">
       <label for="">Sort By</label>
-      <ng-select [(ngModel)]="showSelected"  [searchable]="false" formControlName="sortBy">
-        <ng-option
-          *ngFor="let i of sortByOptions; let k = index"
-          value= {{k}}
-          >{{ i }}</ng-option
-        >
-      </ng-select>
+      <select formControlName="sortBy" class="keka-custom-select">
+        <option value={{k}} *ngFor="let i of sortByOptions;let k =index">{{i}}</option>
+      </select>
+
     </div>
     <div class="recent form-reset">
-      <button class="reset-btn btn ml-2" (click)="searchForm.reset()">
+      <button class="reset-btn btn ml-2" (click)="this.resetSearch()">
         <fa-icon [icon]="faRedo"></fa-icon>Reset
       </button>
       <button class="btn btn-question" (click)="openModal(template)">
@@ -108,18 +102,18 @@
       </div>
       <div class="form-select new-question-select mt-3">
         <label for="">Category</label>
-        <app-keka-select
-          [formGroup]="newQuestionForm"
-          [controlName]="'questionCategory'"
-          [categoryOptions]="categoryOptions"
-        ></app-keka-select>
+          <select class="keka-custom-select" formControlName="questionCategory">
+            <option value="0" selected>--Select Category--</option>
+            <option value={{i.id}} *ngFor="let i of categoryOptions;let k =index">{{i.name}}</option>
+          </select>
+
       </div>
     </form>
     <div class="d-flex justify-content-end mt-4">
-      <button class="btn btn-cancel mr-2" (click)="modalRef.hide()">
+      <button class="btn btn-cancel mr-2" (click)="modalRef.hide()" >
         Cancel
       </button>
-      <button class="btn btn-post" (click)="createQuestion()">Post</button>
+      <button [disabled]="this.newQuestionForm.invalid" class="btn btn-post" (click)="createQuestion()">Post</button>
     </div>
   </div>
 </ng-template>
