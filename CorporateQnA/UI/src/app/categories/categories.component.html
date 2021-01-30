@@ -4,18 +4,17 @@
       <label for="">Categories</label>
       <div class="search-bar">
         <fa-icon [icon]="faSearch"></fa-icon>
-        <input type="text" name="" id="" placeholder="Search" />
+        <input type="text" name="" id="" placeholder="Search" formControlName="search"/>
       </div>
     </div>
     <div class="show-category">
       <label for="" class="fnt-wt-600">Show</label>
       <select class="keka-custom-select" formControlName="show">
         <option value="0" selected>All</option>
-        <option value={{i.id}} *ngFor="let i of categoryDetails;let k =index">{{i.name}}</option>
       </select>
     </div>
     <div class="d-flex align-items-end justify-content-between w-100">
-      <button class="reset-btn btn" (click)="searchForm.reset()">
+      <button class="reset-btn btn" (click)="resetForm()">
         <fa-icon [icon]="faRedo"></fa-icon>Reset
       </button>
       <button class="btn btn-question"  (click)="openModal(template)">
@@ -27,10 +26,11 @@
 </div>
 <div class="categories-content p-20">
     <div class="standard-grid">
- 
-   <app-category *ngFor="let i of categoryDetails" [categoryDetail]=i></app-category>
+   <app-category *ngFor="let i of showCategories" [categoryDetail]=i></app-category>
     </div>
 </div>
+
+<!-- Modal  -->
 <ng-template #template>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Add Category</h4>

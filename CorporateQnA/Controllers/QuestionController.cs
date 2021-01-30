@@ -43,5 +43,12 @@ namespace CorporateQnA.Controllers
             return Ok(this.questionService.GetQuestions());
         }
 
+        [HttpPost]
+        [Route("search")]
+        public IActionResult SearchQuestion(SearchFilter searchFilter)
+        {
+            return Ok(this.questionService.SearchQuestion(searchFilter));
+        }
+
     }
 }

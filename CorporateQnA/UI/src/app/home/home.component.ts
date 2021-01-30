@@ -1,3 +1,4 @@
+import { SearchFilterModel } from './../../models/search-filter.model';
 import { QuestionActivityEnum } from './../../models/enum/question-activity.enum';
 import { QuestionService } from './../services/question.service';
 import { QuestionModel } from './../../models/question.model';
@@ -12,6 +13,7 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { QuestionDetailsModel } from 'src/models/question-details.model';
 import { QuestionActivityModel } from 'src/models/question-activity.model';
+import { debounceTime } from 'rxjs/operators';
 
 @Component
     ({
@@ -34,25 +36,18 @@ export class HomeComponent implements OnInit {
     toggleFlyoutEditor = false;
     modalRef: BsModalRef;
 
-    // categoryOptions: string[] = ["all", "asp.net", "java", "node.js", "dev ops", "ux design"]
     categoryOptions: CategoryModel[] = []
-    showOptions: string[] = ["all", "my questions", "my participation", "hot", "solved", "unsolved"]
-    showSelected:string = ""
-    sortByOptions: string[] = ["all", "recent", "last 10 days", "last 30 days"]
-
-    text: string = "";
 
     user: any
     currentQuestion: QuestionDetailsModel;
 
-    allQuestions:QuestionDetailsModel[] = []
-    showQuestions: QuestionDetailsModel[] = []
+    allQuestions: QuestionDetailsModel[] = []
 
     constructor(private modalService: BsModalService, private categoryService: CategoryService, private oidcService: OidcSecurityService, private answerService: AnswerService, private questionService: QuestionService) {
 
         this.searchForm = new FormGroup({
             searchInput: new FormControl(""),
-            category: new FormControl(0),
+            categoryId: new FormControl(0),
             show: new FormControl(0),
             sortBy: new FormControl(0)
         })
@@ -80,25 +75,18 @@ export class HomeComponent implements OnInit {
             console.log("userdata :", this.user);
         })
 
-        this.questionService.getQuestions().subscribe(value=>{
+        this.questionService.getQuestions().subscribe(value => {
             this.allQuestions = [...value];
-            this.showQuestions = [...value];
         });
 
-        this.searchForm.valueChanges.subscribe(value=>{
-            console.log(value);
-            this.showQuestions = this.allQuestions.filter((e,i,a)=>{
-                let selected = true;
-            
-                if(value['searchInput'].length != 0){
-                    selected = new RegExp(value['searchInput'].replace(".","\\."),"ig").exec(e.questionTitle) != null;
-                }
-
-                if(value['category']!=0){
-                    selected =  e.categoryId == value['category'] && selected;
-                }
-
-                return selected;
+        this.searchForm.valueChanges.pipe(debounceTime(420)).subscribe((value:SearchFilterModel) => { 
+            value.userId = this.user['userId']
+            value.categoryId = Number(value.categoryId);
+            value.show = Number(value.show);
+            value.sortBy = Number(value.sortBy)
+            console.log("Search filter ",value);
+            this.questionService.searchQuestion(value).subscribe(values=>{
+                this.allQuestions = values;
             })
         })
     }
@@ -114,40 +102,39 @@ export class HomeComponent implements OnInit {
         let title = this.newQuestionForm.get("title").value;
         let question: QuestionModel = new QuestionModel({ askedBy, categoryId, content, title })
         console.log(question);
-        this.questionService.createQuestion(question).subscribe(value=>{
+        this.questionService.createQuestion(question).subscribe(value => {
             let questionData = new QuestionDetailsModel({
-                questionId : value,
-                userName : this.user['userName'],
+                questionId: value,
+                userName: this.user['userName'],
                 questionTitle: title,
                 content,
                 askedBy,
                 categoryId,
-                likeCount:0,
-                viewCount:0,
-                resolved:0,
-                answerCount:0
+                likeCount: 0,
+                viewCount: 0,
+                resolved: 0,
+                answerCount: 0
             })
             this.allQuestions.push(questionData)
-            this.showQuestions.push(questionData);
             this.modalRef.hide();
         })
     }
 
-    viewQuestion(question:QuestionDetailsModel){
-        
+    viewQuestion(question: QuestionDetailsModel) {
+
         this.currentQuestion = question;
         //for view activity
         let act = new QuestionActivityModel({
-            userId:this.user['userId'],
+            userId: this.user['userId'],
             questionId: question.questionId,
-            activityType : QuestionActivityEnum.View 
-         })
-         //send view request
-         this.questionService.createQuestionActivity(act).subscribe(value=>{
-            if(value!=0){
+            activityType: QuestionActivityEnum.View
+        })
+        //send view request
+        this.questionService.createQuestionActivity(act).subscribe(value => {
+            if (value != 0) {
                 this.currentQuestion.viewCount++;
             }
-         })
+        })
 
     }
 
@@ -163,10 +150,11 @@ export class HomeComponent implements OnInit {
         return str.replace(/(<([^>]+)>)/ig, '');
     }
 
-    resetSearch(){
+    resetSearch() {
         this.searchForm.get("searchInput").patchValue("")
-        this.searchForm.get("category") .patchValue(0)
-        this.searchForm.get("show") .patchValue(0)
-        this.searchForm.get("sortBy") .patchValue(0)
+        this.searchForm.get("category").patchValue(0)
+        this.searchForm.get("show").patchValue(0)
+        this.searchForm.get("sortBy").patchValue(0)
     }
+
 }

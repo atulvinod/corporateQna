@@ -18,5 +18,7 @@ namespace CorporateQnA.Services
 
         public IEnumerable<QuestionDetails> GetQuestions();
 
+        public IEnumerable<QuestionDetails> SearchQuestion(SearchFilter searchFilter);
+
     }
 }

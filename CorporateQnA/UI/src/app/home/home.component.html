@@ -15,7 +15,7 @@
     </div>
     <div class="category form-select ml-3">
       <label for="">Category</label>
-      <select formControlName="category" class="keka-custom-select">
+      <select formControlName="categoryId" class="keka-custom-select">
         <option value="0" selected>All</option>
         <option value={{i.id}} *ngFor="let i of categoryOptions;let k =index">{{i.name}}</option>
       </select>
@@ -24,19 +24,27 @@
     <div class="show form-select ml-3">
       <label for="">Show</label>
       <select formControlName="show" class="keka-custom-select">
-        <option value={{k}} *ngFor="let i of showOptions;let k =index">{{i}}</option>
+       <option value=0>All</option>
+       <option value=1>My Questions</option>
+       <option value=2>My Participation</option>
+       <option value=3>Hot</option>
+       <option value=4>Solved</option>
+       <option value=5>Unsolved</option>
       </select>
 
     </div>
     <div class="recent form-select ml-3">
       <label for="">Sort By</label>
       <select formControlName="sortBy" class="keka-custom-select">
-        <option value={{k}} *ngFor="let i of sortByOptions;let k =index">{{i}}</option>
+        <option value="0">All</option>
+        <option value="1">Recent</option>
+        <option value="2">Last 10 Days</option>
+        <option value="3">Last 30 Days</option>
       </select>
 
     </div>
     <div class="recent form-reset">
-      <button class="reset-btn btn ml-2" (click)="this.resetSearch()">
+      <button class="reset-btn btn ml-2" (click)="this.searchForm.reset()">
         <fa-icon [icon]="faRedo"></fa-icon>Reset
       </button>
       <button class="btn btn-question" (click)="openModal(template)">
@@ -52,7 +60,7 @@
       <app-question
         class="d-block app-question"
         [ngClass]="{ 'current-question': currentQuestion == i }"
-        *ngFor="let i of showQuestions"
+        *ngFor="let i of allQuestions"
         [question]="i"
         (click)="viewQuestion(i)"
       ></app-question>

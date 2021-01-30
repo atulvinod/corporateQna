@@ -350,18 +350,29 @@ nav {
   background-color: white;
 }
 
+.question-solved{
+  .question-flag {
+    background-color: #86c06a;
+  }
+}
+
 .question-flag {
   position: absolute;
   width: 20px;
   height: 60px;
-  background-color: #86c06a;
+  background-color: transparent;
   top: -20px;
   left: -10px;
   transform: rotate(45deg);
 }
 
+
 .current-question {
   border-right: 5px solid $violet-dark;
+
+  .question-card {
+    background-color: #f2f1f0;
+  }
 }
 
 .question-card-grid {
@@ -592,7 +603,7 @@ nav {
 //   background-color: #eaeef1;
 // }
 
-.keka-custom-select{
+.keka-custom-select {
   display: block;
   width: 100%;
   padding: 7px 6px;
@@ -615,7 +626,7 @@ nav {
   background-color: white;
   padding: 7.2px 0px;
 
-  .ng-value{
+  .ng-value {
     margin-left: 10px;
   }
 }

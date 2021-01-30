@@ -1,3 +1,4 @@
+import { SearchFilterModel } from './../../models/search-filter.model';
 import { QuestionModel } from './../../models/question.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, isDevMode } from "@angular/core";
@@ -27,5 +28,9 @@ export class QuestionService{
 
     createQuestionActivity(activity:QuestionActivityModel){
         return this.http.post(this.httpRoot+"/activity/question",activity);
+    }
+
+    searchQuestion(filter: SearchFilterModel){
+        return this.http.post<QuestionDetailsModel[]>(this.httpRoot+"/questions/search",filter)
     }
 }

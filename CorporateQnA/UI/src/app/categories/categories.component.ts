@@ -14,7 +14,6 @@ import { OidcSecurityService } from 'angular-auth-oidc-client';
     })
 export class CategoriesComponent implements OnInit {
 
-    categoryOptions: string[] = ["all", "asp.net", "java", "node.js", "dev ops", "ux design"]
     faSearch = faSearch;
     searchForm: FormGroup;
     newCategoryForm: FormGroup
@@ -22,7 +21,9 @@ export class CategoriesComponent implements OnInit {
     faPlus = faPlus;
     modalRef: BsModalRef;
     user: any
-    categoryDetails: CategoryDetailsModel[] = []
+    allCategories: CategoryDetailsModel[] = []
+    showCategories: CategoryDetailsModel[] = []
+    show
 
     constructor(private modalService: BsModalService, private userManager: OidcSecurityService, private categoryService: CategoryService) {
         this.searchForm = new FormGroup({
@@ -42,7 +43,19 @@ export class CategoriesComponent implements OnInit {
 
     ngOnInit() {
         this.categoryService.getCategoryDetails().subscribe(value => {
-            this.categoryDetails = value;
+            this.allCategories = value;
+            this.showCategories = value;
+        })
+
+        this.searchForm.valueChanges.subscribe(value => {
+            console.log(value)
+            this.showCategories = this.allCategories.filter((e,i,a)=>{
+                let selected = true;
+                if((value['search'] ?? "").length != 0){
+                    selected = new RegExp(value['search'].replace(".","\\."),"ig").exec(e.name) != null
+                }
+                return selected;
+            })
         })
     }
 
@@ -60,7 +73,13 @@ export class CategoriesComponent implements OnInit {
             this.newCategoryForm.reset();
             this.modalRef.hide();
             let newCategoryDetail: CategoryDetailsModel = new CategoryDetailsModel({ name, description, thisWeek: 0, thisMonth: 0, total: 0, id: value })
-            this.categoryDetails.push(newCategoryDetail);
+            this.allCategories.push(newCategoryDetail);
+            this.showCategories.push(newCategoryDetail)
         })
+    }
+
+    resetForm() {
+        this.searchForm.reset();
+        this.searchForm.get('show').patchValue(0)
     }
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using PetaPoco;
 using Microsoft.Extensions.Configuration;
 using AutoMapper;
+using static CorporateQnA.Models.Enums.SearchFilterTypes;
 
 namespace CorporateQnA.Services
 {
@@ -52,7 +53,7 @@ namespace CorporateQnA.Services
         {
             try
             {
-                return this.database.Query<CorporateQnA.Services.Models.QuestionDetails>(" SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails]").Select(s => this.mapper.Map<CorporateQnA.Models.QuestionDetails>(s));
+                return this.database.Query<CorporateQnA.Services.Models.QuestionDetails>(" SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails] qd ORDER BY qd.LikeCount DESC").Select(s => this.mapper.Map<CorporateQnA.Models.QuestionDetails>(s));
             }
             catch (Exception)
             {
@@ -70,6 +71,64 @@ namespace CorporateQnA.Services
             {
                 throw;
             }
+        }
+
+        public IEnumerable<QuestionDetails> SearchQuestion(SearchFilter search)
+        {
+            IEnumerable<Models.QuestionDetails> fetch;
+            //check if searchInput is not null
+            search.searchInput = search.searchInput ?? "";
+            //query database for show values
+            switch (search.Show)
+            {
+                case Show.MyQuestions:
+                    fetch = this.database.Query<Models.QuestionDetails>($"SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails] q WHERE LOWER(q.QuestionTitle) LIKE '%{search.searchInput.ToLower()}%' AND q.AskedBy = {search.userId}");
+                    break;
+                case Show.MyParticipation:
+                    fetch = this.database.Query<Models.QuestionDetails>($"SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails] q WHERE LOWER(q.QuestionTitle) LIKE '%{search.searchInput.ToLower()}%' AND EXISTS(SELECT 1 FROM Answer a WHERE a.QuestionId = q.QuestionId AND a.AnsweredBy = {search.userId})");
+                    break;
+                case Show.Solved:
+                    fetch = this.database.Query<Models.QuestionDetails>($"SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails] q WHERE LOWER(q.QuestionTitle)  LIKE '%{search.searchInput.ToLower()}%' AND q.Resolved > 0;");
+                    break;
+                case Show.Unsolved: 
+                    fetch = this.database.Query<Models.QuestionDetails>($"SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails] q WHERE LOWER(q.QuestionTitle)  LIKE '%{search.searchInput.ToLower()}%' AND q.Resolved = 0;");
+                    break;
+                //all is default
+                default:
+                    fetch = this.database.Query<Models.QuestionDetails>($"SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails] q WHERE LOWER(q.QuestionTitle)  LIKE '%{search.searchInput.ToLower()}%'");
+                    break;
+            }
+
+            return fetch.Where(x =>
+            {
+                bool select = true;
+                //based on category id
+                if (search.categoryId != 0)
+                {
+                    select = x.CategoryId == search.categoryId;
+                }
+
+
+                //sort by
+                switch (search.SortBy)
+                {
+                    case SortBy.Last10Days:
+                        select = x.AskedOn >= DateTime.Now.AddDays(-10) && select;
+                        break;
+                    case SortBy.Last30Days:
+                        select = x.AskedOn >= DateTime.Now.AddDays(-30) && select;
+                        break;
+                    case SortBy.Recent:
+                        select = x.AskedOn >= DateTime.Now.AddDays(-7) && select;
+                        break;
+                    default:
+                        break;
+                }
+
+                return select;
+            }).Select(x => this.mapper.Map<QuestionDetails>(x));
+
+
         }
     }
 }
