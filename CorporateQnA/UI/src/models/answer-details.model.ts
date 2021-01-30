@@ -5,9 +5,10 @@ export class AnswerDetailsModel{
     content :string;
     answeredBy : number;
     answeredOn :string;
+    isBestSolution: number;
     questionId: number;
-    userName :string;
-
+    answeredByName :string;
+    askedBy: number;
     constructor(args:{}) {
         this.answerId   = args['answerId ']
         this.likeCount  = args['likeCount']
@@ -15,7 +16,9 @@ export class AnswerDetailsModel{
         this.content  = args['content']
         this.answeredBy   = args['answeredBy']
         this.answeredOn  = args['answeredOn']
-        this.userName   = args['userName']
+        this.answeredByName   = args['answeredByName']
         this.questionId  = args['questionId']
+        this.isBestSolution = args['isBestSolution']
+        this.askedBy  = args['askedBy']
     }
 }

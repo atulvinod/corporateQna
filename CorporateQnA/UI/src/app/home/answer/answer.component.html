@@ -3,7 +3,7 @@
     <div class="user-info">
       <div>
         <img src="https://i.pravatar.cc/300" alt="" class="profile-pic-sm" />
-        <span class="ml-3">{{ answer.userName }}</span>
+        <span class="ml-3">{{ answer.answeredByName }}</span>
         <span class="ml-3 text-muted fnt-12">{{timeAgo}}</span>
       </div>
     </div>
@@ -20,7 +20,7 @@
     </div>
   </div>
   <p class="mt-20 fnt-14">{{answer.content}}</p>
-  <div class="d-flex align-items-center">
+  <div class="d-flex align-items-center" *ngIf="answer.askedBy == user['userId']">
     <div class="checkbox d-inline-block">
       <input
         type="checkbox"

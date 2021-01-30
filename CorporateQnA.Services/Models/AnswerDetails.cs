@@ -27,12 +27,18 @@ namespace CorporateQnA.Services.Models
 
         [Column]
         public DateTime AnsweredOn { get; set; }
+    
+        [Column]
+        public int IsBestSolution { get; set; }
 
         [Column]
         public int QuestionId { get; set; }
 
         [Column]
-        public string UserName { get; set; }
+        public string AnsweredByName { get; set; }
+ 
+        [Column]
+        public int AskedBy { get; set; }
     }
 
 

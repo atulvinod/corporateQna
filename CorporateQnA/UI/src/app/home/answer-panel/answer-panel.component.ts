@@ -32,7 +32,7 @@ export class AnswerPanelComponent implements OnInit{
 
     ngOnInit(){
         this.newAnswer = new FormGroup({
-            content: new FormControl("", [Validators.required,this.answerValidator()]),
+            content: new FormControl("", [Validators.required,this.editorValidator()]),
         })
 
         this.oidcService.userData$.subscribe(value => {
@@ -87,7 +87,7 @@ export class AnswerPanelComponent implements OnInit{
                 answeredBy,
                 answeredOn : moment(),
                 questionId,
-                userName : this.userData['name']
+                answeredByName : this.userData['name']
             })
             this.answers.push(answerDetail);
             this.newAnswer.reset();
@@ -95,12 +95,12 @@ export class AnswerPanelComponent implements OnInit{
         })
     }
 
-    answerValidator(): ValidatorFn {
+    editorValidator(): ValidatorFn {
         return (control: AbstractControl): {[key: string]: any} | null => {
             console.log("validator ",this.removeTags(control.value))
           let empty = this.removeTags(control.value).length == 0
 
           return empty ? {"empty": "Empty content"} : null;
         };
-      }
+    }
 }

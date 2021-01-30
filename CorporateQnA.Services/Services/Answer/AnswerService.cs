@@ -37,7 +37,7 @@ namespace CorporateQnA.Services
 
         public IEnumerable<AnswerDetails> GetAnswersForQues(int questionId)
         {
-            var answers = this.database.Query<CorporateQnA.Services.Models.AnswerDetails>("SELECT * FROM [master].[dbo].[AnswerDetails] WHERE QuestionId = @0", questionId).Select(s=>this.mapper.Map<CorporateQnA.Models.AnswerDetails>(s));
+            var answers = this.database.Query<CorporateQnA.Services.Models.AnswerDetails>("SELECT * FROM [AnswerDetails] WHERE QuestionId = @0", questionId).Select(s=>this.mapper.Map<CorporateQnA.Models.AnswerDetails>(s));
             return answers;
         }
     }

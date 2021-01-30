@@ -29,6 +29,12 @@ namespace CorporateQnA.Services.Auth
         public async Task<bool> Login(string email, string password)
         {
             var getUser = await this.userManager.FindByEmailAsync(email);
+
+            if(getUser == null)
+            {
+                return false;
+            }
+
             var signinResult = await this.signInManager.PasswordSignInAsync(getUser, password, false, false);
             if (signinResult.Succeeded)
             {
