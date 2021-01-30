@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CorporateQnA.Services.Auth
 {
@@ -6,7 +7,7 @@ namespace CorporateQnA.Services.Auth
     {
         public Task<bool> Login(string email, string password);
 
-        public Task<bool> Register(string name, string username, string email, string password, string location, string position, string department);
+        public Task<List<string>> Register(string name, string username, string email, string password, string location, string position, string department);
 
         public Task<string> Logout(string logoutId);
     }

@@ -31,7 +31,8 @@ namespace CorporateQnA.Models.View
         public string Password { get; set; }
         
         [Required]
-        [Compare("Password")]
+        [Display(Name ="Confirm Password")]
+        [Compare("Password",ErrorMessage ="Passwords dont match")]
         public string ConfirmPassword { get; set; }
     }
 }

@@ -44,7 +44,7 @@
 
     </div>
     <div class="recent form-reset">
-      <button class="reset-btn btn ml-2" (click)="this.searchForm.reset()">
+      <button class="reset-btn btn ml-2" (click)="this.resetSearch()">
         <fa-icon [icon]="faRedo"></fa-icon>Reset
       </button>
       <button class="btn btn-question" (click)="openModal(template)">
@@ -66,6 +66,12 @@
       ></app-question>
     </div>
     <div class="home-answer-panel">
+      <div class="d-flex justify-content-center align-items-center h-100" *ngIf="currentQuestion==null">
+        <div class="view-hint-container">
+          <img src="../../assets/back.svg" alt="" class="d-block">
+          <span> Click on a Question to see all the details</span>
+        </div>
+      </div>
       <ng-container *ngIf="currentQuestion != null">
         <app-answer-panel [question]="currentQuestion"></app-answer-panel>
       </ng-container>

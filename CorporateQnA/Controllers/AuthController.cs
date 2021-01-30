@@ -30,7 +30,7 @@ namespace CorporateQnA.Controllers
             // TODO: If the modelstate is invalid, return errors
             if (ModelState.IsValid == false)
             {
-
+                return View(model: login);
             }
 
             var result = await this.authService.Login(login.Email, login.Password);
@@ -38,7 +38,8 @@ namespace CorporateQnA.Controllers
             // show incorrect errors
             if (result == false)
             {
-
+                ViewBag.Fail = "Incorrect Email or password";
+                return View(model: login);
             }
 
             return Redirect(login.ReturnUrl); ;
@@ -63,14 +64,15 @@ namespace CorporateQnA.Controllers
             //check model state
             if (ModelState.IsValid == false)
             {
-
+                return View(model: register);
             }
 
-            var result = await this.authService.Register(register.Username, register.Username, register.Email, register.Password, register.Location, register.Position, register.Department);
+            var errors = await this.authService.Register(register.Username, register.Username, register.Email, register.Password, register.Location, register.Position, register.Department);
 
-            if (result == false)
+            if (errors != null)
             {
-                //show errors and return view
+                ViewBag.Errors = errors;
+                return View(model: register);
             }
 
             return Redirect(register.ReturnUrl);

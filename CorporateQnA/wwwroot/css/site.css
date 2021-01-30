@@ -1,0 +1,29 @@
+﻿.logo{
+    width:250px;
+    display:block;
+}
+
+.banner {
+    background-color: #76618B;
+}
+
+.login{
+    margin-top:90px;
+    margin-bottom:90px;
+}
+
+body{
+    height : 100vh;
+}
+
+body > *{
+    height: 100%
+}
+
+.container-fluid{
+    height : 100%
+}
+
+.row{
+    height:100%
+}

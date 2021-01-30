@@ -1,4 +1,5 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +7,19 @@ import { Component, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'CorporateQnA';
+
+  constructor(private oidc:OidcSecurityService) {
+    
+  }
+
+  ngOnInit(){
+    this.oidc.checkAuth().subscribe(value=>{
+      console.log("APP COMPONENT ",value)
+      if(value==false){
+        this.oidc.authorize()
+      }
+    })
+  }
 }

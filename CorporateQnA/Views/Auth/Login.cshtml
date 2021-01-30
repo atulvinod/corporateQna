@@ -1,23 +1,26 @@
 ﻿@model LoginModel;
 
-<h1>Login</h1>
-<hr />
-<form asp-controller="Auth" asp-action="Login" method="post">
-    <input type="hidden" asp-for="ReturnUrl" />
-    <div class="form-group">
-        <label>Email</label>
-        <input asp-for="Email" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>Password</label>
-        <input type="password" asp-for="Password" class="form-control" />
-    </div>
-    <div class="mt-1">
-        <input type="submit" value="Login" class="btn btn-success" />
-    </div>
+<div class="p-4 login">
+    <h1>Login</h1>
+    <hr />
+    <form asp-controller="Auth" asp-action="Login" method="post">
+        <input type="hidden" asp-for="ReturnUrl" />
+        <div class="form-group">
+            <label>Email</label><span asp-validation-for="Email" class="text-danger ml-2"></span>
+            <input asp-for="Email" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Password</label><span asp-validation-for="Password" class="text-danger ml-2"></span>
+            <input type="password" asp-for="Password" class="form-control" />
+        </div>
+        <span class="text-danger mt-2">@ViewBag.Fail</span>
+        <div class="mt-2">
+            <input type="submit" value="Login" class="btn btn-success" />
+        </div>
 
-</form>
-<hr />
-<div class="mt-2">
-    <a asp-action="Register" asp-controller="Auth" asp-route-returnUrl="@Model.ReturnUrl" class="btn btn-primary">Register</a>
+    </form>
+    <hr />
+    <div class="mt-2">
+       <a asp-action="Register" asp-controller="Auth" asp-route-returnUrl="@Model.ReturnUrl" class="btn btn-primary">Register</a>
+    </div>
 </div>

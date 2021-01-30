@@ -11,16 +11,18 @@ export class NavbarComponent implements OnInit {
 
     loggedIn = false;
     userName: string = ""
-    constructor(public oidcSecurityService: OidcSecurityService) {}
+    constructor(public oidcSecurityService: OidcSecurityService) { }
 
     ngOnInit() {
-        this.oidcSecurityService.checkAuth().subscribe(value => {
+        this.oidcSecurityService.isAuthenticated$.subscribe(value => {
             console.log("FROM NAV ,is authenticated => ", value);
             this.loggedIn = value
             if (value) {
-                this.getUserName()
+                this.getUserName();
             }
         })
+
+
     }
 
     login() {
@@ -33,7 +35,10 @@ export class NavbarComponent implements OnInit {
 
     getUserName() {
         this.oidcSecurityService.userData$.subscribe(value => {
-            this.userName = value["name"]
+            console.log("NAVBAR USER", value)
+            if (value != null) {
+                this.userName = value["name"]
+            }
         })
     }
 

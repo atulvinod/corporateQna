@@ -279,7 +279,9 @@ nav {
 }
 
 .home-questions {
-  height: 50rem;
+  min-height: 50rem;
+  padding-bottom: 30px;
+  background-color: white;
 }
 
 .home-answer-panel {
@@ -331,6 +333,24 @@ nav {
   top: 10px;
   right: 10px;
   z-index: 1;
+}
+
+.view-hint-container{
+  width: 210px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction: column;
+
+  img{
+    width: 60px;
+  }
+
+  span{
+    margin-top: 22px;
+    color: #777;
+    font-size: 18px;
+  }
 }
 
 //>---------------- HOME Main content---------------------------

@@ -6,7 +6,7 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { QuestionService } from 'src/app/services/question.service';
 import { faExpandAlt, faCompressAlt } from '@fortawesome/free-solid-svg-icons';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { QuestionDetailsModel } from 'src/models/question-details.model';
 import * as moment from 'moment';
 import { ThrowStmt } from '@angular/compiler';
@@ -32,7 +32,7 @@ export class AnswerPanelComponent implements OnInit{
 
     ngOnInit(){
         this.newAnswer = new FormGroup({
-            content: new FormControl("", [Validators.required]),
+            content: new FormControl("", [Validators.required,this.answerValidator()]),
         })
 
         this.oidcService.userData$.subscribe(value => {
@@ -46,6 +46,10 @@ export class AnswerPanelComponent implements OnInit{
         })
 
         this.questionTimeAgo = moment(this.question.askedOn).fromNow()
+
+        this.newAnswer.get("content").valueChanges.subscribe(value=>{
+            console.log("valid form",this.newAnswer.valid, value);
+        })
     }
 
     ngOnChanges(changes:SimpleChanges){
@@ -90,4 +94,13 @@ export class AnswerPanelComponent implements OnInit{
             this.answerCount++;
         })
     }
+
+    answerValidator(): ValidatorFn {
+        return (control: AbstractControl): {[key: string]: any} | null => {
+            console.log("validator ",this.removeTags(control.value))
+          let empty = this.removeTags(control.value).length == 0
+
+          return empty ? {"empty": "Empty content"} : null;
+        };
+      }
 }

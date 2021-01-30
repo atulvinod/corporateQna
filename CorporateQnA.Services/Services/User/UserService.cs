@@ -20,7 +20,15 @@ namespace CorporateQnA.Services
 
         public int Create(AppUser user)
         {
-            return (int)this.database.Insert(user);
+            var check = this.database.Query<AppUser>("Select * From Users WHERE Email = @0", user.Email);
+            if (check == null)
+            {
+                return (int)this.database.Insert(user);
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         public AppUser GetUser(int userid)

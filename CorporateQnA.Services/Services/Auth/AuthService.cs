@@ -2,6 +2,7 @@
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Identity;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CorporateQnA.Services.Auth
@@ -36,14 +37,16 @@ namespace CorporateQnA.Services.Auth
             return false;
         }
 
-        public async Task<bool> Register(string name, string username, string email, string password, string location, string position, string department)
+        public async Task<List<string>> Register(string name, string username, string email, string password, string location, string position, string department)
         {
+            List<string> errors = new List<string>();
             var user = await this.userManager.FindByEmailAsync(email);
 
             //if the user already exits
             if (user != null)
             {
-                return false;
+                errors.Add("User already exists");
+                return errors; ;
             }
 
             var appUser = new AppUser
@@ -55,6 +58,26 @@ namespace CorporateQnA.Services.Auth
                 Position = position
             };
 
+            var validators = this.userManager.PasswordValidators;
+
+            foreach (var validator in validators)
+            {
+                var passwordResult = await validator.ValidateAsync(this.userManager, null, password);
+
+                if (!passwordResult.Succeeded)
+                {
+                    foreach (var error in passwordResult.Errors)
+                    {
+                        errors.Add(error.Description);
+                    }
+                }
+            }
+            //check if password validation didnt add any errors
+            if(errors.Count != 0)
+            {
+                return errors;
+            }
+
             var userId = this.userService.Create(appUser);
             var newUser = new AppIdentityUser
             {
@@ -64,13 +87,21 @@ namespace CorporateQnA.Services.Auth
             };
 
             var result = await this.userManager.CreateAsync(newUser, password);
+
             if (result.Succeeded)
             {
                 await this.signInManager.SignInAsync(newUser, false);
-                return true;
+                return null;
             }
-
-            return false;
+            else
+            {
+                foreach(var i in result.Errors)
+                {
+                    errors.Add(i.Description);
+                }
+            }
+            //as there are no errors
+            return null;
         }
 
         public async Task<string> Logout(string logoutId)

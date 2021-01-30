@@ -24,7 +24,7 @@
     </p>
   </div>
   <div class="answer-count">
-    <span>Answers {{answerCount}}</span>
+    <span>Answers ({{answerCount}})</span>
   </div>
   <div class="d-flex flex-column justifiy-content-between">
     <div class="answers">
@@ -39,7 +39,7 @@
           <form [formGroup]="newAnswer" class="h-100">
             <app-editor [formGroup]="newAnswer" [controlName]="'content'"></app-editor>
           </form>
-          <button class="btn big-editor-save" (click)="postAnswer()">
+          <button class="btn big-editor-save" (click)="postAnswer()" [disabled]="this.newAnswer.invalid">
             <img src="../../assets/send-plane.svg" alt="" class="">
           </button>
         </div>
@@ -51,7 +51,7 @@
         <form [formGroup]="newAnswer" class="h-100">
           <app-editor [formGroup]="newAnswer" [controlName]="'content'" class="editor-mini"></app-editor>
         </form>
-        <button class="btn small-editor-save" (click)="postAnswer()">
+        <button class="btn small-editor-save" (click)="postAnswer()"  [disabled]="this.newAnswer.invalid">
           <img src="../../assets/send-plane.svg" alt="" >
         </button>
       </div>

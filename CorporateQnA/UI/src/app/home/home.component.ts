@@ -6,7 +6,7 @@ import { AnswerModel } from './../../models/answer.model';
 import { AnswerService } from './../services/answer.service';
 import { CategoryModel } from './../../models/category.model';
 import { CategoryService } from './../services/category.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Component, TemplateRef, OnInit } from '@angular/core';
 import { faSearch, faPlus, faRedo, faThumbsUp, faThumbsDown, faExpand, faExpandAlt, faCompress, faCompressArrowsAlt, faCompressAlt } from '@fortawesome/free-solid-svg-icons';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
@@ -54,8 +54,8 @@ export class HomeComponent implements OnInit {
 
         this.newQuestionForm = new FormGroup({
             title: new FormControl("", [Validators.required]),
-            content: new FormControl("", [Validators.required]),
-            questionCategory: new FormControl("0")
+            content: new FormControl("", [Validators.required, this.editorValidator()]),
+            questionCategory: new FormControl("0", [Validators.required, this.categoryIdValidator()])
         })
 
         this.newAnswer = new FormGroup({
@@ -66,27 +66,25 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
         this.categoryService.getCategories().subscribe(categories => {
             this.categoryOptions = [...this.categoryOptions, ...categories]
-            console.log("Categories:", this.categoryOptions)
         })
 
-        //TODO: check if logged in, if not, redirect to login screen
         this.oidcService.userData$.subscribe(value => {
             this.user = value;
-            console.log("userdata :", this.user);
         })
 
         this.questionService.getQuestions().subscribe(value => {
             this.allQuestions = [...value];
         });
 
-        this.searchForm.valueChanges.pipe(debounceTime(420)).subscribe((value:SearchFilterModel) => { 
+        this.searchForm.valueChanges.pipe(debounceTime(420)).subscribe((value: SearchFilterModel) => {
             value.userId = this.user['userId']
             value.categoryId = Number(value.categoryId);
             value.show = Number(value.show);
             value.sortBy = Number(value.sortBy)
-            console.log("Search filter ",value);
-            this.questionService.searchQuestion(value).subscribe(values=>{
+
+            this.questionService.searchQuestion(value).subscribe(values => {
                 this.allQuestions = values;
+                this.currentQuestion = null;
             })
         })
     }
@@ -152,9 +150,23 @@ export class HomeComponent implements OnInit {
 
     resetSearch() {
         this.searchForm.get("searchInput").patchValue("")
-        this.searchForm.get("category").patchValue(0)
+        this.searchForm.get("categoryId").patchValue(0)
         this.searchForm.get("show").patchValue(0)
         this.searchForm.get("sortBy").patchValue(0)
     }
 
+    categoryIdValidator(): ValidatorFn {
+        return (control: AbstractControl): { [key: string]: any } | null => {
+            return control.value == 0 ? { "categoryId": "invalid category id" } : null;
+        };
+    }
+
+    editorValidator(): ValidatorFn {
+        return (control: AbstractControl): { [key: string]: any } | null => {
+            console.log("validator ", this.removeTags(control.value))
+            let empty = this.removeTags(control.value).length == 0
+
+            return empty ? { "empty": "Empty content" } : null;
+        };
+    }
 }

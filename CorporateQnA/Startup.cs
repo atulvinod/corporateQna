@@ -33,7 +33,7 @@ namespace CorporateQnA
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             services.AddCors(options =>
             {
@@ -109,6 +109,8 @@ namespace CorporateQnA
             }
 
             app.UseHttpsRedirection();
+
+            app.UseStaticFiles();
 
             app.UseRouting();
 
