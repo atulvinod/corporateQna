@@ -6,58 +6,86 @@
     </a>
   </div>
 
-  <div class="user-details-container mt-3">
-    <div class="d-flex p-20 user-details-content">
-      <div class="user-info d-flex user-info-detailed">
-        <img class="profile-pic-lg" src="https://i.pravatar.cc/300" alt="" />
-        <div class="user-data ml-3">
-          <h5>Jhon Doe</h5>
-          <span class="text-muted fnt-14 mt-1 d-block">Role</span>
-          <span class="text-muted fnt-14">Location</span>
-          <div class="d-flex align-items-center mt-2">
-            <button class="btn mr-1 btn-response">
-              <fa-icon [icon]="thumbsUp" class=" like"></fa-icon>
-              <span class="mr-2">20</span>
-            </button>
-            <button class="btn mr-1 btn-response">
-              <fa-icon [icon]="thumbsDown" class="dislike "></fa-icon>
-              <span>30</span>
-            </button>
+  <div *ngIf="userDetails != null">
+    <div class="user-details-container mt-3">
+      <div class="d-flex p-20 user-details-content">
+        <div class="user-info d-flex user-info-detailed">
+          <img class="profile-pic-lg" src="https://i.pravatar.cc/300" alt="" />
+          <div class="user-data ml-3">
+            <h5>{{ userDetails.name }}</h5>
+            <span class="text-muted fnt-14 mt-1 d-block">{{
+              userDetails.position
+            }}</span>
+            <span class="text-muted fnt-14">{{ userDetails.location }}</span>
+            <div class="d-flex align-items-center mt-2">
+              <button class="btn mr-1 btn-response">
+                <fa-icon [icon]="thumbsUp" class="like"></fa-icon>
+                <span class="mr-2">{{ userDetails.totalLikes }}</span>
+              </button>
+              <button class="btn mr-1 btn-response">
+                <fa-icon [icon]="thumbsDown" class="dislike"></fa-icon>
+                <span>{{ userDetails.totalDislikes }}</span>
+              </button>
+            </div>
           </div>
         </div>
+        <div class="user-stat-2 asked">
+          <span class="user-stat-value">{{ userDetails.questionAsked }}</span>
+          <span class="d-block text-muted fnt-12">Questions Asked</span>
+        </div>
+        <div class="user-stat-2 answered">
+          <span class="user-stat-value">{{
+            userDetails.questionAnswered
+          }}</span>
+          <span class="d-block text-muted fnt-12">Questions Answered</span>
+        </div>
+        <div class="user-stat-2 solved">
+          <span class="user-stat-value">{{
+            userDetails.questionResolved
+          }}</span>
+          <span class="d-block text-muted fnt-12">Questions Solved</span>
+        </div>
       </div>
-      <div class="user-stat-2 asked">
-        <span class="user-stat-value">12</span>
-        <span class="d-block text-muted fnt-12">Questions Asked</span>
-      </div>
-      <div class="user-stat-2 answered">
-        <span class="user-stat-value">12</span>
-        <span class="d-block text-muted fnt-12">Questions Answered</span>
-      </div>
-      <div class="user-stat-2 solved">
-        <span class="user-stat-value">12</span>
-        <span class="d-block text-muted fnt-12">Questions Solved</span>
+      <div class="user-details-footer">
+        <ul class="nav user-details-nav">
+          <li class="nav-item" [ngClass]="{'user-details-current': currentTab == 'ALL'}" (click)="setTab('ALL')">
+            <a class="nav-link" >All Questions</a>
+          </li>
+          <li class="nav-item" [ngClass]="{'user-details-current': currentTab == 'ANSWERED'}" (click)="setTab('ANSWERED')">
+            <a class="nav-link" >Answered</a>
+          </li>
+        </ul>
       </div>
     </div>
-    <div class="user-details-footer">
-      <ul class="nav user-details-nav">
-        <li class="nav-item user-details-current">
-          <a class="nav-link" href="#">All Questions</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Answered</a>
-        </li>
-      </ul>
-    </div>
-  </div>
 
-  <div class="mt-4">
-    <div class="user-detail-grid">
-      <div class="user-questions">
-        <app-question></app-question>
-        <app-question></app-question>
+    <div class="mt-4">
+      <div class="user-detail-grid">
+        <div class="user-questions h-100" >
+          <div class="d-flex justify-content-center align-items-center h-100" *ngIf="currentQuestions.length == 0">
+            <div class="font-italic text-muted">
+              No questions
+            </div>
+          </div>
+          <app-question
+          class="d-block app-question"
+          [ngClass]="{ 'current-question': currentQuestion == i }"
+          *ngFor="let i of currentQuestions"
+          [question]="i"
+          (click)="viewQuestion(i)"
+        ></app-question>
+        </div>
+        <div class="user-answer-pane">
+          <div class="d-flex justify-content-center align-items-center h-100" *ngIf="currentQuestion==null">
+            <div class="view-hint-container">
+              <img src="../../assets/back.svg" alt="" class="d-block">
+              <span> Click on a Question to see all the details</span>
+            </div>
+          </div>
+          <ng-container *ngIf="currentQuestion != null">
+            <app-answer-panel [question]="currentQuestion"></app-answer-panel>
+          </ng-container>
+        </div>
       </div>
-      <div class="user-answer-pane"></div>
     </div>
   </div>
 </div>

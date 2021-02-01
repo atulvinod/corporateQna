@@ -22,7 +22,7 @@ namespace CorporateQnA.Controllers
 
         [Route("answer")]
         [HttpPost]
-        public IActionResult CreateAnswerAcitvity(AnswerActivity answerActivity)
+        public IActionResult CreateAnswerActivity(AnswerActivity answerActivity)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace CorporateQnA.Controllers
 
         [Route("question")]
         [HttpPost]
-        public IActionResult CreateQuestionAcitvity(QuestionActivity questionAcitvity)
+        public IActionResult CreateQuestionActivity(QuestionActivity questionAcitvity)
         {
             try
             {
@@ -48,7 +48,5 @@ namespace CorporateQnA.Controllers
                 return BadRequest(new { message = e.Message });
             }
         }
-
-
     }
 }

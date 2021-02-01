@@ -11,17 +11,12 @@ namespace CorporateQnA.Services.ModelMaps
     {
         public QuestionMap()
         {
-            //data to core
-            CreateMap<CorporateQnA.Services.Models.Question, CorporateQnA.Models.Question>();
+            CreateMap<Models.Question, CorporateQnA.Models.Question>();
 
-            //core to data
-            CreateMap<CorporateQnA.Models.Question, CorporateQnA.Services.Models.Question>();
+            CreateMap<CorporateQnA.Models.Question, Models.Question>();
 
-            //data to core
-            CreateMap<CorporateQnA.Services.Models.QuestionDetails, CorporateQnA.Models.QuestionDetails>();
-
-            //core to data
-            CreateMap<CorporateQnA.Models.QuestionDetails, CorporateQnA.Services.Models.QuestionDetails>();
+            CreateMap<Models.QuestionDetails, CorporateQnA.Models.QuestionDetails>()
+                .ForMember(x=>x.Resolved ,o=>o.MapFrom(x=>x.Resolved > 0));
 
         }
     }

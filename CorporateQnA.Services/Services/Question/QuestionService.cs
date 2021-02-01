@@ -8,6 +8,7 @@ using PetaPoco;
 using Microsoft.Extensions.Configuration;
 using AutoMapper;
 using static CorporateQnA.Models.Enums.SearchFilterTypes;
+using CorporateQnA.Models.Enums;
 
 namespace CorporateQnA.Services
 {
@@ -53,7 +54,7 @@ namespace CorporateQnA.Services
         {
             try
             {
-                return this.database.Query<CorporateQnA.Services.Models.QuestionDetails>(" SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails] qd ORDER BY qd.LikeCount DESC").Select(s => this.mapper.Map<CorporateQnA.Models.QuestionDetails>(s));
+                return this.database.Query<Models.QuestionDetails>(" SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails] qd ORDER BY qd.LikeCount DESC").Select(s => this.mapper.Map<CorporateQnA.Models.QuestionDetails>(s));
             }
             catch (Exception)
             {
@@ -127,8 +128,41 @@ namespace CorporateQnA.Services
 
                 return select;
             }).Select(x => this.mapper.Map<QuestionDetails>(x));
-
-
         }
+
+        public IEnumerable<QuestionDetails> QuestionsByUser(int userId)
+        {
+            return this.database.Query<CorporateQnA.Models.QuestionDetails>("SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails] q WHERE q.AskedBy = @0", userId).Select(s => this.mapper.Map<CorporateQnA.Models.QuestionDetails>(s));
+        }
+
+        public IEnumerable<QuestionDetails> QuestionsAnsweredByUser(int userId)
+        {
+            return this.database.Query<CorporateQnA.Models.QuestionDetails>("SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails] q WHERE EXISTS(SELECT * FROM Answer a WHERE a.AnsweredBy = @0  AND a.QuestionId = q.QuestionId) AND q.AskedBy = @1;", userId,userId).Select(s => this.mapper.Map<CorporateQnA.Models.QuestionDetails>(s));
+        }
+
+        public void SetQuestionSolution(QuestionSolution solution)
+        {
+            var activity = this.database.Query<Models.QuestionActivity>("SELECT * FROM [CorporateQ&A].[dbo].[QuestionActivity] q WHERE q.QuestionId = @0 AND q.UserId = @1 AND q.ActivityType = 2",solution.QuestionId,solution.ResolvedBy).FirstOrDefault();
+
+            if(activity == null)
+            {
+                var newActivity = new QuestionActivity
+                {
+                    ActivityType = QuestionActivityType.Resolved,
+                    UserId = solution.ResolvedBy,
+                    QuestionId = solution.QuestionId,
+                    CreatedAt = DateTime.Now
+                };
+                this.database.Insert(this.mapper.Map<CorporateQnA.Services.Models.QuestionActivity>(newActivity));
+                this.database.Execute("UPDATE Answer SET IsBestSolution = 1 WHERE Id = @0", solution.AnswerId);
+            }
+            else
+            {
+                this.database.Delete(activity);
+                this.database.Execute("UPDATE Answer SET IsBestSolution = 0 WHERE Id = @0", solution.AnswerId);
+            }
+        }
+
+
     }
 }

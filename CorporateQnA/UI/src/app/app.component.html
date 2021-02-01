@@ -1,4 +1,14 @@
 <app-nav></app-nav>
+<div class="preloader" *ngIf="showPreloader">
+    <div class="preloader-content">
+      <img src="../assets/logo.svg" alt="">
+      
+      <h5 class="mt-4 text-white" >Loading..</h5>
+      <div>
+        <progressbar class="progress-striped active"  [value]="100"></progressbar>
+      </div>
+    </div>
+</div>
 <div class="grid">
   <div class="side-bar">
     <div class="forum side-bar-nav">

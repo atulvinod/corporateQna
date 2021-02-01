@@ -14,11 +14,14 @@ import { OidcSecurityService } from 'angular-auth-oidc-client';
     })
 export class CategoriesComponent implements OnInit {
 
-    faSearch = faSearch;
-    searchForm: FormGroup;
-    newCategoryForm: FormGroup
+    //ICONS
     faRedo = faRedo;
     faPlus = faPlus;
+    faSearch = faSearch;
+    
+    searchForm: FormGroup;
+    newCategoryForm: FormGroup
+  
     modalRef: BsModalRef;
     user: any
     allCategories: CategoryDetailsModel[] = []
@@ -36,23 +39,23 @@ export class CategoriesComponent implements OnInit {
             categoryDescription: new FormControl("", [Validators.required])
         })
 
-        this.userManager.userData$.subscribe(value => {
-            this.user = value
+        this.userManager.userData$.subscribe(user => {
+            this.user = user
         })
     }
 
     ngOnInit() {
-        this.categoryService.getCategoryDetails().subscribe(value => {
-            this.allCategories = value;
-            this.showCategories = value;
+        this.categoryService.getCategoryDetails().subscribe(categories => {
+            this.allCategories = categories;
+            this.showCategories = categories;
         })
 
         this.searchForm.valueChanges.subscribe(value => {
-            console.log(value)
-            this.showCategories = this.allCategories.filter((e,i,a)=>{
+
+            this.showCategories = this.allCategories.filter((e, i, a) => {
                 let selected = true;
-                if((value['search'] ?? "").length != 0){
-                    selected = new RegExp(value['search'].replace(".","\\."),"ig").exec(e.name) != null
+                if ((value['search'] ?? "").length != 0) {
+                    selected = new RegExp(value['search'].replace(".", "\\."), "ig").exec(e.name) != null
                 }
                 return selected;
             })
@@ -64,17 +67,23 @@ export class CategoriesComponent implements OnInit {
     }
 
     createCategory() {
+        
         let createdBy = this.user['userId']
         let name = this.newCategoryForm.get('categoryName').value;
         let description = this.newCategoryForm.get('categoryDescription').value;
+        
         let category: CategoryModel = new CategoryModel({ createdBy, name, description })
+
         this.categoryService.createCategory(category).subscribe(value => {
-            console.log(value);
-            this.newCategoryForm.reset();
-            this.modalRef.hide();
+
             let newCategoryDetail: CategoryDetailsModel = new CategoryDetailsModel({ name, description, thisWeek: 0, thisMonth: 0, total: 0, id: value })
+
             this.allCategories.push(newCategoryDetail);
             this.showCategories.push(newCategoryDetail)
+
+            this.newCategoryForm.reset();
+            this.modalRef.hide();
+
         })
     }
 

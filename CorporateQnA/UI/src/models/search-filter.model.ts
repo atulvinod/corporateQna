@@ -1,9 +1,11 @@
 export class SearchFilterModel{
+    
     searchInput:string;
     categoryId: number;
     show:number;
     sortBy:number
     userId: number
+
     constructor(args:{}) {
         this.searchInput = args['searchInput']
         this.categoryId = args['categoryId'] 

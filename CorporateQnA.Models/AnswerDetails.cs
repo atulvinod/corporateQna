@@ -20,12 +20,16 @@ namespace CorporateQnA.Models
 
         public  DateTime AnsweredOn { get; set; }
         
-        public int IsBestSolution { get; set; }
+        public bool IsBestSolution { get; set; }
 
         public int QuestionId { get; set; }
 
         public string AnsweredByName { get; set; }
 
         public int AskedBy { get; set; }
+
+        public bool LikedByUser { get; set; }
+
+        public bool DislikedByUser { get; set; }
     }
 }

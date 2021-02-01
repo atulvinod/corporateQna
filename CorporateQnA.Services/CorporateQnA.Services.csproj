@@ -6,6 +6,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="IdentityServer4" Version="4.1.1" />
+		<PackageReference Include="PetaPoco.Compiled" Version="6.0.459" />
 		<PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
 		<PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
 		<PackageReference Include="automapper" Version="10.1.1" />

@@ -1,8 +1,8 @@
-import { AllUsersComponent } from './view-users/all-users.component';
 import { UsersComponent } from './users.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from "@angular/core";
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { AllUsersComponent } from './all-users/all-users.component';
 
 const routes : Routes = [
     {
@@ -14,7 +14,7 @@ const routes : Routes = [
                 component: AllUsersComponent
             },
             {
-                path:"view",
+                path:"view/:id",
                 component: UserDetailsComponent
             }
         ]

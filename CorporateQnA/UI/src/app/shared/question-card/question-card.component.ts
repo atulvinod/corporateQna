@@ -10,35 +10,40 @@ import { OidcSecurityService } from 'angular-auth-oidc-client';
 @Component
     ({
         selector: "app-question",
-        templateUrl:"./question-card.component.html"
+        templateUrl: "./question-card.component.html"
     })
-export class QuestionCardComponent implements OnInit{
-    faChevronUp= faChevronUp
-    faEye = faEye
-    user:any;
-    timeAgo = ""
-    
-    @Input() question:QuestionDetailsModel
-    constructor(private questionService: QuestionService, private oidc: OidcSecurityService) {
-    }
+export class QuestionCardComponent implements OnInit {
 
-    ngOnInit(){
-        this.oidc.userData$.subscribe(value=>{
+    @Input() question: QuestionDetailsModel
+
+    //Icons
+    faChevronUp = faChevronUp
+    faEye = faEye
+
+    user: any;
+    timeAgo = ""
+
+    constructor(private questionService: QuestionService, private oidc: OidcSecurityService) { }
+
+    ngOnInit() {
+        this.oidc.userData$.subscribe(value => {
             this.user = value;
         })
+
         this.timeAgo = moment(this.question.askedOn).fromNow()
     }
 
-    upvote(){
-         let act = new QuestionActivityModel({
-            userId:this.user['userId'],
+    upvote() {
+        let act = new QuestionActivityModel({
+            userId: this.user['userId'],
             questionId: this.question.questionId,
-            activityType : QuestionActivityEnum.Like
-         })
-         this.questionService.createQuestionActivity(act).subscribe(value=>{
-            if(value!=0){
+            activityType: QuestionActivityEnum.Like
+        })
+
+        this.questionService.createQuestionActivity(act).subscribe(value => {
+            if (value != 0) {
                 this.question.likeCount++
-            }            
-         })
+            }
+        })
     }
 }

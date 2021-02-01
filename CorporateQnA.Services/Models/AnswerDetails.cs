@@ -39,6 +39,12 @@ namespace CorporateQnA.Services.Models
  
         [Column]
         public int AskedBy { get; set; }
+
+        [Column]
+        public int LikedByUser { get; set; }
+
+        [Column]
+        public int DislikedByUser { get; set; }
     }
 
 

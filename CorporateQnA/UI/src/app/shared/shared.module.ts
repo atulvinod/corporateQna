@@ -1,3 +1,5 @@
+import {EidtorAComponent} from './editor/editor.component';
+import { NgxEditorModule } from 'ngx-editor';
 import { QuestionCardComponent } from './question-card/question-card.component';
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
@@ -6,6 +8,8 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { HttpClientModule } from '@angular/common/http';
 import { NgSelectModule } from '@ng-select/ng-select';
+import {AnswerComponent} from './answer/answer.component';
+import {AnswerPanelComponent} from './answer-panel/answer-panel.component'
 
 @NgModule({
     imports:[
@@ -16,10 +20,14 @@ import { NgSelectModule } from '@ng-select/ng-select';
         ModalModule.forChild(),
         HttpClientModule,
         NgSelectModule,
-        FormsModule
+        FormsModule,
+        NgxEditorModule
     ],
     declarations:[
-        QuestionCardComponent
+        EidtorAComponent,
+        QuestionCardComponent,
+        AnswerComponent,
+        AnswerPanelComponent
     ],
     exports:[
         QuestionCardComponent,
@@ -29,7 +37,10 @@ import { NgSelectModule } from '@ng-select/ng-select';
         CommonModule,
         HttpClientModule,
         NgSelectModule,
-        FormsModule
+        FormsModule,
+        AnswerPanelComponent,
+        AnswerComponent,
+        EidtorAComponent
     ]
 })
 export class SharedModule{}

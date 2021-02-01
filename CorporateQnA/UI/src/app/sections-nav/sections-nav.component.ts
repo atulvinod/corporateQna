@@ -9,12 +9,7 @@ export class SectionsNavComponent implements OnInit{
     
     constructor(public router: Router, public activatedRoute: ActivatedRoute) { }
 
-    ngOnInit(){
-        this.activatedRoute.url.subscribe(value=>{
-            console.log("FROM NAV",value);
-        })
-        console.log(this.getRoute());
-    }
+    ngOnInit(){}
 
     getRoute(){
         return this.router.url;

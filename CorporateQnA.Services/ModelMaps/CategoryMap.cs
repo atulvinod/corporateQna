@@ -11,15 +11,13 @@ namespace CorporateQnA.Services.ModelMaps
     {
         public CategoryMap()
         {
-            //data to core
-            CreateMap<Services.Models.Category, CorporateQnA.Models.Category>();
+            CreateMap<Models.Category, CorporateQnA.Models.Category>();
 
-            //core to data
             CreateMap<CorporateQnA.Models.Category, Models.Category>();
 
+            CreateMap<CorporateQnA.Models.CategoryDetails, Models.CategoryDetails>();
 
-            CreateMap<CorporateQnA.Models.CategoryDetails, CorporateQnA.Services.Models.CategoryDetails>();
-            CreateMap<CorporateQnA.Services.Models.CategoryDetails, CorporateQnA.Models.CategoryDetails>();
+            CreateMap<Models.CategoryDetails, CorporateQnA.Models.CategoryDetails>();
 
         }
     }

@@ -27,7 +27,6 @@ namespace CorporateQnA.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel login)
         {
-            // TODO: If the modelstate is invalid, return errors
             if (ModelState.IsValid == false)
             {
                 return View(model: login);
@@ -35,7 +34,6 @@ namespace CorporateQnA.Controllers
 
             var result = await this.authService.Login(login.Email, login.Password);
 
-            // show incorrect errors
             if (result == false)
             {
                 ViewBag.Fail = "Incorrect Email or password";

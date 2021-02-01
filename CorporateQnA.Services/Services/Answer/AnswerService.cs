@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CorporateQnA.Models;
+using CorporateQnA.Models.Enums;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -35,10 +36,16 @@ namespace CorporateQnA.Services
             }
         }
 
-        public IEnumerable<AnswerDetails> GetAnswersForQues(int questionId)
+        public IEnumerable<AnswerDetails> GetAnswersForQues(GetAnswer getAnswer)
         {
-            var answers = this.database.Query<CorporateQnA.Services.Models.AnswerDetails>("SELECT * FROM [AnswerDetails] WHERE QuestionId = @0", questionId).Select(s=>this.mapper.Map<CorporateQnA.Models.AnswerDetails>(s));
+            var answers = this.database.FetchProc<AnswerDetails>("[master].dbo.GetAnswers", new { questionId = getAnswer.QuestionId, userId = getAnswer.UserId });
             return answers;
+        }
+
+        public int SetAnswerState(AnswerState state)
+        {
+            var i = this.database.Execute("UPDATE Answer SET IsBestSolution =@0 WHERE Id = @1", state.IsBestSolution, state.AnswerId);
+            return (int)i;
         }
     }
 }

@@ -12,16 +12,17 @@ namespace CorporateQnA.Services.ModelMaps
         public AnswerMap()
         {
             //data to core
-            CreateMap<CorporateQnA.Services.Models.Answer, CorporateQnA.Models.Answer>();
+            CreateMap<Models.Answer, CorporateQnA.Models.Answer>();
 
             //core to data
-            CreateMap<CorporateQnA.Models.Answer, CorporateQnA.Services.Models.Answer>();
+            CreateMap<CorporateQnA.Models.Answer, Models.Answer>();
 
             //data to core
-            CreateMap<CorporateQnA.Services.Models.AnswerDetails, CorporateQnA.Models.AnswerDetails>();
+            CreateMap<Models.AnswerDetails, CorporateQnA.Models.AnswerDetails>()
+               .ForMember(x=>x.IsBestSolution, o=>o.MapFrom(z=> z.IsBestSolution > 0))
+               .ForMember(x => x.LikedByUser, o => o.MapFrom(z => z.LikedByUser > 0))
+               .ForMember(x => x.DislikedByUser, o => o.MapFrom(z => z.DislikedByUser > 0));
 
-            //core to data
-            CreateMap<CorporateQnA.Models.AnswerDetails, CorporateQnA.Services.Models.AnswerDetails>();
         }
     }
 }

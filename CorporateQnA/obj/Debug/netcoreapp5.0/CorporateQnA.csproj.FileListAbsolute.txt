@@ -410,3 +410,4 @@ C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA\bin\Debug\netcor
 C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA\bin\Debug\netcoreapp5.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA\bin\Debug\netcoreapp5.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA\obj\Debug\netcoreapp5.0\CorporateQnA.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA\bin\Debug\netcoreapp5.0\PetaPoco.dll

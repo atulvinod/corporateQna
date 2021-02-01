@@ -3,28 +3,35 @@ import { AnswerModel } from './../../models/answer.model';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, isDevMode } from "@angular/core"
 import { AnswerActivityModel } from 'src/models/answer-activity.model';
+import { AnswerStateModel } from 'src/models/answer-state.model';
+import { GetAnswersModel } from 'src/models/get-answers.model';
 
 @Injectable({
-    providedIn:"root"
+    providedIn: "root"
 })
-export class AnswerService{
+export class AnswerService {
     httpRoot = "https://localhost:5001"
 
     constructor(public http: HttpClient) {
-        if(!isDevMode){
+        if (!isDevMode) {
             this.httpRoot = ""
         }
     }
 
-    createAnswer(ans:AnswerModel){
-        return this.http.post(this.httpRoot+"/answer",ans);
+    createAnswer(ans: AnswerModel) {
+        return this.http.post(this.httpRoot + "/answer", ans);
     }
 
-    getAnswersForQuestion(questionId: number){
-        return this.http.get<AnswerDetailsModel[]>(this.httpRoot+"/answer?qId="+questionId);
+    getAnswersForQuestion(query: GetAnswersModel) {
+        console.log(query);
+        return this.http.post<AnswerDetailsModel[]>(this.httpRoot + "/answer/getanswers", query);
     }
 
-    createAnswerActivity(activity:AnswerActivityModel){
-        return this.http.post(this.httpRoot+"/activity/answer",activity);
+    createAnswerActivity(activity: AnswerActivityModel) {
+        return this.http.post(this.httpRoot + "/activity/answer", activity);
     }
+
+    setAnswerState(state: AnswerStateModel) {
+        return this.http.post(this.httpRoot + "/answer/setstate", state);
+    }   
 }

@@ -1,25 +1,25 @@
 <div class="view-answer">
     <div class="d-flex justify-content-between">
-      <div class="user-info">
+      <div class="user-info pb-2">
         <div>
           <img
             src="https://i.pravatar.cc/300"
             alt=""
             class="profile-pic-sm"
           />
-          <span class="ml-3">{{question.userName}}</span>
-          <span class="ml-3 text-muted fnt-12">{{questionTimeAgo}}</span>
+          <span class="ml-2 fnt-15">{{question.userName}}</span>
+          <span class="ml-2 text-muted fnt-13">{{questionTimeAgo}}</span>
         </div>
       </div>
       <div class="d-flex align-items-center">
-        <img src="../../assets/report.png" alt="" class="answer-icons" />
+        <img src="../../assets/report.png" alt="" class="answer-icons mr-2" />
         <span class="fnt-14">Report this</span>
       </div>
     </div>
-    <p class="mt-20">
+    <p class="fnt-15">
         {{question.questionTitle}}
     </p>
-    <p class="text-muted mt-2 fnt-14">
+    <p class="text-muted mt-2 fnt-13">
       {{question.content}}
     </p>
   </div>
@@ -28,7 +28,7 @@
   </div>
   <div class="d-flex flex-column justifiy-content-between">
     <div class="answers">
-      <app-answer *ngFor="let i of answers" [answer]= i></app-answer>
+      <app-answer *ngFor="let i of answers" [answer]= i (setQuestionResolvedState)="questionEvent($event)" [isQuestionResolved]="this.question.resolved"></app-answer>
     </div>
     <div class="editor mt-3">
       <div class="big-editor" *ngIf="toggleFlyoutEditor">
@@ -44,12 +44,12 @@
           </button>
         </div>
       </div>
-      <div class="mini-editor">
+      <div class="small-editor">
         <button class="btn editor-expand" (click)="toggleFlyoutEditor=true">
           <fa-icon [icon]="faExpandAlt"></fa-icon>
         </button>
         <form [formGroup]="newAnswer" class="h-100">
-          <app-editor [formGroup]="newAnswer" [controlName]="'content'" class="editor-mini"></app-editor>
+          <app-editor [formGroup]="newAnswer" [controlName]="'content'"></app-editor>
         </form>
         <button class="btn small-editor-save" (click)="postAnswer()"  [disabled]="this.newAnswer.invalid">
           <img src="../../assets/send-plane.svg" alt="" >

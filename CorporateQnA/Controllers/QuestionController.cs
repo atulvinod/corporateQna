@@ -50,5 +50,27 @@ namespace CorporateQnA.Controllers
             return Ok(this.questionService.SearchQuestion(searchFilter));
         }
 
+        [Route("answeredBy")]
+        [HttpGet]
+        public IActionResult QuestionsAnsweredBy(int userId)
+        {
+            return Ok(this.questionService.QuestionsAnsweredByUser(userId));
+        }
+
+        [Route("askedBy")]
+        [HttpGet]
+        public IActionResult UserQuestions(int userId)
+        {
+            return Ok(this.questionService.QuestionsByUser(userId));
+
+        }
+
+        [Route("setsolution")]
+        public IActionResult SetQuestionSolution(QuestionSolution solution)
+        {
+            this.questionService.SetQuestionSolution(solution);
+            return Ok();
+        }
+
     }
 }

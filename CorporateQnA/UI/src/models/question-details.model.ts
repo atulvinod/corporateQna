@@ -1,6 +1,5 @@
-import { NumberValueAccessor } from "@angular/forms";
-
 export class QuestionDetailsModel {
+
     questionId: number;
     userName: string;
     questionTitle: string;
@@ -10,7 +9,7 @@ export class QuestionDetailsModel {
     categoryId: number;
     likeCount: number;
     viewCount: number;
-    resolved: number;
+    resolved: boolean;
     answerCount: number;
 
     constructor(args: {}) {

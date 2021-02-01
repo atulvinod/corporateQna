@@ -26,11 +26,8 @@ namespace CorporateQnA.Services
             try
             {
 
-
-                var d = this.mapper.Map<CorporateQnA.Services.Models.AnswerActivity>(answerActivity);
-                var check = this.database.Query<CorporateQnA.Services.Models.AnswerActivity>("SELECT * FROM AnswerActivity WHERE UserId = @0 AND AnswerId = @1", d.UserId, d.AnswerId).FirstOrDefault<CorporateQnA.Services.Models.AnswerActivity>();
-
-              
+                var d = this.mapper.Map<Models.AnswerActivity>(answerActivity);
+                var check = this.database.Query<Models.AnswerActivity>("SELECT * FROM AnswerActivity WHERE UserId = @0 AND AnswerId = @1", d.UserId, d.AnswerId).FirstOrDefault<CorporateQnA.Services.Models.AnswerActivity>();
 
                 if(check == null)
                 {
@@ -40,9 +37,10 @@ namespace CorporateQnA.Services
                     return 1;
                 }
 
-                //both activity are the same
+                //both activity are the same, then remove the activity to set the state to neutral
                 if (check.ActivityType == (short)answerActivity.ActivityType)
                 {
+                    this.database.Delete(check);
                     return 0;
                 }
 
@@ -63,9 +61,6 @@ namespace CorporateQnA.Services
                     this.database.Update(check);
                     return 3;
                 }
-
-
-
             }
             catch (Exception)
             {
@@ -79,8 +74,11 @@ namespace CorporateQnA.Services
         {
             try
             {
-                var d = this.mapper.Map<CorporateQnA.Services.Models.QuestionActivity>(questionActivity);
+                //add question viewed activity
+
+                var d = this.mapper.Map<Models.QuestionActivity>(questionActivity);
                 var check = this.database.ExecuteScalar<long>("SELECT COUNT(*) FROM QuestionActivity WHERE UserId = @0 AND QuestionId = @1 AND ActivityType = @2", d.UserId, d.QuestionId, d.ActivityType);
+               
                 if (check == 0)
                 {
                     d.CreatedAt = DateTime.Now;
@@ -88,7 +86,6 @@ namespace CorporateQnA.Services
                     return (int)id;
                 }
                 return 0;
-
             }
             catch (Exception e)
             {

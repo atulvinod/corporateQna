@@ -33,17 +33,25 @@ namespace CorporateQnA.Controllers
             }
         }
 
-        [HttpGet]
-        public IActionResult GetAnswerForQuestion([FromQuery] int qId)
+        [HttpPost]
+        [Route("getanswers")]
+        public IActionResult GetAnswerForQuestion(GetAnswer answer)
         {
             try
             {
-                return Ok(this.answerService.GetAnswersForQues(qId));
+                return Ok(this.answerService.GetAnswersForQues(answer));
             }
             catch (Exception e)
             {
                 return BadRequest(new { message = e.Message });
             }
+        }
+
+        [Route("setstate")]
+        [HttpPost]
+        public IActionResult SetAnswerState(AnswerState state)
+        {
+            return Ok(this.answerService.SetAnswerState(state));
         }
 
     }

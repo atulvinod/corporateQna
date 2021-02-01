@@ -4,15 +4,13 @@
             <label for="">Users</label>
             <div class="search-bar">
               <fa-icon [icon]="faSearch"></fa-icon>
-              <input type="text" name="" id="" placeholder="Search" />
+              <input type="text" name="" id="" placeholder="Search" formControlName="search"/>
             </div>
           </div>
     </form>
 </div>
 <div class="users-content p-20">
     <div class="standard-grid">
-     <app-user-card></app-user-card>
-     <app-user-card></app-user-card>
-     <app-user-card></app-user-card>
+     <app-user-card *ngFor="let i of showUsers" [userDetail]=i [routerLink]="['../view',i.id]"></app-user-card>
     </div>
 </div>

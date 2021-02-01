@@ -1,0 +1,58 @@
+<div class="answer">
+  <div class="d-flex justify-content-between">
+    <div class="user-info">
+      <div>
+        <img src="https://i.pravatar.cc/300" alt="" class="profile-pic-sm" />
+        <span class="ml-2 fnt-15">{{ answer.answeredByName }}</span>
+        <span class="ml-2 text-muted fnt-12">{{ timeAgo }}</span>
+        <span class="ml-2 text-success fnt-12" *ngIf="answer.isBestSolution"
+          >&#x2605; Best Solution!</span
+        >
+      </div>
+    </div>
+    <div class="d-flex align-items-center">
+      <button
+        class="btn mr-1 btn-response"
+        (click)="createAnswerActivity(0)"
+        [ngClass]="{ 'like-active': answer.likedByUser }"
+      >
+        <fa-icon [icon]="thumbsUp" class="like"></fa-icon>
+        <span class="mr-2">{{ answer.likeCount }}</span>
+      </button>
+
+      <button
+        class="btn mr-1 btn-response"
+        (click)="createAnswerActivity(1)"
+        [ngClass]="{ 'dislike-active': answer.dislikedByUser }"
+      >
+        <fa-icon [icon]="thumbsDown" class="dislike"></fa-icon>
+        <span>{{ answer.dislikeCount }}</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="answer-content">
+    <p class="fnt-14">{{ answer.content }}</p>
+    <div
+      class="d-flex align-items-center"
+      *ngIf="
+        answer.askedBy == user['userId'] &&
+        (answer.isBestSolution || isQuestionResolved == false)
+      "
+    >
+      <form [formGroup]="setAsSolution">
+        <div class="checkbox d-inline-block">
+          <input
+            type="checkbox"
+            name="checkbox1"
+            id="checkbox1"
+            class="child-checkbox"
+            formControlName="isBestSolution"
+          />
+          <label for="checkbox1"></label>
+        </div>
+      </form>
+      <span class="ml-2 mb-2 fnt-14">Mark as solution</span>
+    </div>
+  </div>
+</div>

@@ -1,3 +1,4 @@
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { UsersModule } from './users/users.module';
 import { HomeModule } from './home/home.module';
 import { SharedModule } from './shared/shared.module';
@@ -43,6 +44,7 @@ export function configureAuth(oidcConfigService: OidcConfigService) {
     FontAwesomeModule,
     UsersModule,
     AuthModule.forRoot(),
+    ProgressbarModule.forRoot(),
   ],
   providers: [
     OidcConfigService,

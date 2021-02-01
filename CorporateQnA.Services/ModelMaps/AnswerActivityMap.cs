@@ -12,7 +12,6 @@ namespace CorporateQnA.Services.ModelMaps
     {
         public AnswerActivityMap()
         {
-            //data to core
             CreateMap<Models.AnswerActivity, CorporateQnA.Models.AnswerActivity>()
                 .ForMember(x => x.ActivityType, opt => opt.MapFrom(z => (AnswerActivityType)z.ActivityType));
 

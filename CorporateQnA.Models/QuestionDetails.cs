@@ -26,7 +26,7 @@ namespace CorporateQnA.Models
 
         public int ViewCount { get; set; }
 
-        public int Resolved { get; set; }
+        public bool Resolved { get; set; }
 
         public int AnswerCount { get; set; }
     }

@@ -106,7 +106,7 @@
         </div>
       </div>
       <div class="mt-3 form-input">
-        <label for="">Discription</label>
+        <label for="">Description</label>
         <div class="new-question-desc">
           <app-editor
             [formGroup]="newQuestionForm"
@@ -124,7 +124,7 @@
       </div>
     </form>
     <div class="d-flex justify-content-end mt-4">
-      <button class="btn btn-cancel mr-2" (click)="modalRef.hide()" >
+      <button class="btn btn-cancel mr-2" (click)="resetNewQuestion()" >
         Cancel
       </button>
       <button [disabled]="this.newQuestionForm.invalid" class="btn btn-post" (click)="createQuestion()">Post</button>

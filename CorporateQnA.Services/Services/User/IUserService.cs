@@ -12,5 +12,9 @@ namespace CorporateQnA.Services
         public int Create(AppUser user);
 
         public AppUser GetUser(int userid);
+
+        public IEnumerable<UserDetails> GetUsersDetails();
+
+        public UserDetails GetSingleUserDetails(int userId);
     }
 }

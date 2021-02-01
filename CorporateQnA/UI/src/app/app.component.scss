@@ -7,10 +7,10 @@ $text-muted: #757575;
 $body-color: #f4f5f8;
 $sidebar-width: 100px;
 $modal-header-bg: #515968;
-$checkbox-color: green;
+$checkbox-color: #86C06A;
 
 //MEASUREMENTS
-$checkbox-width: 20px;
+$checkbox-size: 18px;
 $logo-img-width: 64px;
 $nav-height: 61.3720929952px;
 $profile-right-margin: 19.0705788944px;
@@ -62,6 +62,32 @@ nav {
   }
 }
 
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $violet-light;
+  z-index: 100;
+
+  &-content {
+    width: 250px;
+    margin-bottom: 2%;
+    img {
+      width: 250px;
+    }
+  }
+
+  bar{
+   background-color: #5e4973; 
+  }
+}
+
+
 .profile {
   &-controls {
     color: white;
@@ -111,6 +137,11 @@ nav {
     color: white;
     background-color: $grey-light;
   }
+
+  span{
+    margin-top: 3px;
+    font-size: 13px;
+  }
 }
 
 .grid {
@@ -145,6 +176,11 @@ nav {
 .form-select {
   flex: $form-select-flex;
   border-radius: 3px;
+
+  label{
+    font-size: 15px;
+
+  }
 }
 
 .form-reset {
@@ -157,6 +193,7 @@ nav {
 .form-input {
   label {
     display: block;
+    font-size: 15px;
   }
   input {
     border: none;
@@ -218,6 +255,8 @@ nav {
   background-color: $violet-dark;
   color: white;
   height: 45px;
+  font-size: 15px;
+
   fa-icon {
     margin-right: 5px;
     font-size: 10px;
@@ -227,8 +266,10 @@ nav {
 .reset-btn {
   color: $text-muted;
   height: 45px;
+  font-size: 15px;
+
   fa-icon {
-    margin-right: 5px;
+    margin-right: 8px;
     font-size: 12px;
   }
 }
@@ -294,7 +335,7 @@ nav {
 }
 
 .answer-count {
-  padding: 10px 20px;
+  padding: 8px 20px;
   background-color: #e4e6e9;
   border: 1px solid lightgrey;
 }
@@ -306,15 +347,32 @@ nav {
 
 .dislike {
   margin-top: 6px;
-  color: red;
+  color: #EF6868;
 }
 
 .like {
-  color: green;
+  color: #86C06A;
+}
+
+.like-active {
+  border-bottom: 3px solid #86C06A;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.dislike-active {
+  border-bottom: 3px solid #EF6868;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 
 .answer {
   background-color: #f8f8f9;
+  padding: 12px 20px;
+
+  &-content{
+    margin-left: 27px;
+  }
 }
 
 .editor {
@@ -335,18 +393,18 @@ nav {
   z-index: 1;
 }
 
-.view-hint-container{
+.view-hint-container {
   width: 210px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
 
-  img{
+  img {
     width: 60px;
   }
 
-  span{
+  span {
     margin-top: 22px;
     color: #777;
     font-size: 18px;
@@ -370,7 +428,7 @@ nav {
   background-color: white;
 }
 
-.question-solved{
+.question-solved {
   .question-flag {
     background-color: #86c06a;
   }
@@ -386,6 +444,9 @@ nav {
   transform: rotate(45deg);
 }
 
+.upvote-btn{
+  padding-bottom: 0px;
+}
 
 .current-question {
   border-right: 5px solid $violet-dark;
@@ -398,7 +459,7 @@ nav {
 .question-card-grid {
   display: grid;
   grid-template-columns: 40px auto;
-  grid-gap: 8px;
+  grid-gap: 5px;
 }
 
 .question-content {
@@ -501,6 +562,7 @@ nav {
 
 .user-answer-pane {
   background-color: #f8f8f9;
+  border-left: 1px solid lightgrey;
 }
 
 .user-details-nav {
@@ -516,6 +578,11 @@ nav {
 
 .user-details-current {
   border-bottom: 4px solid $violet-dark !important;
+}
+
+.user-questions{
+  min-height: 500px;
+  background-color: #fff;
 }
 
 //------------------------ SECTION NAV-------------------------
@@ -560,69 +627,6 @@ nav {
 //-----------------------SECTION Nav-------------------------
 
 // ----------------------- SELECT-----------------------------
-// .keka-custom-select {
-//   position: relative;
-//   border: 1px solid lightgrey;
-//   border-radius: 3px;
-// }
-
-// .keka-custom-select select {
-//   display: none; /*hide original SELECT element:*/
-// }
-
-// /*style the arrow inside the select element:*/
-// .select-selected:after {
-//   position: absolute;
-//   content: "";
-//   top: 45%;
-//   right: 10px;
-//   width: 0;
-//   height: 0;
-//   border: 6px solid transparent;
-//   border-color: #757575 transparent transparent transparent;
-// }
-
-// /*point the arrow upwards when the select box is open (active):*/
-// .select-selected.select-arrow-active:after {
-//   border-color: #757575 transparent transparent transparent;
-//   top: 45%;
-// }
-
-// /*style the items (options), including the selected item:*/
-// .select-items div,
-// .select-selected {
-//   color: #000;
-//   padding: 7px 16px;
-//   border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-//   cursor: pointer;
-//   user-select: none;
-//   background-color: white;
-//   border-radius: 3px;
-// }
-
-// /*style items (options):*/
-// .select-items {
-//   position: absolute;
-//   top: 90%;
-//   left: 0;
-//   right: 0;
-//   z-index: 100;
-//   border: 1px solid lightgrey;
-//   background-color: white;
-//   box-shadow: 0px 2px 10px rgb(0, 0, 0, 0.2);
-//   border-radius: 5px;
-// }
-
-// /*hide the items when the select box is closed:*/
-// .select-hide {
-//   display: none;
-// }
-
-// .select-items div:hover,
-// .same-as-selected {
-//   background-color: #eaeef1;
-// }
-
 .keka-custom-select {
   display: block;
   width: 100%;
@@ -631,54 +635,13 @@ nav {
   border-radius: 3px;
 }
 
-.ng-option {
-  background-color: white;
-  padding: 10px 15px;
-
-  &:hover {
-    background-color: #eaeef1;
-  }
-}
-
-.ng-select {
-  border: 1px solid lightgray;
-  border-radius: 3px;
-  background-color: white;
-  padding: 7.2px 0px;
-
-  .ng-value {
-    margin-left: 10px;
-  }
-}
-
-.ng-arrow-wrapper {
-  width: 30px;
-}
-
-.ng-arrow {
-  border-color: #999999 transparent transparent;
-  border-style: solid;
-  border-width: 5px 5px 2.5px;
-}
-.ng-dropdown-panel {
-  border: 1px solid lightgrey;
-  border-radius: 3px;
-  max-height: unset;
-}
-.ng-dropdown-panel-items {
-  max-height: unset !important;
-}
-
-.ng-clear-wrapper {
-  color: white;
-}
-
 //-----------------------------SELECT----------------------------
 
 //----------------------------- Modals---------------------------
 .custom-modal {
   max-width: $custom-modal-width;
 }
+
 .modal-header {
   background-color: $modal-header-bg;
   color: white;
@@ -703,6 +666,7 @@ nav {
   height: 15rem;
   border: 1px solid lightgray;
   padding: 10px;
+
   .editor-container {
     height: 100%;
   }
@@ -724,7 +688,8 @@ nav {
 
 //------------------------------- Editor styling ----------------
 
-.editor-mini {
+.small-editor {
+  
   .NgxEditor__Wrapper {
     border: none !important;
   }
@@ -735,10 +700,6 @@ nav {
 }
 
 .big-editor {
-  //
-  // display: none
-  //
-
   height: $big-editor-height;
   width: $big-editor-width;
   position: absolute;
@@ -802,8 +763,20 @@ nav {
   font-size: 14px;
 }
 
+.fnt-15{
+  font-size: 15px;
+}
+
+.fnt-13 {
+  font-size: 13px;
+}
+
 .fnt-12 {
   font-size: 12px;
+}
+
+.fnt-11 {
+  font-size: 11px;
 }
 
 .mt-20 {
@@ -828,10 +801,10 @@ nav {
 }
 
 .btn-response {
-  padding-left: 2px;
-  padding-right: 2px;
+  padding-left: 6px;
+  padding-right: 8px;
   fa-icon {
-    margin-right: 5px;
+    margin-right: 3px;
   }
 }
 
@@ -841,9 +814,9 @@ nav {
 }
 
 .checkbox {
-  width: $checkbox-width;
+  width: $checkbox-size;
   border: 1px solid white;
-  height: $checkbox-width;
+  height: $checkbox-size;
   position: relative;
   border: 2px solid lightgrey;
   border-radius: 3px;
@@ -860,8 +833,8 @@ nav {
 
     &:checked ~ label {
       display: block;
-      width: $checkbox-width;
-      height: $checkbox-width;
+      width: $checkbox-size;
+      height: $checkbox-size;
       top: 0;
       background-color: $checkbox-color;
       border-radius: 3px;
@@ -872,8 +845,8 @@ nav {
       content: "";
       cursor: pointer;
       display: block;
-      height: 17px;
-      width: 8px;
+      height: 14px;
+      width: 6px;
       transform: rotate(45deg);
       border-bottom: 3px solid white;
       border-right: 3px solid white;

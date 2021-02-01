@@ -29,18 +29,21 @@ export class HomeComponent implements OnInit {
     faExpandAlt = faExpandAlt
     faCompressAlt = faCompressAlt
 
+    //Form groups
     searchForm: FormGroup;
     newAnswer: FormGroup;
     newQuestionForm: FormGroup;
 
+    //Modal controls
     toggleFlyoutEditor = false;
     modalRef: BsModalRef;
 
-    categoryOptions: CategoryModel[] = []
-
+    //Current User
     user: any
-    currentQuestion: QuestionDetailsModel;
 
+    //Models
+    currentQuestion: QuestionDetailsModel;
+    categoryOptions: CategoryModel[] = []
     allQuestions: QuestionDetailsModel[] = []
 
     constructor(private modalService: BsModalService, private categoryService: CategoryService, private oidcService: OidcSecurityService, private answerService: AnswerService, private questionService: QuestionService) {
@@ -65,25 +68,26 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
         this.categoryService.getCategories().subscribe(categories => {
-            this.categoryOptions = [...this.categoryOptions, ...categories]
+            this.categoryOptions = categories
         })
 
-        this.oidcService.userData$.subscribe(value => {
-            this.user = value;
+        this.oidcService.userData$.subscribe(user => {
+            this.user = user;
         })
 
-        this.questionService.getQuestions().subscribe(value => {
-            this.allQuestions = [...value];
+        this.questionService.getQuestions().subscribe(questions => {
+            this.allQuestions = [...questions];
         });
 
-        this.searchForm.valueChanges.pipe(debounceTime(420)).subscribe((value: SearchFilterModel) => {
-            value.userId = this.user['userId']
-            value.categoryId = Number(value.categoryId);
-            value.show = Number(value.show);
-            value.sortBy = Number(value.sortBy)
+        this.searchForm.valueChanges.pipe(debounceTime(420)).subscribe((filter: SearchFilterModel) => {
 
-            this.questionService.searchQuestion(value).subscribe(values => {
-                this.allQuestions = values;
+            filter.userId = this.user['userId']
+            filter.categoryId = Number(filter.categoryId);
+            filter.show = Number(filter.show);
+            filter.sortBy = Number(filter.sortBy)
+
+            this.questionService.searchQuestion(filter).subscribe(questions => {
+                this.allQuestions = questions;
                 this.currentQuestion = null;
             })
         })
@@ -98,8 +102,9 @@ export class HomeComponent implements OnInit {
         let categoryId = this.newQuestionForm.get("questionCategory").value;
         let content = this.removeTags(this.newQuestionForm.get("content").value);
         let title = this.newQuestionForm.get("title").value;
+
         let question: QuestionModel = new QuestionModel({ askedBy, categoryId, content, title })
-        console.log(question);
+
         this.questionService.createQuestion(question).subscribe(value => {
             let questionData = new QuestionDetailsModel({
                 questionId: value,
@@ -113,6 +118,7 @@ export class HomeComponent implements OnInit {
                 resolved: 0,
                 answerCount: 0
             })
+
             this.allQuestions.push(questionData)
             this.modalRef.hide();
         })
@@ -121,15 +127,17 @@ export class HomeComponent implements OnInit {
     viewQuestion(question: QuestionDetailsModel) {
 
         this.currentQuestion = question;
+
         //for view activity
         let act = new QuestionActivityModel({
             userId: this.user['userId'],
             questionId: question.questionId,
             activityType: QuestionActivityEnum.View
         })
+
         //send view request
-        this.questionService.createQuestionActivity(act).subscribe(value => {
-            if (value != 0) {
+        this.questionService.createQuestionActivity(act).subscribe(response => {
+            if (response != 0) {
                 this.currentQuestion.viewCount++;
             }
         })
@@ -153,6 +161,13 @@ export class HomeComponent implements OnInit {
         this.searchForm.get("categoryId").patchValue(0)
         this.searchForm.get("show").patchValue(0)
         this.searchForm.get("sortBy").patchValue(0)
+    }
+
+    resetNewQuestion(){
+        this.newQuestionForm.reset();
+        this.newQuestionForm.get("content").patchValue("")
+        this.newQuestionForm.get("questionCategory").patchValue(0);
+        this.modalRef.hide()
     }
 
     categoryIdValidator(): ValidatorFn {
