@@ -1,4 +1,5 @@
-import { QuestionSolutionModel } from './../../../models/question-solution.model';
+import { QuestionActivityEnum } from './../../../models/enum/question-activity.enum';
+import { QuestionActivityModel } from 'src/models/question-activity.model';
 import { QuestionService } from 'src/app/services/question.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { AnswerActivityModel } from '../../../models/answer-activity.model';
@@ -21,7 +22,7 @@ export class AnswerComponent {
     @Input() answer: AnswerDetailsModel;
     @Input() isQuestionResolved: boolean = false;
 
-    @Output() setQuestionResolvedState: EventEmitter<{ answerId: number ,questionId: number, resolveState: boolean }> = new EventEmitter();
+    @Output() setQuestionResolvedState: EventEmitter<{ answerId: number, questionId: number, resolveState: boolean }> = new EventEmitter();
 
     //ICONS
     thumbsUp = faThumbsUp
@@ -48,27 +49,21 @@ export class AnswerComponent {
         this.setAsSolution.get('isBestSolution').patchValue(this.answer.isBestSolution)
 
         this.setAsSolution.valueChanges.subscribe(values => {
-            
+
             this.answer.isBestSolution = values.isBestSolution
 
-            let answerState = new AnswerStateModel({
-                answerId: this.answer.answerId,
-                isBestSolution: values.isBestSolution,
-                questionId: this.answer.questionId,
-                userId: this.answer.answeredBy
-            });
-
-            let questionSolution:QuestionSolutionModel = new QuestionSolutionModel({
+            let questionSolvedActivity: QuestionActivityModel = new QuestionActivityModel({
                 questionId: this.answer.questionId,
                 answerId: this.answer.answerId,
-                resolvedBy: Number(this.answer.answeredBy)
+                userId: Number(this.answer.answeredBy),
+                activityType : QuestionActivityEnum.Resolved
             })
 
-            this.questionService.setQuestionSolution(questionSolution).subscribe(()=>{
+            this.questionService.createQuestionActivity(questionSolvedActivity).subscribe(() => {
                 this.setQuestionResolvedState.emit({
                     questionId: this.answer.questionId,
                     resolveState: values.isBestSolution,
-                    answerId : this.answer.answerId
+                    answerId: this.answer.answerId
                 })
             })
         })
@@ -76,13 +71,13 @@ export class AnswerComponent {
 
     createAnswerActivity(activityType: AnswerActivityEnum) {
 
-        let act = new AnswerActivityModel({
+        let activity = new AnswerActivityModel({
             userId: this.user['userId'],
             answerId: this.answer.answerId,
             activityType
         })
 
-        this.answerService.createAnswerActivity(act).subscribe(value => {
+        this.answerService.createAnswerActivity(activity).subscribe(value => {
             switch (value) {
                 //set the state to neutral
                 case 0:

@@ -8,8 +8,8 @@ namespace CorporateQnA.Models.Enums
 {
     public enum QuestionActivityType
     {
-        View,
         Like,
+        View,
         Resolved
     }
 }

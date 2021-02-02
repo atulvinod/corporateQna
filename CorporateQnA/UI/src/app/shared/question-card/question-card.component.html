@@ -1,4 +1,4 @@
-<div class="question-card" [ngClass]="{'question-solved':this.question.resolved}">
+<div class="question-card" [ngClass]="{'question-solved':this.question.resolved}" (click)="viewActivity()">
   <div class="question-flag"></div>
   <div class="question-card-grid">
     <div class="d-flex flex-column align-items-center">
@@ -8,7 +8,7 @@
         alt=""
         class="profile-pic-sm mb-3"
       />
-      <button class="btn upvote-btn" (click)="upvote()">
+      <button class="btn upvote-btn" (click)="upvoteActivity()">
         <fa-icon [icon]="faChevronUp" class="text-muted"></fa-icon>
       </button>
       <span class="fnt-15">{{ question.likeCount }}</span>

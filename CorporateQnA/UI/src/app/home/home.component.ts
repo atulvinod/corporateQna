@@ -125,23 +125,7 @@ export class HomeComponent implements OnInit {
     }
 
     viewQuestion(question: QuestionDetailsModel) {
-
         this.currentQuestion = question;
-
-        //for view activity
-        let act = new QuestionActivityModel({
-            userId: this.user['userId'],
-            questionId: question.questionId,
-            activityType: QuestionActivityEnum.View
-        })
-
-        //send view request
-        this.questionService.createQuestionActivity(act).subscribe(response => {
-            if (response != 0) {
-                this.currentQuestion.viewCount++;
-            }
-        })
-
     }
 
     removeTags(str) {

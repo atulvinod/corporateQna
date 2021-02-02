@@ -64,13 +64,5 @@ namespace CorporateQnA.Controllers
             return Ok(this.questionService.QuestionsByUser(userId));
 
         }
-
-        [Route("setsolution")]
-        public IActionResult SetQuestionSolution(QuestionSolution solution)
-        {
-            this.questionService.SetQuestionSolution(solution);
-            return Ok();
-        }
-
     }
 }

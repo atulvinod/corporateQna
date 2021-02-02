@@ -17,6 +17,8 @@ namespace CorporateQnA.Models
 
         public QuestionActivityType ActivityType{ get; set; }
 
+        public int AnswerId { get; set; }
+
         public DateTime CreatedAt { get; set; }
     }
 }

@@ -29,7 +29,7 @@ namespace CorporateQnA.Services
                 var d = this.mapper.Map<Models.AnswerActivity>(answerActivity);
                 var check = this.database.Query<Models.AnswerActivity>("SELECT * FROM AnswerActivity WHERE UserId = @0 AND AnswerId = @1", d.UserId, d.AnswerId).FirstOrDefault<CorporateQnA.Services.Models.AnswerActivity>();
 
-                if(check == null)
+                if (check == null)
                 {
                     d.ActivityType = (short)answerActivity.ActivityType;
                     d.CreatedAt = DateTime.Now;
@@ -74,18 +74,39 @@ namespace CorporateQnA.Services
         {
             try
             {
-                //add question viewed activity
+    
+                var dataModel = this.mapper.Map<Models.QuestionActivity>(questionActivity);
+                var activity = this.database.Query<Models.QuestionActivity>("SELECT * FROM QuestionActivity WHERE UserId = @0 AND QuestionId = @1 AND ActivityType = @2", dataModel.UserId, dataModel.QuestionId, dataModel.ActivityType).FirstOrDefault();
 
-                var d = this.mapper.Map<Models.QuestionActivity>(questionActivity);
-                var check = this.database.ExecuteScalar<long>("SELECT COUNT(*) FROM QuestionActivity WHERE UserId = @0 AND QuestionId = @1 AND ActivityType = @2", d.UserId, d.QuestionId, d.ActivityType);
-               
-                if (check == 0)
+                if (questionActivity.ActivityType == QuestionActivityType.Resolved)
                 {
-                    d.CreatedAt = DateTime.Now;
-                    var id = this.database.Insert(d);
-                    return (int)id;
+                    if (activity == null)
+                    {
+                        dataModel.CreatedAt = DateTime.Now;
+                        var id = this.database.Insert(dataModel);
+                        this.database.Insert(dataModel);
+                        this.database.Execute("UPDATE Answer SET IsBestSolution = 1 WHERE Id = @0", questionActivity.AnswerId);
+                    }
+                    else
+                    {
+                        this.database.Delete(activity);
+                        this.database.Execute("UPDATE Answer SET IsBestSolution = 0 WHERE Id = @0", questionActivity.AnswerId);
+                    }
+
+                    return 1;
                 }
-                return 0;
+                else
+                {
+                    if (activity == null)
+                    {
+                        dataModel.CreatedAt = DateTime.Now;
+                        var id = this.database.Insert(dataModel);
+                        return 1;
+
+                    }
+                    return 0;
+                }
+
             }
             catch (Exception e)
             {

@@ -33,7 +33,7 @@ export class QuestionCardComponent implements OnInit {
         this.timeAgo = moment(this.question.askedOn).fromNow()
     }
 
-    upvote() {
+    upvoteActivity() {
         let act = new QuestionActivityModel({
             userId: this.user['userId'],
             questionId: this.question.questionId,
@@ -43,6 +43,22 @@ export class QuestionCardComponent implements OnInit {
         this.questionService.createQuestionActivity(act).subscribe(value => {
             if (value != 0) {
                 this.question.likeCount++
+            }
+        })
+    }
+
+    viewActivity() {
+        //for view activity
+        let act = new QuestionActivityModel({
+            userId: this.user['userId'],
+            questionId: this.question.questionId,
+            activityType: QuestionActivityEnum.View
+        })
+
+        //send view request
+        this.questionService.createQuestionActivity(act).subscribe(response => {
+            if (response != 0) {
+                this.question.viewCount++;
             }
         })
     }

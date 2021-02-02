@@ -143,30 +143,5 @@ namespace CorporateQnA.Services
         {
             return this.database.Query<CorporateQnA.Models.QuestionDetails>("SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails] q WHERE EXISTS(SELECT * FROM Answer a WHERE a.AnsweredBy = @0  AND a.QuestionId = q.QuestionId);", userId).Select(s => this.mapper.Map<QuestionDetails>(s));
         }
-
-        public void SetQuestionSolution(QuestionSolution solution)
-        {
-            var activity = this.database.Query<Models.QuestionActivity>("SELECT * FROM [CorporateQ&A].[dbo].[QuestionActivity] q WHERE q.QuestionId = @0 AND q.UserId = @1 AND q.ActivityType = 2",solution.QuestionId,solution.ResolvedBy).FirstOrDefault();
-
-            if(activity == null)
-            {
-                var newActivity = new QuestionActivity
-                {
-                    ActivityType = QuestionActivityType.Resolved,
-                    UserId = solution.ResolvedBy,
-                    QuestionId = solution.QuestionId,
-                    CreatedAt = DateTime.Now
-                };
-                this.database.Insert(this.mapper.Map<CorporateQnA.Services.Models.QuestionActivity>(newActivity));
-                this.database.Execute("UPDATE Answer SET IsBestSolution = 1 WHERE Id = @0", solution.AnswerId);
-            }
-            else
-            {
-                this.database.Delete(activity);
-                this.database.Execute("UPDATE Answer SET IsBestSolution = 0 WHERE Id = @0", solution.AnswerId);
-            }
-        }
-
-
     }
 }

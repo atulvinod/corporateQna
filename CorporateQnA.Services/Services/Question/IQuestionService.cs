@@ -22,7 +22,5 @@ namespace CorporateQnA.Services
         public IEnumerable<QuestionDetails> QuestionsByUser(int userId);
 
         public IEnumerable<QuestionDetails> QuestionsAnsweredByUser(int userId);
-
-        public void SetQuestionSolution(QuestionSolution solution);
     }
 }
