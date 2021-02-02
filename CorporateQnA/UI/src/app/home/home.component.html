@@ -57,6 +57,11 @@
 <div class="home-container">
   <div class="home-grid">
     <div class="home-questions">
+      <div class="d-flex justify-content-center align-items-center h-100" *ngIf="allQuestions.length == 0">
+        <div class="font-italic text-muted">
+          No questions
+        </div>
+      </div>
       <app-question
         class="d-block app-question"
         [ngClass]="{ 'current-question': currentQuestion == i }"

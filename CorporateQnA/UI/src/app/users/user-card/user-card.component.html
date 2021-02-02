@@ -6,16 +6,17 @@
             src="https://i.pravatar.cc/300"
             alt="">
             <div class="user-data ml-3">
-                <h5>{{userDetail.name}}</h5>
+                <h5 class="fnt-16">{{userDetail.name}}</h5>
                 <span class="text-muted fnt-14 mt-1 d-block">{{userDetail.position}}</span>
+                <span class="text-muted fnt-14">{{userDetail.department}}, </span>
                 <span class="text-muted fnt-14">{{userDetail.location}}</span>
                 <div class="d-flex align-items-center mt-2">
                     <button class="btn mr-1 btn-response">
-                        <fa-icon [icon]="thumbsUp" class=" like"></fa-icon>
+                        <fa-icon [icon]="thumbsUp" class=" mr-2 like"></fa-icon>
                         <span class="mr-2">{{userDetail.totalLikes}}</span>
                       </button>
                       <button class="btn mr-1 btn-response">
-                        <fa-icon [icon]="thumbsDown" class="dislike "></fa-icon>
+                        <fa-icon [icon]="thumbsDown" class="mr-2 dislike "></fa-icon>
                         <span>{{userDetail.totalDislikes}}</span>
                       </button>
                   </div>
@@ -25,15 +26,15 @@
     </div>
     <div class="user-card-footer">
         <div class="user-stat">
-            <span>{{userDetail.questionAsked}}</span>
+            <span class="user-stat-value">{{userDetail.questionAsked}}</span>
             <span class="d-block text-muted fnt-12">Questions Asked</span>
         </div>
         <div class="user-stat">
-            <span>{{userDetail.questionAnswered}}</span>
+            <span class="user-stat-value">{{userDetail.questionAnswered}}</span>
             <span class="d-block text-muted fnt-12">Questions Answered</span>
         </div>
         <div class="user-stat">
-            <span>{{userDetail.questionResolved}}</span>
+            <span class="user-stat-value">{{userDetail.questionResolved}}</span>
             <span class="d-block text-muted fnt-12">Questions Solved</span>
         </div>
     </div>

@@ -94,6 +94,10 @@ namespace CorporateQnA.Services
                 case Show.Unsolved: 
                     fetch = this.database.Query<Models.QuestionDetails>($"SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails] q WHERE LOWER(q.QuestionTitle)  LIKE '%{search.searchInput.ToLower()}%' AND q.Resolved = 0;");
                     break;
+                case Show.Hot:
+                    fetch = this.database.Query<Models.QuestionDetails>($"SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails] q WHERE LOWER(q.QuestionTitle)  LIKE '%{search.searchInput.ToLower()}%' ORDER BY q.AskedOn DESC");
+                    break;
+
                 //all is default
                 default:
                     fetch = this.database.Query<Models.QuestionDetails>($"SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails] q WHERE LOWER(q.QuestionTitle)  LIKE '%{search.searchInput.ToLower()}%'");
@@ -137,7 +141,7 @@ namespace CorporateQnA.Services
 
         public IEnumerable<QuestionDetails> QuestionsAnsweredByUser(int userId)
         {
-            return this.database.Query<CorporateQnA.Models.QuestionDetails>("SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails] q WHERE EXISTS(SELECT * FROM Answer a WHERE a.AnsweredBy = @0  AND a.QuestionId = q.QuestionId) AND q.AskedBy = @1;", userId,userId).Select(s => this.mapper.Map<CorporateQnA.Models.QuestionDetails>(s));
+            return this.database.Query<CorporateQnA.Models.QuestionDetails>("SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails] q WHERE EXISTS(SELECT * FROM Answer a WHERE a.AnsweredBy = @0  AND a.QuestionId = q.QuestionId);", userId).Select(s => this.mapper.Map<QuestionDetails>(s));
         }
 
         public void SetQuestionSolution(QuestionSolution solution)

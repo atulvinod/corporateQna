@@ -13,10 +13,9 @@
           <img class="profile-pic-lg" src="https://i.pravatar.cc/300" alt="" />
           <div class="user-data ml-3">
             <h5>{{ userDetails.name }}</h5>
-            <span class="text-muted fnt-14 mt-1 d-block">{{
-              userDetails.position
-            }}</span>
-            <span class="text-muted fnt-14">{{ userDetails.location }}</span>
+            <span class="text-muted fnt-14 mt-1 d-block">{{userDetails.position}}</span>
+            <span class="text-muted fnt-14">{{userDetails.department}}, </span>
+            <span class="text-muted fnt-14">{{userDetails.location}}</span>
             <div class="d-flex align-items-center mt-2">
               <button class="btn mr-1 btn-response">
                 <fa-icon [icon]="thumbsUp" class="like"></fa-icon>

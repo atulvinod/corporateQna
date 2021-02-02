@@ -16,7 +16,7 @@ $nav-height: 61.3720929952px;
 $profile-right-margin: 19.0705788944px;
 $profile-pic-regular-width: 40px;
 $profile-pic-sm-width: 20px;
-$profile-pic-lg-width: 40px;
+$profile-pic-lg-width: 52px;
 $sun-img-width: 20px;
 $sidebar-logos-width: 25px;
 $form-select-flex: 160px;
@@ -136,6 +136,10 @@ nav {
     align-items: center;
     color: white;
     background-color: $grey-light;
+
+    &:hover{
+      cursor: pointer;
+    }
   }
 
   span{
@@ -477,7 +481,7 @@ nav {
   border: 1px solid #d4d7dc;
   padding: 3px 5px;
   border-radius: 5px;
-  color: #8b8c8c;
+  color: #777777;
 }
 
 .question-time {
@@ -490,6 +494,10 @@ nav {
 
 .user-search {
   flex-basis: 400px;
+}
+
+.user-data{
+  line-height: 20px;
 }
 
 .users-content {
@@ -511,10 +519,14 @@ nav {
 
 .user-stat {
   text-align: center;
-  padding: 10px 5px;
+  padding: 14px 5px 12px 5px;
   flex: 1;
   &:not(:first-child) {
     border-left: 1px solid lightgrey;
+  }
+
+  &-value{
+    color: #222;
   }
 
   &-2 {
@@ -569,6 +581,11 @@ nav {
   li {
     border-bottom: 4px solid transparent;
     padding: 5px 10px;
+
+    &:hover{
+      cursor: pointer;
+    }
+
   }
   a {
     text-decoration: none;
@@ -761,6 +778,10 @@ nav {
 
 .fnt-14 {
   font-size: 14px;
+}
+
+.fnt-16{
+  font-size: 16px;
 }
 
 .fnt-15{

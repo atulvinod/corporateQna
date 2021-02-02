@@ -9,15 +9,15 @@ const routes: Routes = [
   {
     path: "categories",
     loadChildren: () => import("./categories/categories.module").then(m => m.CategoriesModule)
-  }, 
+  },
   {
-    path:"users",
+    path: "users",
     loadChildren: () => import("./users/users.module").then(m => m.UsersModule)
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
