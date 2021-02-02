@@ -15,39 +15,39 @@
     </div>
     <div class="category form-select ml-3">
       <label for="">Category</label>
-      <select formControlName="categoryId" class="keka-custom-select">
-        <option value="0" selected>All</option>
-        <option value={{i.id}} *ngFor="let i of categoryOptions;let k =index">{{i.name}}</option>
-      </select>
+      <ng-select formControlName="categoryId"  [clearable]="false" [searchable]="false">
+        <ng-option [value]="0">All</ng-option>
+        <ng-option *ngFor="let i of categoryOptions" [value]="i.id">{{i.name}}</ng-option>
+      </ng-select>
 
     </div>
     <div class="show form-select ml-3">
       <label for="">Show</label>
-      <select formControlName="show" class="keka-custom-select">
-       <option value=0>All</option>
-       <option value=1>My Questions</option>
-       <option value=2>My Participation</option>
-       <option value=3>Hot</option>
-       <option value=4>Solved</option>
-       <option value=5>Unsolved</option>
-      </select>
+      <ng-select formControlName="show"  [clearable]="false" [searchable]="false">
+        <ng-option  [value]="0">All</ng-option>
+        <ng-option  [value]="1">My Questions</ng-option>
+        <ng-option  [value]="2">My Participation</ng-option>
+        <ng-option  [value]="3">Hot</ng-option>
+        <ng-option  [value]="4">Solved</ng-option>
+        <ng-option  [value]="5">Unsolved</ng-option>
+      </ng-select>
 
     </div>
     <div class="recent form-select ml-3">
       <label for="">Sort By</label>
-      <select formControlName="sortBy" class="keka-custom-select">
-        <option value="0">All</option>
-        <option value="1">Recent</option>
-        <option value="2">Last 10 Days</option>
-        <option value="3">Last 30 Days</option>
-      </select>
+      <ng-select formControlName="sortBy"  [clearable]="false" [searchable]="false">
+        <ng-option  [value]="0">All</ng-option>
+        <ng-option  [value]="1">Recent</ng-option>
+        <ng-option  [value]="2">Last 10 days</ng-option>
+        <ng-option  [value]="3">Last 30 days</ng-option>
+      </ng-select>
 
     </div>
     <div class="recent form-reset">
       <button class="reset-btn btn ml-2" (click)="this.resetSearch()">
         <fa-icon [icon]="faRedo"></fa-icon>Reset
       </button>
-      <button class="btn btn-question" (click)="openModal(template)">
+      <button class="btn btn-add" (click)="openModal(template)">
         <fa-icon [icon]="faPlus"></fa-icon>
         Question
       </button>
@@ -86,14 +86,10 @@
 
 <ng-template #template>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Add Question</h4>
-    <button
-      type="button"
-      class="close pull-right"
-      aria-label="Close"
-      (click)="modalRef.hide()"
-    >
-      <span aria-hidden="true">&times;</span>
+    <h4 class="modal-title pull-left fnt-20">Add Question</h4>
+    <button type="button" class="close modal-close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span class="span-1"></span>
+      <span class="span-2"></span>
     </button>
   </div>
   <div class="modal-body p-20">
@@ -121,10 +117,10 @@
       </div>
       <div class="form-select new-question-select mt-3">
         <label for="">Category</label>
-          <select class="keka-custom-select" formControlName="questionCategory">
-            <option value="0" selected>--Select Category--</option>
-            <option value={{i.id}} *ngFor="let i of categoryOptions;let k =index">{{i.name}}</option>
-          </select>
+          <ng-select formControlName="questionCategory"  [clearable]="false" [searchable]="false">
+            <ng-option [value]="0">--Select Category--</ng-option>
+            <ng-option *ngFor="let i of categoryOptions" [value]="i.id">{{i.name}}</ng-option>
+          </ng-select>
 
       </div>
     </form>

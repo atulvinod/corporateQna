@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
         this.newQuestionForm = new FormGroup({
             title: new FormControl("", [Validators.required]),
             content: new FormControl("", [Validators.required, this.editorValidator()]),
-            questionCategory: new FormControl("0", [Validators.required, this.categoryIdValidator()])
+            questionCategory: new FormControl(0, [Validators.required, this.categoryIdValidator()])
         })
 
         this.newAnswer = new FormGroup({
@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
         this.categoryService.getCategories().subscribe(categories => {
-            this.categoryOptions = categories
+            this.categoryOptions = [...this.categoryOptions, ...categories]
         })
 
         this.oidcService.userData$.subscribe(user => {

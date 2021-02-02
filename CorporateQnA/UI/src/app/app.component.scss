@@ -5,9 +5,10 @@ $grey: #3e4249;
 $grey-light: #505661;
 $text-muted: #757575;
 $body-color: #f4f5f8;
+$text-light-brown: #2d2d2d;
 $sidebar-width: 100px;
 $modal-header-bg: #515968;
-$checkbox-color: #86C06A;
+$checkbox-color: #86c06a;
 
 //MEASUREMENTS
 $checkbox-size: 18px;
@@ -82,11 +83,10 @@ nav {
     }
   }
 
-  bar{
-   background-color: #5e4973; 
+  bar {
+    background-color: #5e4973;
   }
 }
-
 
 .profile {
   &-controls {
@@ -137,12 +137,12 @@ nav {
     color: white;
     background-color: $grey-light;
 
-    &:hover{
+    &:hover {
       cursor: pointer;
     }
   }
 
-  span{
+  span {
     margin-top: 3px;
     font-size: 13px;
   }
@@ -181,9 +181,8 @@ nav {
   flex: $form-select-flex;
   border-radius: 3px;
 
-  label{
+  label {
     font-size: 15px;
-
   }
 }
 
@@ -255,7 +254,7 @@ nav {
   flex: $keywords-input-flex;
 }
 
-.btn-question {
+.btn-add {
   background-color: $violet-dark;
   color: white;
   height: 45px;
@@ -264,6 +263,10 @@ nav {
   fa-icon {
     margin-right: 5px;
     font-size: 10px;
+  }
+
+  &:hover {
+    color: white;
   }
 }
 
@@ -278,7 +281,49 @@ nav {
   }
 }
 
+
+
 //>--------------- HOME SEARCH FROM----------------------------
+
+//---------------- SELECT------------------------
+
+
+.ng-arrow {
+  border-color: #999999 transparent transparent;
+  border-style: solid;
+  border-width: 5px 5px 2.5px;
+}
+
+.ng-dropdown-panel-items{
+  border: 1px solid lightgrey;
+  background-color: #fafafa;
+  margin-top: -5px;
+  box-shadow: 0 0 8px 0 rgba(0,0,0,0.12), 0 8px 8px 0 rgba(0,0,0,0.24);
+  max-height: unset !important;
+  border-radius: 3px;
+}
+
+.ng-dropdown-panel{
+ 
+}
+
+.ng-select-container{
+  border: 1px solid lightgrey;
+  padding: 6px 10px;
+  border-radius: 3px;
+  background-color: #fff;
+}
+
+.ng-option{
+  padding: 10px 15px;
+  font-size: 15px;
+  color:  #2d2d2d;
+  &:hover{
+    background-color: #EAEEF1;
+  }
+}
+
+// ----------------- SELECT-----------------------
 
 //---------------- Categories ---------------------------------
 .categories {
@@ -351,21 +396,21 @@ nav {
 
 .dislike {
   margin-top: 6px;
-  color: #EF6868;
+  color: #ef6868;
 }
 
 .like {
-  color: #86C06A;
+  color: #86c06a;
 }
 
 .like-active {
-  border-bottom: 3px solid #86C06A;
+  border-bottom: 3px solid #86c06a;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
 }
 
 .dislike-active {
-  border-bottom: 3px solid #EF6868;
+  border-bottom: 3px solid #ef6868;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
 }
@@ -374,7 +419,7 @@ nav {
   background-color: #f8f8f9;
   padding: 12px 20px;
 
-  &-content{
+  &-content {
     margin-left: 27px;
   }
 }
@@ -424,6 +469,10 @@ nav {
   background-color: #fff;
   overflow: hidden;
   position: relative;
+  cursor: pointer;
+  &:hover{
+    background-color: #fcfaf8;
+  }
 }
 
 .app-question {
@@ -448,7 +497,7 @@ nav {
   transform: rotate(45deg);
 }
 
-.upvote-btn{
+.upvote-btn {
   padding-bottom: 0px;
 }
 
@@ -496,7 +545,7 @@ nav {
   flex-basis: 400px;
 }
 
-.user-data{
+.user-data {
   line-height: 20px;
 }
 
@@ -525,7 +574,7 @@ nav {
     border-left: 1px solid lightgrey;
   }
 
-  &-value{
+  &-value {
     color: #222;
   }
 
@@ -582,10 +631,9 @@ nav {
     border-bottom: 4px solid transparent;
     padding: 5px 10px;
 
-    &:hover{
+    &:hover {
       cursor: pointer;
     }
-
   }
   a {
     text-decoration: none;
@@ -597,7 +645,7 @@ nav {
   border-bottom: 4px solid $violet-dark !important;
 }
 
-.user-questions{
+.user-questions {
   min-height: 500px;
   background-color: #fff;
 }
@@ -660,10 +708,47 @@ nav {
 }
 
 .modal-header {
-  background-color: $modal-header-bg;
+  background-color: #515968;
   color: white;
-  height: 68px;
+  height: 52px;
   border-radius: 0px;
+  padding: 0px 24px 0px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .modal-title {
+    font-weight: 400;
+    font-size: 20px;
+  }
+
+  .modal-close{
+
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    flex-direction: column;
+    height: 20px;
+    width: 26px;
+
+    span{
+      width: 100%;
+      height: 2px;
+      background-color: lightgrey;
+      display: block;
+  
+    }
+
+    .span-1{
+      transform: rotate(45deg);
+      transform-origin: left;
+    }
+
+    .span-2{
+      transform: rotate(-45deg);
+      transform-origin: left;
+    }
+  }
 }
 
 .modal-content {
@@ -706,7 +791,6 @@ nav {
 //------------------------------- Editor styling ----------------
 
 .small-editor {
-  
   .NgxEditor__Wrapper {
     border: none !important;
   }
@@ -776,15 +860,19 @@ nav {
 
 //------------------------------Utility --------------------------
 
+.fnt-20 {
+  font-size: 20px;
+}
+
 .fnt-14 {
   font-size: 14px;
 }
 
-.fnt-16{
+.fnt-16 {
   font-size: 16px;
 }
 
-.fnt-15{
+.fnt-15 {
   font-size: 15px;
 }
 
@@ -814,6 +902,10 @@ nav {
 
 .dark-violet-color {
   color: $violet-dark;
+}
+
+.text-light-brown {
+  color: $text-light-brown;
 }
 
 .btn-post {

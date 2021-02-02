@@ -31,7 +31,7 @@ export class CategoriesComponent implements OnInit {
     constructor(private modalService: BsModalService, private userManager: OidcSecurityService, private categoryService: CategoryService) {
         this.searchForm = new FormGroup({
             search: new FormControl(),
-            show: new FormControl("0")
+            show: new FormControl(0)
         })
 
         this.newCategoryForm = new FormGroup({
