@@ -1,8 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "C:\\Users\\atulv\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\atulv\\.nuget\\packages"
-    ]
-  }
-}

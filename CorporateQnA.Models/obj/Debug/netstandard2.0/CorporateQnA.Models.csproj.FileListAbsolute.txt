@@ -1,9 +1,0 @@
-C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA.Models\bin\Debug\netstandard2.0\CorporateQnA.Models.deps.json
-C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA.Models\bin\Debug\netstandard2.0\CorporateQnA.Models.dll
-C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA.Models\bin\Debug\netstandard2.0\CorporateQnA.Models.pdb
-C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA.Models\obj\Debug\netstandard2.0\CorporateQnA.Models.csprojAssemblyReference.cache
-C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA.Models\obj\Debug\netstandard2.0\CorporateQnA.Models.AssemblyInfoInputs.cache
-C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA.Models\obj\Debug\netstandard2.0\CorporateQnA.Models.AssemblyInfo.cs
-C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA.Models\obj\Debug\netstandard2.0\CorporateQnA.Models.csproj.CoreCompileInputs.cache
-C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA.Models\obj\Debug\netstandard2.0\CorporateQnA.Models.dll
-C:\Users\atulv\Documents\CorporateQnA\CorporateQnA\CorporateQnA.Models\obj\Debug\netstandard2.0\CorporateQnA.Models.pdb
