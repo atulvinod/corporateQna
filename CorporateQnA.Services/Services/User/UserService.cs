@@ -23,7 +23,7 @@ namespace CorporateQnA.Services
 
         public int Create(Users user)
         {
-            var check = this.database.Query<Users>("Select * From Users WHERE Email = @0", user.Email).FirstOrDefault();
+            var check = this.database.Fetch<Users>("WHERE Email = @0", user.Email).FirstOrDefault();
             if (check == null)
             {
                 return (int)this.database.Insert(user);
@@ -36,19 +36,19 @@ namespace CorporateQnA.Services
 
         public Users GetUser(int userid)
         {
-            var user = this.database.Query<Users>("SELECT * FROM Users WHERE Id = @0", userid).FirstOrDefault();
+            var user = this.database.FirstOrDefault<Users>("WHERE Id = @0", userid);
             return user;
         }
 
         public IEnumerable<UserDetails> GetUsersDetails()
         {
-            var users = this.database.Query<Models.UserDetails>("SELECT * FROM UserDetails").Select(s => this.mapper.Map<UserDetails>(s));
+            var users = this.database.Fetch<Models.UserDetails>().Select(s => this.mapper.Map<UserDetails>(s));
             return users;
         }
 
         public UserDetails GetSingleUserDetails(int userId)
         {
-            var users = this.database.Query<Models.UserDetails>("SELECT * FROM UserDetails WHERE Id = @0", userId).Select(s => this.mapper.Map<UserDetails>(s)).FirstOrDefault();
+            var users = this.database.Fetch<Models.UserDetails>("WHERE Id = @0", userId).Select(s => this.mapper.Map<UserDetails>(s)).FirstOrDefault();
             return users;
         }
     }

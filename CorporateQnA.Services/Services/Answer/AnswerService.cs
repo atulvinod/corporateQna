@@ -25,7 +25,7 @@ namespace CorporateQnA.Services
         {
             try
             {
-                var data = this.mapper.Map<CorporateQnA.Services.Models.Answer>(answer);
+                var data = this.mapper.Map<Models.Answer>(answer);
                 data.AnsweredOn = DateTime.Now;
                 return (int)this.database.Insert(data); ;
             }
@@ -43,7 +43,7 @@ namespace CorporateQnA.Services
 
         public int SetAnswerState(AnswerState state)
         {
-            var i = this.database.Execute("UPDATE Answer SET IsBestSolution =@0 WHERE Id = @1", state.IsBestSolution, state.AnswerId);
+            var i = this.database.Update<Answer>("SET IsBestSolution =@0 WHERE Id = @1", state.IsBestSolution, state.AnswerId);
             return (int)i;
         }
     }

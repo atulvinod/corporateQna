@@ -37,7 +37,7 @@ namespace CorporateQnA.Services
         {
             try
             {
-                var category = this.database.Query<CorporateQnA.Services.Models.Category>("SELECT * FROM Category").Select(z => this.mapper.Map<CorporateQnA.Models.Category>(z));
+                var category = this.database.Fetch<CorporateQnA.Services.Models.Category>().Select(z => this.mapper.Map<CorporateQnA.Models.Category>(z));
                 return category;
             }
             catch (Exception)
@@ -48,7 +48,7 @@ namespace CorporateQnA.Services
 
         public IEnumerable<CategoryDetails> GetCategoryDetails()
         {
-            return this.database.Query<CorporateQnA.Services.Models.CategoryDetails>("SELECT * FROM [master].[dbo].CategoryDetails").Select(s => this.mapper.Map<CorporateQnA.Models.CategoryDetails>(s));
+            return this.database.Fetch<CorporateQnA.Services.Models.CategoryDetails>().Select(s => this.mapper.Map<CorporateQnA.Models.CategoryDetails>(s));
         }
     }
 }

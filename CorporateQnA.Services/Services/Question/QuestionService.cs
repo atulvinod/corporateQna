@@ -40,7 +40,7 @@ namespace CorporateQnA.Services
         {
             try
             {
-                return this.database.Query<Models.QuestionDetails>(" SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails] qd ORDER BY qd.LikeCount DESC").Select(s => this.mapper.Map<CorporateQnA.Models.QuestionDetails>(s));
+                return this.database.Fetch<Models.QuestionDetails>(" ORDER BY LikeCount DESC").Select(s => this.mapper.Map<CorporateQnA.Models.QuestionDetails>(s));
             }
             catch (Exception)
             {
@@ -110,12 +110,12 @@ namespace CorporateQnA.Services
 
         public IEnumerable<QuestionDetails> QuestionsByUser(int userId)
         {
-            return this.database.Query<CorporateQnA.Models.QuestionDetails>("SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails] q WHERE q.AskedBy = @0", userId).Select(s => this.mapper.Map<CorporateQnA.Models.QuestionDetails>(s));
+            return this.database.Fetch<Models.QuestionDetails>("WHERE AskedBy = @0", userId).Select(s => this.mapper.Map<QuestionDetails>(s));
         }
 
         public IEnumerable<QuestionDetails> QuestionsAnsweredByUser(int userId)
         {
-            return this.database.Query<CorporateQnA.Models.QuestionDetails>("SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails] q WHERE EXISTS(SELECT * FROM Answer a WHERE a.AnsweredBy = @0  AND a.QuestionId = q.QuestionId);", userId).Select(s => this.mapper.Map<QuestionDetails>(s));
+            return this.database.Fetch<Models.QuestionDetails>("WHERE EXISTS(SELECT * FROM Answer a WHERE a.AnsweredBy = @0  AND a.QuestionId = QuestionId);", userId).Select(s => this.mapper.Map<QuestionDetails>(s));
         }
     }
 }
