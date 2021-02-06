@@ -121,4 +121,97 @@ SELECT u.Id, u.Name, u.Department, u.Location, u.Position, u.Email,
 (SELECT COUNT(*) FROM Question q WHERE EXISTS (SELECT * FROM Answer a WHERE a.AnsweredBy = u.Id AND a.QuestionId = q.Id)) as 'QuestionAnswered',
 (SELECT COUNT(*) FROM QuestionActivity qa WHERE qa.UserId = u.Id AND qa.ActivityType = 2) as 'QuestionResolved'
 from Users u;
+GO;
 
+CREATE PROCEDURE FilterByKeywordAndShowType(@keyword as NVARCHAR(MAX), @show AS SMALLINT, @userId AS INT)
+AS BEGIN
+DECLARE @results TABLE(
+	QuestionId INT,
+	CategoryId INT,
+	UserName NVARCHAR(MAX),
+	QuestionTitle NVARCHAR(MAX),
+	Content NVARCHAR(MAX),
+	AskedBy INT,
+	AskedOn DATETIME,
+	LikeCount INT,
+	ViewCount INT,
+	Resolved INT,
+	AnswerCount INT
+)
+DECLARE @query as NVARCHAR(MAX);
+SET @query = CONCAT('%',LOWER(@keyword),'%')
+
+IF @show = 1 
+	INSERT INTO @results 
+	SELECT * FROM QuestionDetails q WHERE LOWER(q.QuestionTitle) LIKE @query AND q.AskedBy = @userId;
+ELSE IF @show = 2
+	INSERT INTO @results 
+	SELECT * FROM QuestionDetails q WHERE LOWER(q.QuestionTitle) LIKE @query AND EXISTS(SELECT 1 FROM Answer a WHERE a.QuestionId = q.QuestionId AND a.AnsweredBy = @userId);
+ELSE IF @show = 3
+	INSERT INTO @results 
+	SELECT * FROM QuestionDetails q WHERE LOWER(q.QuestionTitle) LIKE @query AND q.Resolved > 0;
+ELSE IF @show = 4
+	INSERT INTO @results 
+	SELECT * FROM QuestionDetails q WHERE LOWER(q.QuestionTitle) LIKE @query AND q.Resolved = 0;
+ELSE IF @show = 5
+	INSERT INTO @results 
+	SELECT * FROM QuestionDetails q WHERE LOWER(q.QuestionTitle) LIKE @query ORDER BY q.AskedOn DESC;
+ELSE
+	INSERT INTO @results 
+	SELECT * FROM QuestionDetails q WHERE LOWER(q.QuestionTitle) LIKE @query;
+
+SELECT * FROM @results;
+END;
+GO;
+
+CREATE PROCEDURE SearchQuestion(@keyword as NVARCHAR(MAX), @show AS SMALLINT, @userId AS INT,@categoryId as INT, @sortBy as SMALLINT)
+AS BEGIN
+DECLARE @keywordFilterResult TABLE(
+	QuestionId INT,
+	CategoryId INT,
+	UserName NVARCHAR(MAX),
+	QuestionTitle NVARCHAR(MAX),
+	Content NVARCHAR(MAX),
+	AskedBy INT,
+	AskedOn DATETIME,
+	LikeCount INT,
+	ViewCount INT,
+	Resolved INT,
+	AnswerCount INT
+)
+
+DECLARE @sortByResult TABLE(
+	QuestionId INT,
+	CategoryId INT,
+	UserName NVARCHAR(MAX),
+	QuestionTitle NVARCHAR(MAX),
+	Content NVARCHAR(MAX),
+	AskedBy INT,
+	AskedOn DATETIME,
+	LikeCount INT,
+	ViewCount INT,
+	Resolved INT,
+	AnswerCount INT
+);
+INSERT INTO @keywordFilterResult
+EXEC FilterByKeywordAndShowType @keyword, @show, @userId
+
+IF(@sortBy = 2)
+	INSERT INTO @sortByResult 
+	SELECT * FROM @keywordFilterResult as kf WHERE kf.AskedOn >= DATEADD(DAY,-10,GETDATE());
+ELSE IF (@sortBy = 3)
+	INSERT INTO @sortByResult 
+	SELECT * FROM @keywordFilterResult as kf WHERE kf.AskedOn >= DATEADD(DAY,-10,GETDATE());
+ELSE IF (@sortBy = 1)
+	INSERT INTO @sortByResult 
+	SELECT * FROM @keywordFilterResult as kf WHERE kf.AskedOn >= DATEADD(DAY,-7,GETDATE());
+ELSE
+	INSERT INTO @sortByResult
+	SELECT * FROM @keywordFilterResult;
+
+IF @categoryId = 0
+	SELECT * FROM @sortByResult
+ELSE
+	SELECT * FROM @sortByResult ss WHERE ss.CategoryId = @categoryId;
+END
+GO;

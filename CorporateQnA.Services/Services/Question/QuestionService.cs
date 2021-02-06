@@ -50,62 +50,13 @@ namespace CorporateQnA.Services
 
         public IEnumerable<QuestionDetails> SearchQuestion(SearchFilter search)
         {
-            IEnumerable<Models.QuestionDetails> fetch;
+            List<Models.QuestionDetails> fetch;
             //check if searchInput is not null
             search.searchInput = search.searchInput ?? "";
+
             //query database for show values
-            switch (search.Show)
-            {
-                case Show.MyQuestions:
-                    fetch = this.database.Query<Models.QuestionDetails>($"SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails] q WHERE LOWER(q.QuestionTitle) LIKE '%{search.searchInput.ToLower()}%' AND q.AskedBy = {search.userId}");
-                    break;
-                case Show.MyParticipation:
-                    fetch = this.database.Query<Models.QuestionDetails>($"SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails] q WHERE LOWER(q.QuestionTitle) LIKE '%{search.searchInput.ToLower()}%' AND EXISTS(SELECT 1 FROM Answer a WHERE a.QuestionId = q.QuestionId AND a.AnsweredBy = {search.userId})");
-                    break;
-                case Show.Solved:
-                    fetch = this.database.Query<Models.QuestionDetails>($"SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails] q WHERE LOWER(q.QuestionTitle)  LIKE '%{search.searchInput.ToLower()}%' AND q.Resolved > 0;");
-                    break;
-                case Show.Unsolved: 
-                    fetch = this.database.Query<Models.QuestionDetails>($"SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails] q WHERE LOWER(q.QuestionTitle)  LIKE '%{search.searchInput.ToLower()}%' AND q.Resolved = 0;");
-                    break;
-                case Show.Hot:
-                    fetch = this.database.Query<Models.QuestionDetails>($"SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails] q WHERE LOWER(q.QuestionTitle)  LIKE '%{search.searchInput.ToLower()}%' ORDER BY q.AskedOn DESC");
-                    break;
-
-                //all is default
-                default:
-                    fetch = this.database.Query<Models.QuestionDetails>($"SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails] q WHERE LOWER(q.QuestionTitle)  LIKE '%{search.searchInput.ToLower()}%'");
-                    break;
-            }
-
-            return fetch.Where(x =>
-            {
-                bool select = true;
-                //based on category id
-                if (search.categoryId != 0)
-                {
-                    select = x.CategoryId == search.categoryId;
-                }
-
-
-                //sort by
-                switch (search.SortBy)
-                {
-                    case SortBy.Last10Days:
-                        select = x.AskedOn >= DateTime.Now.AddDays(-10) && select;
-                        break;
-                    case SortBy.Last30Days:
-                        select = x.AskedOn >= DateTime.Now.AddDays(-30) && select;
-                        break;
-                    case SortBy.Recent:
-                        select = x.AskedOn >= DateTime.Now.AddDays(-7) && select;
-                        break;
-                    default:
-                        break;
-                }
-
-                return select;
-            }).Select(x => this.mapper.Map<QuestionDetails>(x));
+            fetch = this.database.FetchProc<CorporateQnA.Services.Models.QuestionDetails>("SearchQuestion", new { userId = search.userId, keyword = search.searchInput, categoryId = search.categoryId, sortBy = (short)search.SortBy, show = (short)search.Show });
+            return fetch.Select(x => this.mapper.Map<QuestionDetails>(x));
         }
 
         public IEnumerable<QuestionDetails> QuestionsByUser(int userId)
