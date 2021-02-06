@@ -11,10 +11,6 @@ namespace CorporateQnA.Services
     {
         public int Create(Question question);
 
-        public void Update(Question question);
-
-        public void Delete(int questionId);
-
         public IEnumerable<QuestionDetails> GetQuestions();
 
         public IEnumerable<QuestionDetails> SearchQuestion(SearchFilter searchFilter);

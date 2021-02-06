@@ -19,7 +19,7 @@ export class AnswerService {
     }
 
     getAnswersForQuestion(query: GetAnswersModel) {
-        return this.http.post<AnswerDetailsModel[]>(this.httpRoot + "/answer/getanswers", query);
+        return this.http.post<AnswerDetailsModel[]>(this.httpRoot + "/answer/list", query);
     }
 
     createAnswerActivity(activity: AnswerActivityModel) {

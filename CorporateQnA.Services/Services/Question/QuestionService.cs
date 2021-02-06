@@ -28,21 +28,7 @@ namespace CorporateQnA.Services
             {
                 var data = this.mapper.Map<Models.Question>(question);
                 data.AskedOn = DateTime.Now;
-                var id = this.database.Insert(data);
-                return (int)id;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public void Delete(int questionId)
-        {
-            try
-            {
-                this.database.Delete(questionId);
-
+                return (int)this.database.Insert(data); ;
             }
             catch (Exception)
             {
@@ -55,18 +41,6 @@ namespace CorporateQnA.Services
             try
             {
                 return this.database.Query<Models.QuestionDetails>(" SELECT * FROM [CorporateQ&A].[dbo].[QuestionDetails] qd ORDER BY qd.LikeCount DESC").Select(s => this.mapper.Map<CorporateQnA.Models.QuestionDetails>(s));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public void Update(Question question)
-        {
-            try
-            {
-                this.database.Update(this.mapper.Map<Models.Question>(question));
             }
             catch (Exception)
             {

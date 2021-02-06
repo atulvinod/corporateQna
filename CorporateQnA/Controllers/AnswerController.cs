@@ -34,12 +34,12 @@ namespace CorporateQnA.Controllers
         }
 
         [HttpPost]
-        [Route("getanswers")]
-        public IActionResult GetAnswerForQuestion(GetAnswer answer)
+        [Route("list")]
+        public IActionResult GetAnswersForQuestion(GetAnswer answer)
         {
             try
             {
-                return Ok(this.answerService.GetAnswersForQues(answer));
+                return Ok(this.answerService.GetAnswersForQuestion(answer));
             }
             catch (Exception e)
             {

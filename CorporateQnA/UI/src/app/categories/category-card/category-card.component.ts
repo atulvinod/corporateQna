@@ -7,5 +7,6 @@ import { Component, Input } from '@angular/core';
     })
 export class CategoryCardComponent{
     @Input() categoryDetail:CategoryDetailsModel
+    
     constructor() {}
 }

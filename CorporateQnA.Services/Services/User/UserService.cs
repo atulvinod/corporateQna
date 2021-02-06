@@ -21,9 +21,9 @@ namespace CorporateQnA.Services
         }
 
 
-        public int Create(AppUser user)
+        public int Create(Users user)
         {
-            var check = this.database.Query<AppUser>("Select * From Users WHERE Email = @0", user.Email).FirstOrDefault();
+            var check = this.database.Query<Users>("Select * From Users WHERE Email = @0", user.Email).FirstOrDefault();
             if (check == null)
             {
                 return (int)this.database.Insert(user);
@@ -34,9 +34,9 @@ namespace CorporateQnA.Services
             }
         }
 
-        public AppUser GetUser(int userid)
+        public Users GetUser(int userid)
         {
-            var user = this.database.Query<AppUser>("SELECT * FROM Users WHERE Id = @0", userid).FirstOrDefault();
+            var user = this.database.Query<Users>("SELECT * FROM Users WHERE Id = @0", userid).FirstOrDefault();
             return user;
         }
 

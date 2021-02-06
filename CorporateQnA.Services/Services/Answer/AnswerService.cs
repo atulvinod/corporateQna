@@ -27,8 +27,7 @@ namespace CorporateQnA.Services
             {
                 var data = this.mapper.Map<CorporateQnA.Services.Models.Answer>(answer);
                 data.AnsweredOn = DateTime.Now;
-                var id = this.database.Insert(data);
-                return (int)id;
+                return (int)this.database.Insert(data); ;
             }
             catch (Exception)
             {
@@ -36,7 +35,7 @@ namespace CorporateQnA.Services
             }
         }
 
-        public IEnumerable<AnswerDetails> GetAnswersForQues(GetAnswer getAnswer)
+        public IEnumerable<AnswerDetails> GetAnswersForQuestion(GetAnswer getAnswer)
         {
             var answers = this.database.FetchProc<AnswerDetails>("[master].dbo.GetAnswers", new { questionId = getAnswer.QuestionId, userId = getAnswer.UserId });
             return answers;

@@ -9,9 +9,9 @@ namespace CorporateQnA.Services
 {
     public interface IUserService
     {
-        public int Create(AppUser user);
+        public int Create(Users user);
 
-        public AppUser GetUser(int userid);
+        public Users GetUser(int userid);
 
         public IEnumerable<UserDetails> GetUsersDetails();
 

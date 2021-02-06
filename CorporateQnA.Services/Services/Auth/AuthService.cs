@@ -55,7 +55,7 @@ namespace CorporateQnA.Services.Auth
                 return errors; ;
             }
 
-            var appUser = new AppUser
+            var appUser = new Users
             {
                 Department = department,
                 Location = location,

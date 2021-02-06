@@ -10,7 +10,7 @@ namespace CorporateQnA.Models
     
     [TableName("Users")]
     [PrimaryKey("Id")]
-    public class AppUser
+    public class Users
     {
         [Column]
         public int Id { get; set; }
