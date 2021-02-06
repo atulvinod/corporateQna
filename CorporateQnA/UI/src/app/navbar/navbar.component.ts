@@ -12,7 +12,7 @@ export class NavbarComponent implements OnInit {
     loggedIn = false;
     userName: string = ""
 
-    constructor(public oidcSecurityService: OidcSecurityService) { }
+    constructor(private oidcSecurityService: OidcSecurityService) { }
 
     ngOnInit() {
         this.oidcSecurityService.isAuthenticated$.subscribe(loginState => {

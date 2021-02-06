@@ -8,13 +8,9 @@ import { Injectable, isDevMode } from "@angular/core";
 })
 export class UserService{
     
-    httpRoot = "https://localhost:5001"
+    private httpRoot = "https://localhost:5001"
     
-    constructor(public http: HttpClient) {
-        if (!isDevMode) {
-            this.httpRoot = ""
-        }
-    }
+    constructor(private http: HttpClient) {}
 
     getAllUsersDetails(){
         return this.http.get<UserDetailsModel[]>(this.httpRoot+"/userdata/all")

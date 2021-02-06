@@ -8,13 +8,9 @@ import { Injectable, isDevMode } from "@angular/core";
 })
 export class CategoryService {
 
-    httpRoot = "https://localhost:5001"
+    private httpRoot = "https://localhost:5001"
 
-    constructor(public http: HttpClient) {
-        if (!isDevMode) {
-            this.httpRoot = ""
-        }
-    }
+    constructor(private http: HttpClient) {}
 
     getCategories() {
         return this.http.get<CategoryModel[]>(this.httpRoot + "/category")

@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
     categoryOptions: CategoryModel[] = []
     allQuestions: QuestionDetailsModel[] = []
 
-    constructor(private modalService: BsModalService, private categoryService: CategoryService, private oidcService: OidcSecurityService, private answerService: AnswerService, private questionService: QuestionService) {
+    constructor(private modalService: BsModalService, private categoryService: CategoryService, private oidcService: OidcSecurityService, private questionService: QuestionService) {
 
         this.searchForm = new FormGroup({
             searchInput: new FormControl(""),
@@ -162,7 +162,6 @@ export class HomeComponent implements OnInit {
 
     editorValidator(): ValidatorFn {
         return (control: AbstractControl): { [key: string]: any } | null => {
-            console.log("validator ", this.removeTags(control.value))
             let empty = this.removeTags(control.value).length == 0
 
             return empty ? { "empty": "Empty content" } : null;

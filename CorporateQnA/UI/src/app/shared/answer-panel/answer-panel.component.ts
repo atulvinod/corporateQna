@@ -117,7 +117,6 @@ export class AnswerPanelComponent implements OnInit {
 
     editorValidator(): ValidatorFn {
         return (control: AbstractControl): { [key: string]: any } | null => {
-            console.log("validator ", this.removeTags(control.value))
             let empty = this.removeTags(control.value).length == 0
 
             return empty ? { "empty": "Empty content" } : null;

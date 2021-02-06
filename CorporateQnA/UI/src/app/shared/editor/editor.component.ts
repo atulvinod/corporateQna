@@ -27,15 +27,7 @@ export class EidtorAComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.editor = new Editor();
-        console.log(this.text);
-        console.log(this.formGroup);
-        console.log(this.controlName)
     }
-
-    ngOnChanges(changes: SimpleChanges) {
-        // changes.prop contains the old and the new value...
-        console.log(this.text);
-      }
 
     ngOnDestroy(): void {
         this.editor.destroy();

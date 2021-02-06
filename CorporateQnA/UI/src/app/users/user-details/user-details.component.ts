@@ -46,7 +46,6 @@ export class UserDetailsComponent implements OnInit {
     }
 
     setTab(tab){
-        console.log("Clicked")
         if(tab=="ALL"){
             this.currentQuestions = this.userQuestions;
         }else{

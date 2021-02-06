@@ -7,7 +7,7 @@ import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router'
     })
 export class SectionsNavComponent implements OnInit{
     
-    constructor(public router: Router, public activatedRoute: ActivatedRoute) { }
+    constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
 
     ngOnInit(){}
 

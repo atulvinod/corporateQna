@@ -10,20 +10,15 @@ import { GetAnswersModel } from 'src/models/get-answers.model';
     providedIn: "root"
 })
 export class AnswerService {
-    httpRoot = "https://localhost:5001"
+    private httpRoot = "https://localhost:5001"
 
-    constructor(public http: HttpClient) {
-        if (!isDevMode) {
-            this.httpRoot = ""
-        }
-    }
+    constructor(private http: HttpClient) {}
 
     createAnswer(ans: AnswerModel) {
         return this.http.post(this.httpRoot + "/answer", ans);
     }
 
     getAnswersForQuestion(query: GetAnswersModel) {
-        console.log(query);
         return this.http.post<AnswerDetailsModel[]>(this.httpRoot + "/answer/getanswers", query);
     }
 
