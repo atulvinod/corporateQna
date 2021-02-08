@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CorporateQnA.Models;
 using CorporateQnA.Models.Enums;
+using CorporateQnA.Services.ModelMaps.Extensions;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,10 @@ namespace CorporateQnA.Services
     public class ActivityService : IActivityService
     {
         private readonly PetaPoco.Database database;
-        private readonly IMapper mapper;
 
-        public ActivityService(IConfiguration configuration, IMapper mapper)
+        public ActivityService(IConfiguration configuration)
         {
             this.database = new PetaPoco.Database(configuration.GetConnectionString("DB"), "System.Data.SqlClient");
-            this.mapper = mapper;
         }
 
         public int CreateAnswerActivity(AnswerActivity answerActivity)
@@ -26,8 +25,8 @@ namespace CorporateQnA.Services
             try
             {
 
-                var d = this.mapper.Map<Models.AnswerActivity>(answerActivity);
-                var check = this.database.Fetch<Models.AnswerActivity>("WHERE UserId = @0 AND AnswerId = @1", d.UserId, d.AnswerId).FirstOrDefault<CorporateQnA.Services.Models.AnswerActivity>();
+                var d = answerActivity.MapTo<Models.AnswerActivity>();
+                var check = this.database.FirstOrDefault<Models.AnswerActivity>("WHERE UserId = @0 AND AnswerId = @1", d.UserId, d.AnswerId);
 
                 if (check == null)
                 {
@@ -75,7 +74,7 @@ namespace CorporateQnA.Services
             try
             {
     
-                var dataModel = this.mapper.Map<Models.QuestionActivity>(questionActivity);
+                var dataModel = questionActivity.MapTo<Models.QuestionActivity>();
                 var activity = this.database.FirstOrDefault<Models.QuestionActivity>("WHERE UserId = @0 AND QuestionId = @1 AND ActivityType = @2", dataModel.UserId, dataModel.QuestionId, dataModel.ActivityType);
 
                 if (questionActivity.ActivityType == QuestionActivityType.Resolved)

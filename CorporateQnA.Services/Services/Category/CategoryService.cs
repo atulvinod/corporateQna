@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CorporateQnA.Models;
+using CorporateQnA.Services.ModelMaps.Extensions;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -11,11 +12,9 @@ namespace CorporateQnA.Services
 {
     public class CategoryService : ICategoryService
     {
-        private readonly IMapper mapper;
         private readonly PetaPoco.Database database;
-        public CategoryService(IConfiguration configuration, AutoMapper.IMapper mapper)
+        public CategoryService(IConfiguration configuration)
         {
-            this.mapper = mapper;
             this.database = new PetaPoco.Database(configuration.GetConnectionString("DB"), "System.Data.SqlClient");
         }
 
@@ -23,9 +22,9 @@ namespace CorporateQnA.Services
         {
             try
             {
-                var data = this.mapper.Map<CorporateQnA.Services.Models.Category>(category);
-                data.CreatedOn = DateTime.Now;
-                return (int)this.database.Insert(data);
+                var dataModel = category.MapTo<Models.Category>();
+                dataModel.CreatedOn = DateTime.Now;
+                return (int)this.database.Insert(dataModel);
             }
             catch (Exception)
             {
@@ -35,20 +34,12 @@ namespace CorporateQnA.Services
 
         public IEnumerable<Category> GetCategories()
         {
-            try
-            {
-                var category = this.database.Fetch<CorporateQnA.Services.Models.Category>().Select(z => this.mapper.Map<CorporateQnA.Models.Category>(z));
-                return category;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return this.database.Fetch<Models.Category>().MapCollectionTo<Category>();
         }
 
         public IEnumerable<CategoryDetails> GetCategoryDetails()
         {
-            return this.database.Fetch<CorporateQnA.Services.Models.CategoryDetails>().Select(s => this.mapper.Map<CorporateQnA.Models.CategoryDetails>(s));
+            return this.database.Fetch<Models.CategoryDetails>().MapCollectionTo<CategoryDetails>();
         }
     }
 }

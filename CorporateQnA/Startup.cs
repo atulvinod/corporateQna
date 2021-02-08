@@ -90,8 +90,6 @@ namespace CorporateQnA
                 config.LogoutPath = "/Auth/Logout";
             });
 
-            services.AddAutoMapper(typeof(AnswerMap), typeof(QuestionMap), typeof(CategoryMap), typeof(AnswerActivityMap), typeof(QuestionActivityMap), typeof(UserMap));
-
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IQuestionService, QuestionService>();
             services.AddScoped<IAnswerService, AnswerService>();

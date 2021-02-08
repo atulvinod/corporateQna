@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CorporateQnA.Services.ModelMaps
+namespace CorporateQnA.Services.ModelMaps.Extensions
 {
     public static class MapperExtensions
     {
@@ -23,16 +23,15 @@ namespace CorporateQnA.Services.ModelMaps
             }).CreateMapper();
         }
 
-        public static T Map<T>(this object src)
+        public static T MapTo<T>(this object src)
         {
-            IMapper mapper = GetMapperConfiguration();
-            return mapper.Map<T>(src);
+            //To prevent null exception when using with FirstOrDefault()
+            return src != null ? GetMapperConfiguration().Map<T>(src) : default;
         }
 
-        public static IEnumerable<T> MapCollection<T>(this IEnumerable<object> src)
+        public static IEnumerable<T> MapCollectionTo<T>(this IEnumerable<object> src)
         {
-            IMapper mapper = GetMapperConfiguration();
-            return mapper.Map<IEnumerable<T>>(src);
+            return GetMapperConfiguration().Map<IEnumerable<T>>(src);
         }
     }
 }

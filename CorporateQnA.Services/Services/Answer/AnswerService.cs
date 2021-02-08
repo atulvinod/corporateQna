@@ -7,17 +7,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CorporateQnA.Services.ModelMaps.Extensions;
 
 namespace CorporateQnA.Services
 {
     public class AnswerService : IAnswerService
     {
         private readonly PetaPoco.Database database;
-        private readonly IMapper mapper;
 
-        public AnswerService(IConfiguration configuration, AutoMapper.IMapper mapper)
+        public AnswerService(IConfiguration configuration)
         {
-            this.mapper = mapper;
             this.database = new PetaPoco.Database(configuration.GetConnectionString("DB"), "System.Data.SqlClient");
         }
 
@@ -25,7 +24,7 @@ namespace CorporateQnA.Services
         {
             try
             {
-                var data = this.mapper.Map<Models.Answer>(answer);
+                var data = answer.MapTo<Models.Answer>();
                 data.AnsweredOn = DateTime.Now;
                 return (int)this.database.Insert(data); ;
             }
@@ -37,8 +36,7 @@ namespace CorporateQnA.Services
 
         public IEnumerable<AnswerDetails> GetAnswersForQuestion(GetAnswer getAnswer)
         {
-            var answers = this.database.FetchProc<AnswerDetails>("[master].dbo.GetAnswers", new { questionId = getAnswer.QuestionId, userId = getAnswer.UserId });
-            return answers;
+            return this.database.FetchProc<Models.AnswerDetails>("[master].dbo.GetAnswers", new { questionId = getAnswer.QuestionId, userId = getAnswer.UserId }).MapCollectionTo<AnswerDetails>();
         }
 
         public int SetAnswerState(AnswerState state)

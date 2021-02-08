@@ -9,16 +9,15 @@ using Microsoft.Extensions.Configuration;
 using AutoMapper;
 using static CorporateQnA.Models.Enums.SearchFilterTypes;
 using CorporateQnA.Models.Enums;
+using CorporateQnA.Services.ModelMaps.Extensions;
 
 namespace CorporateQnA.Services
 {
     public class QuestionService : IQuestionService
     {
-        private readonly AutoMapper.IMapper mapper;
         private readonly PetaPoco.Database database;
-        public QuestionService(IConfiguration configuration, AutoMapper.IMapper mapper)
+        public QuestionService(IConfiguration configuration)
         {
-            this.mapper = mapper;
             this.database = new PetaPoco.Database(configuration.GetConnectionString("DB"), "System.Data.SqlClient");
         }
 
@@ -26,9 +25,9 @@ namespace CorporateQnA.Services
         {
             try
             {
-                var data = this.mapper.Map<Models.Question>(question);
+                var data = question.MapTo<Models.Question>();
                 data.AskedOn = DateTime.Now;
-                return (int)this.database.Insert(data); ;
+                return (int)this.database.Insert(data);
             }
             catch (Exception)
             {
@@ -38,35 +37,26 @@ namespace CorporateQnA.Services
 
         public IEnumerable<QuestionDetails> GetQuestions()
         {
-            try
-            {
-                return this.database.Fetch<Models.QuestionDetails>(" ORDER BY LikeCount DESC").Select(s => this.mapper.Map<CorporateQnA.Models.QuestionDetails>(s));
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return this.database.Fetch<Models.QuestionDetails>("ORDER BY LikeCount DESC").MapCollectionTo<QuestionDetails>();
         }
 
         public IEnumerable<QuestionDetails> SearchQuestion(SearchFilter search)
         {
-            List<Models.QuestionDetails> fetch;
             //check if searchInput is not null
             search.searchInput = search.searchInput ?? "";
 
             //query database for show values
-            fetch = this.database.FetchProc<CorporateQnA.Services.Models.QuestionDetails>("SearchQuestion", new { userId = search.userId, keyword = search.searchInput, categoryId = search.categoryId, sortBy = (short)search.SortBy, show = (short)search.Show });
-            return fetch.Select(x => this.mapper.Map<QuestionDetails>(x));
+            return this.database.FetchProc<Models.QuestionDetails>("SearchQuestion", new { userId = search.userId, keyword = search.searchInput, categoryId = search.categoryId, sortBy = (short)search.SortBy, show = (short)search.Show }).MapCollectionTo<QuestionDetails>();
         }
 
         public IEnumerable<QuestionDetails> QuestionsByUser(int userId)
         {
-            return this.database.Fetch<Models.QuestionDetails>("WHERE AskedBy = @0", userId).Select(s => this.mapper.Map<QuestionDetails>(s));
+            return this.database.Fetch<Models.QuestionDetails>("WHERE AskedBy = @0", userId).MapCollectionTo<QuestionDetails>();
         }
 
         public IEnumerable<QuestionDetails> QuestionsAnsweredByUser(int userId)
         {
-            return this.database.Fetch<Models.QuestionDetails>("WHERE EXISTS(SELECT * FROM Answer a WHERE a.AnsweredBy = @0  AND a.QuestionId = QuestionId);", userId).Select(s => this.mapper.Map<QuestionDetails>(s));
+            return this.database.Fetch<Models.QuestionDetails>("WHERE EXISTS(SELECT * FROM Answer a WHERE a.AnsweredBy = @0  AND a.QuestionId = QuestionDetails.QuestionId);", userId).MapCollectionTo<QuestionDetails>();
         }
     }
 }
