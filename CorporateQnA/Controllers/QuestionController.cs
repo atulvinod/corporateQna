@@ -24,12 +24,11 @@ namespace CorporateQnA.Controllers
         }
 
         [HttpPost]
-        public ActionResult<int> CreateQuestion(Question question)
+        public IActionResult CreateQuestion(Question question)
         {
             try
             {
-                var id = this.questionService.Create(question);
-                return id;
+                return Ok(this.questionService.Create(question));
             }
             catch (Exception e)
             {
@@ -38,30 +37,30 @@ namespace CorporateQnA.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetQuestions()
+        public IEnumerable<QuestionDetails> GetQuestions()
         {
-            return Ok(this.questionService.GetQuestions());
+            return this.questionService.GetQuestions();
         }
 
         [HttpPost]
         [Route("search")]
-        public IActionResult SearchQuestion(SearchFilter searchFilter)
+        public IEnumerable<QuestionDetails> SearchQuestion(SearchFilter searchFilter)
         {
-            return Ok(this.questionService.SearchQuestion(searchFilter));
+            return this.questionService.SearchQuestion(searchFilter);
         }
 
         [Route("answeredBy")]
         [HttpGet]
-        public IActionResult QuestionsAnsweredBy(int userId)
+        public IEnumerable<QuestionDetails> QuestionsAnsweredBy(int userId)
         {
-            return Ok(this.questionService.QuestionsAnsweredByUser(userId));
+            return this.questionService.QuestionsAnsweredByUser(userId);
         }
 
         [Route("askedBy")]
         [HttpGet]
-        public IActionResult UserQuestions(int userId)
+        public IEnumerable<QuestionDetails> UserQuestions(int userId)
         {
-            return Ok(this.questionService.QuestionsByUser(userId));
+            return this.questionService.QuestionsByUser(userId);
 
         }
     }

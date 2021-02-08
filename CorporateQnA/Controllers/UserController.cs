@@ -22,16 +22,16 @@ namespace CorporateQnA.Controllers
 
         [HttpGet]
         [Route("all")]
-        public IActionResult GetAllUsersDetails()
+        public IEnumerable<UserDetails> GetAllUsersDetails()
         {
-            return Ok(this.userService.GetUsersDetails());
+            return this.userService.GetUsersDetails();
         }
 
         [HttpGet]
         [Route("user")]
-        public IActionResult GetSingleUserDetails(int userId)
+        public UserDetails GetSingleUserDetails(int userId)
         {
-            return Ok(this.userService.GetSingleUserDetails(userId));
+            return this.userService.GetSingleUserDetails(userId);
         }
     }
 }

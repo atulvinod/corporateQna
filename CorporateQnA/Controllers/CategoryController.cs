@@ -36,16 +36,16 @@ namespace CorporateQnA.Controllers
         }
 
         [HttpGet]
-        public  IActionResult GetCategory()
+        public  IEnumerable<Category> GetCategory()
         {
-            return Ok(this.categoryService.GetCategories());
+            return this.categoryService.GetCategories();
         }
 
         [HttpGet]
         [Route("details")]
-        public IActionResult GetCategoryDetails()
+        public IEnumerable<CategoryDetails> GetCategoryDetails()
         {
-            return Ok(this.categoryService.GetCategoryDetails());
+            return this.categoryService.GetCategoryDetails();
         }
     }
 }

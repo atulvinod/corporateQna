@@ -49,9 +49,9 @@ namespace CorporateQnA.Controllers
 
         [Route("setsolution")]
         [HttpPost]
-        public IActionResult SetAnswerAsSolution(AnswerAsSolution state)
+        public int SetAnswerAsSolution(AnswerAsSolution state)
         {
-            return Ok(this.answerService.SetAnswerAsSolution(state));
+            return this.answerService.SetAnswerAsSolution(state);
         }
 
     }
