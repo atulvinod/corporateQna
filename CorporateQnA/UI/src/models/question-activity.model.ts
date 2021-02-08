@@ -1,10 +1,10 @@
-import { QuestionActivityEnum } from "./enum/question-activity.enum";
+import { ActivityTypes } from './enum/activity-types.enum';
 
 export class QuestionActivityModel{
     
     userId:number
     questionId:number;
-    activityType:QuestionActivityEnum
+    activityType:ActivityTypes
     answerId: number
     constructor(args:{}) {
         this.userId = args['userId']

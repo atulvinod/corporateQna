@@ -47,11 +47,11 @@ namespace CorporateQnA.Controllers
             }
         }
 
-        [Route("setstate")]
+        [Route("setsolution")]
         [HttpPost]
-        public IActionResult SetAnswerState(AnswerState state)
+        public IActionResult SetAnswerAsSolution(AnswerAsSolution state)
         {
-            return Ok(this.answerService.SetAnswerState(state));
+            return Ok(this.answerService.SetAnswerAsSolution(state));
         }
 
     }

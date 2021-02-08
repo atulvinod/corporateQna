@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CorporateQnA.Models
 {
-    public class AnswerState
+    public class AnswerAsSolution
     {
         public int UserId { get; set; }
 

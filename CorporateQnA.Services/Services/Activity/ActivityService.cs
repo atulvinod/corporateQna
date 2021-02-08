@@ -1,13 +1,8 @@
-﻿using AutoMapper;
-using CorporateQnA.Models;
+﻿using CorporateQnA.Models;
 using CorporateQnA.Models.Enums;
 using CorporateQnA.Services.ModelMaps.Extensions;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CorporateQnA.Services
 {
@@ -44,18 +39,18 @@ namespace CorporateQnA.Services
                 }
 
                 //user has liked before, next state is dislike
-                if (check.ActivityType == (short)AnswerActivityType.Like && answerActivity.ActivityType == AnswerActivityType.Dislike)
+                if (check.ActivityType == (short)ActivityTypes.Like && answerActivity.ActivityType == ActivityTypes.Dislike)
                 {
-                    check.ActivityType = (short)AnswerActivityType.Dislike;
+                    check.ActivityType = (short)ActivityTypes.Dislike;
                     check.CreatedAt = DateTime.Now;
                     this.database.Update(check);
                     return 2;
                 }
 
                 //user has disliked before, next state is like
-                if (check.ActivityType == (short)AnswerActivityType.Dislike && answerActivity.ActivityType == AnswerActivityType.Like)
+                if (check.ActivityType == (short)ActivityTypes.Dislike && answerActivity.ActivityType == ActivityTypes.Like)
                 {
-                    check.ActivityType = (short)AnswerActivityType.Like;
+                    check.ActivityType = (short)ActivityTypes.Like;
                     check.CreatedAt = DateTime.Now;
                     this.database.Update(check);
                     return 3;
@@ -73,11 +68,10 @@ namespace CorporateQnA.Services
         {
             try
             {
-    
                 var dataModel = questionActivity.MapTo<Models.QuestionActivity>();
                 var activity = this.database.FirstOrDefault<Models.QuestionActivity>("WHERE UserId = @0 AND QuestionId = @1 AND ActivityType = @2", dataModel.UserId, dataModel.QuestionId, dataModel.ActivityType);
 
-                if (questionActivity.ActivityType == QuestionActivityType.Resolved)
+                if (questionActivity.ActivityType == ActivityTypes.Resolved)
                 {
                     if (activity == null)
                     {
@@ -106,9 +100,8 @@ namespace CorporateQnA.Services
                 }
 
             }
-            catch (Exception e)
+            catch(Exception)
             {
-                Console.WriteLine(e);
                 throw;
             }
         }

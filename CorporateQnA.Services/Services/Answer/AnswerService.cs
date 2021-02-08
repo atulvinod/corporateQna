@@ -36,13 +36,12 @@ namespace CorporateQnA.Services
 
         public IEnumerable<AnswerDetails> GetAnswersForQuestion(GetAnswer getAnswer)
         {
-            return this.database.FetchProc<Models.AnswerDetails>("[master].dbo.GetAnswers", new { questionId = getAnswer.QuestionId, userId = getAnswer.UserId }).MapCollectionTo<AnswerDetails>();
+            return this.database.FetchProc<Models.AnswerDetails>("GetAnswers", new { questionId = getAnswer.QuestionId, userId = getAnswer.UserId }).MapCollectionTo<AnswerDetails>();
         }
 
-        public int SetAnswerState(AnswerState state)
+        public int SetAnswerAsSolution(AnswerAsSolution state)
         {
-            var i = this.database.Update<Answer>("SET IsBestSolution =@0 WHERE Id = @1", state.IsBestSolution, state.AnswerId);
-            return (int)i;
+            return (int)this.database.Update<Answer>("SET IsBestSolution =@0 WHERE Id = @1", state.IsBestSolution, state.AnswerId);
         }
     }
 }

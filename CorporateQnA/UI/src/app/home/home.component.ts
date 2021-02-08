@@ -1,18 +1,14 @@
 import { SearchFilterModel } from './../../models/search-filter.model';
-import { QuestionActivityEnum } from './../../models/enum/question-activity.enum';
 import { QuestionService } from './../services/question.service';
 import { QuestionModel } from './../../models/question.model';
-import { AnswerModel } from './../../models/answer.model';
-import { AnswerService } from './../services/answer.service';
 import { CategoryModel } from './../../models/category.model';
 import { CategoryService } from './../services/category.service';
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Component, TemplateRef, OnInit } from '@angular/core';
-import { faSearch, faPlus, faRedo, faThumbsUp, faThumbsDown, faExpand, faExpandAlt, faCompress, faCompressArrowsAlt, faCompressAlt } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faPlus, faRedo, faExpandAlt, faCompressAlt } from '@fortawesome/free-solid-svg-icons';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { QuestionDetailsModel } from 'src/models/question-details.model';
-import { QuestionActivityModel } from 'src/models/question-activity.model';
 import { debounceTime } from 'rxjs/operators';
 
 @Component

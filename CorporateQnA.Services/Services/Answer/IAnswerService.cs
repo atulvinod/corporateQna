@@ -13,7 +13,7 @@ namespace CorporateQnA.Services
 
         public IEnumerable<AnswerDetails> GetAnswersForQuestion(GetAnswer getAnswer);
 
-        public int SetAnswerState(AnswerState state);
+        public int SetAnswerAsSolution(AnswerAsSolution state);
 
     }
 }

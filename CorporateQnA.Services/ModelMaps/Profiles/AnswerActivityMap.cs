@@ -13,7 +13,7 @@ namespace CorporateQnA.Services.ModelMaps
         public AnswerActivityMap()
         {
             CreateMap<Models.AnswerActivity, CorporateQnA.Models.AnswerActivity>()
-                .ForMember(x => x.ActivityType, opt => opt.MapFrom(z => (AnswerActivityType)z.ActivityType));
+                .ForMember(x => x.ActivityType, opt => opt.MapFrom(z => (ActivityTypes)z.ActivityType));
 
             CreateMap<CorporateQnA.Models.AnswerActivity, Models.AnswerActivity>()
                 .ForMember(x => x.ActivityType, opt => opt.MapFrom(z => (short)(z.ActivityType)));

@@ -14,7 +14,7 @@ namespace CorporateQnA.Services.ModelMaps
         {
 
             CreateMap<Models.QuestionActivity, CorporateQnA.Models.QuestionActivity>()
-                    .ForMember(x => x.ActivityType, opt => opt.MapFrom(z => (QuestionActivityType)z.ActivityType));
+                    .ForMember(x => x.ActivityType, opt => opt.MapFrom(z => (ActivityTypes)z.ActivityType));
 
             CreateMap<CorporateQnA.Models.QuestionActivity, Models.QuestionActivity>()
                 .ForMember(x => x.ActivityType, opt => opt.MapFrom(z => (short)(z.ActivityType)));

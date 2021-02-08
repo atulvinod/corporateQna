@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace CorporateQnA.Models.Enums
 {
-    public enum AnswerActivityType
+    public enum ActivityTypes
     {
         Like,
-        Dislike
+        Dislike,
+        View,
+        Resolved
     }
 }

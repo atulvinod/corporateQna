@@ -26,7 +26,7 @@ export class AnswerService {
         return this.http.post(this.httpRoot + "/activity/answer", activity);
     }
 
-    setAnswerState(state: AnswerStateModel) {
-        return this.http.post(this.httpRoot + "/answer/setstate", state);
+    setAnswerAsSolution(state: AnswerStateModel) {
+        return this.http.post(this.httpRoot + "/answer/setsolution", state);
     }   
 }

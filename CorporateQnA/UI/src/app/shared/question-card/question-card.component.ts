@@ -1,5 +1,5 @@
+import { ActivityTypes } from './../../../models/enum/activity-types.enum';
 import { QuestionService } from 'src/app/services/question.service';
-import { QuestionActivityEnum } from './../../../models/enum/question-activity.enum';
 import { faChevronUp, faEye } from '@fortawesome/free-solid-svg-icons';
 import { Component, Input, OnInit } from '@angular/core';
 import { QuestionDetailsModel } from 'src/models/question-details.model';
@@ -37,7 +37,7 @@ export class QuestionCardComponent implements OnInit {
         let act = new QuestionActivityModel({
             userId: this.user['userId'],
             questionId: this.question.questionId,
-            activityType: QuestionActivityEnum.Like
+            activityType: ActivityTypes.Like
         })
 
         this.questionService.createQuestionActivity(act).subscribe(value => {
@@ -52,7 +52,7 @@ export class QuestionCardComponent implements OnInit {
         let act = new QuestionActivityModel({
             userId: this.user['userId'],
             questionId: this.question.questionId,
-            activityType: QuestionActivityEnum.View
+            activityType: ActivityTypes.View
         })
 
         //send view request

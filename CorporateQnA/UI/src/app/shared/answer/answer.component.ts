@@ -1,16 +1,14 @@
-import { QuestionActivityEnum } from './../../../models/enum/question-activity.enum';
+import { ActivityTypes } from '../../../models/enum/activity-types.enum';
 import { QuestionActivityModel } from 'src/models/question-activity.model';
 import { QuestionService } from 'src/app/services/question.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { AnswerActivityModel } from '../../../models/answer-activity.model';
-import { AnswerActivityEnum } from '../../../models/enum/answer-activity.enum';
 import { AnswerService } from '../../services/answer.service';
 import { AnswerDetailsModel } from '../../../models/answer-details.model';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import * as moment from 'moment';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
-import { AnswerStateModel } from 'src/models/answer-state.model';
 
 @Component
     ({
@@ -56,7 +54,7 @@ export class AnswerComponent {
                 questionId: this.answer.questionId,
                 answerId: this.answer.answerId,
                 userId: Number(this.answer.answeredBy),
-                activityType : QuestionActivityEnum.Resolved
+                activityType : ActivityTypes.Resolved
             })
 
             this.questionService.createQuestionActivity(questionSolvedActivity).subscribe(() => {
@@ -69,7 +67,7 @@ export class AnswerComponent {
         })
     }
 
-    createAnswerActivity(activityType: AnswerActivityEnum) {
+    createAnswerActivity(activityType: ActivityTypes) {
 
         let activity = new AnswerActivityModel({
             userId: this.user['userId'],
@@ -91,7 +89,7 @@ export class AnswerComponent {
                     break;
                 //newly created activity, user was neutral before
                 case 1:
-                    if (activityType == AnswerActivityEnum.Like) {
+                    if (activityType == ActivityTypes.Like) {
                         this.answer.likeCount++;
                         this.answer.likedByUser = true;
                     } else {
