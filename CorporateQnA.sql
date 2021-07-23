@@ -1,5 +1,5 @@
 
-CREATE TABLE [CorporateQ&A].[dbo].Question(
+CREATE TABLE [CorporateQA].[dbo].Question(
 Id INT PRIMARY KEY IDENTITY(1,1),
 CategoryId INT NOT NULL,
 AskedBy INT NOT NULL,
@@ -8,7 +8,7 @@ Content NVARCHAR(MAX) NOT NULL,
 AskedOn DATETIME DEFAULT SYSDATETIME(),
 );
 
-CREATE TABLE [CorporateQ&A].[dbo].Category(
+CREATE TABLE [CorporateQA].[dbo].Category(
 Id INT PRIMARY KEY IDENTITY(1,1),
 Name VARCHAR(80) NOT NULL,
 Description VARCHAR(100) NOT NULL,
@@ -17,7 +17,7 @@ CreatedOn DATETIME DEFAULT SYSDATETIME(),
 );
 
 DROP TABLE Answer;
-CREATE TABLE [CorporateQ&A].[dbo].Answer(
+CREATE TABLE [CorporateQA].[dbo].Answer(
 Id INT PRIMARY KEY IDENTITY(1,1),
 AnsweredBy INT NOT NULL,
 QuestionId INT NOT NULL,
@@ -26,7 +26,7 @@ IsBestSolution BIT DEFAULT 0,
 AnsweredOn DATETIME DEFAULT SYSDATETIME(),
 )
 
-CREATE TABLE [CorporateQ&A].[dbo].QuestionActivity(
+CREATE TABLE [CorporateQA].[dbo].QuestionActivity(
 Id INT PRIMARY KEY IDENTITY(1,1),
 UserId INT NOT NULL,
 QuestionId INT NOT NULL,
@@ -34,7 +34,7 @@ ActivityType SMALLINT,
 CreatedAt DATETIME DEFAULT SYSDATETIME(),
 )
 
-CREATE TABLE [CorporateQ&A].[dbo].AnswerActivity(
+CREATE TABLE [CorporateQA].[dbo].AnswerActivity(
 Id INT PRIMARY KEY IDENTITY(1,1),
 UserId INT NOT NULL,
 AnswerId INT NOT NULL,
@@ -42,7 +42,7 @@ ActivityType SMALLINT,
 CreatedAt DATETIME DEFAULT SYSDATETIME(),
 );
 
-CREATE TABLE [CorporateQ&A].[dbo].Users(
+CREATE TABLE [CorporateQA].[dbo].Users(
 Id INT PRIMARY KEY IDENTITY(1,1),
 Name NVARCHAR(100) NOT NULL,
 Email NVARCHAR(100) UNIQUE NOT NULL,
@@ -53,15 +53,15 @@ Department NVARCHAR(100) NOT NULL,
 go
 
 CREATE VIEW QuestionAnswerView AS
-SELECT q.Id as 'QuestionId',q.AskedBy ,q.Title, q.CategoryId, q.Content, q.AskedOn, a.Id as 'AnswerId' , a.AnsweredBy, a.AnsweredOn FROM [CorporateQ&A].dbo.Question q LEFT JOIN [CorporateQ&A].dbo.Answer a ON q.Id = a.QuestionId
+SELECT q.Id as 'QuestionId',q.AskedBy ,q.Title, q.CategoryId, q.Content, q.AskedOn, a.Id as 'AnswerId' , a.AnsweredBy, a.AnsweredOn FROM [CorporateQA].dbo.Question q LEFT JOIN [CorporateQA].dbo.Answer a ON q.Id = a.QuestionId
 Go
 
 
 
 CREATE VIEW QuestionCategoryView AS
 (Select c.Id as 'CategoryId', c.Name, c.Description, q.Id as 'QuestionId', q.AskedOn  from
-[CorporateQ&A].dbo.Category c left join
-[CorporateQ&A].dbo.Question q on q.CategoryId = c.Id);
+[CorporateQA].dbo.Category c left join
+[CorporateQA].dbo.Question q on q.CategoryId = c.Id);
 Go;
 
 
@@ -97,14 +97,14 @@ Create view AnswerDetails As
 SELECT adatq.AnswerId, adatq.LikeCount, adatq.DislikeCount, adatq.Content, adatq.AnsweredBy, adatq.AnsweredOn, adatq.IsBestSolution , adatq.QuestionId ,u.Name as 'AnsweredByName', q.AskedBy  FROM (
 SELECT adat.AnswerId, adat.LikeCount, adat.DislikeCount, a.Content, a.AnsweredBy, a.AnsweredOn, a.IsBestSolution , a.QuestionId FROM
 	(SELECT a.Id as 'AnswerId',
-	(SELECT COUNT(*) FROM [CorporateQ&A].dbo.AnswerActivity aa1 WHERE aa1.AnswerId = a.Id AND aa1.ActivityType = 0) as 'LikeCount',
-	(SELECT COUNT(*) FROM [CorporateQ&A].dbo.AnswerActivity aa1 WHERE aa1.AnswerId = a.Id AND aa1.ActivityType = 1) as 'DislikeCount'
-	FROM [CorporateQ&A].dbo.Answer a GROUP BY a.Id) as adat
+	(SELECT COUNT(*) FROM [CorporateQA].dbo.AnswerActivity aa1 WHERE aa1.AnswerId = a.Id AND aa1.ActivityType = 0) as 'LikeCount',
+	(SELECT COUNT(*) FROM [CorporateQA].dbo.AnswerActivity aa1 WHERE aa1.AnswerId = a.Id AND aa1.ActivityType = 1) as 'DislikeCount'
+	FROM [CorporateQA].dbo.Answer a GROUP BY a.Id) as adat
 INNER JOIN
-[CorporateQ&A].dbo.Answer a On a.Id = adat.AnswerId
+[CorporateQA].dbo.Answer a On a.Id = adat.AnswerId
 ) as adatq
-INNER JOIN [CorporateQ&A].dbo.Users u ON u.Id = adatq.AnsweredBy
-INNER JOIN [CorporateQ&A].dbo.Question q On q.Id = adatq.QuestionId;
+INNER JOIN [CorporateQA].dbo.Users u ON u.Id = adatq.AnsweredBy
+INNER JOIN [CorporateQA].dbo.Question q On q.Id = adatq.QuestionId;
 Go;
 
 DROP PROCEDURE GetAnswers;
@@ -112,9 +112,9 @@ GO;
 
 CREATE Procedure GetAnswers(@questionId as INT, @userId as INT) AS BEGIN
 Select * , 
-(SELECT Count(*) FROM [CorporateQ&A].dbo.AnswerActivity aa WHERE aa.ActivityType = 0 AND aa.UserId = @userId AND aa.AnswerId = ad.AnswerId) as 'LikedByUser' ,
-(SELECT Count(*) FROM [CorporateQ&A].dbo.AnswerActivity aa WHERE aa.ActivityType = 1 AND aa.UserId = @userId AND aa.AnswerId = ad.AnswerId) as 'DisLikedByUser' 
-from [CorporateQ&A].dbo.AnswerDetails ad WHERE ad.QuestionId = @questionId; 
+(SELECT Count(*) FROM [CorporateQA].dbo.AnswerActivity aa WHERE aa.ActivityType = 0 AND aa.UserId = @userId AND aa.AnswerId = ad.AnswerId) as 'LikedByUser' ,
+(SELECT Count(*) FROM [CorporateQA].dbo.AnswerActivity aa WHERE aa.ActivityType = 1 AND aa.UserId = @userId AND aa.AnswerId = ad.AnswerId) as 'DisLikedByUser' 
+from [CorporateQA].dbo.AnswerDetails ad WHERE ad.QuestionId = @questionId; 
 END;
 Go;
 

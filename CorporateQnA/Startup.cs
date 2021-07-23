@@ -107,6 +107,8 @@ namespace CorporateQnA
             }
 
             app.UseHttpsRedirection();
+            
+            app.UseDefaultFiles();
 
             app.UseStaticFiles();
 
