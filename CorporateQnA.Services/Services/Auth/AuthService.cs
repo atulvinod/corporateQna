@@ -88,6 +88,7 @@ namespace CorporateQnA.Services.Auth
             var newUser = new AppIdentityUser
             {
                 UserId = userId,
+                UserName = username,
                 Email = email,
             };
 
