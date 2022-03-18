@@ -7,24 +7,93 @@ using CorporateQnA.Models;
 using IdentityModel;
 using IdentityServer4;
 using IdentityServer4.Models;
+using IdentityServer4.EntityFramework.DbContexts;
+using IdentityServer4.EntityFramework.Mappers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+using Microsoft.AspNetCore.Builder;
 
 namespace CorporateQnA.Config
 {
     public static class IdentityServerConfig
     {
-        
+
         public static void InitializeIdentityServerConfig(IServiceCollection services, IConfiguration configuration)
         {
+            string connectionString = configuration.GetConnectionString("DB");
+
+            var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+
             services
              .AddIdentityServer()
+             .AddDeveloperSigningCredential()
              .AddAspNetIdentity<AppIdentityUser>()
-             //.AddInMemoryApiResources(IdentityServerConfig.GetApis())
-             //.AddInMemoryClients(IdentityServerConfig.GetClients())
-             .AddInMemoryApiScopes(IdentityServerConfig.GetApiScopes())
-             //.AddInMemoryIdentityResources(IdentityServerConfig.GetIdentityResources())
-             .AddDeveloperSigningCredential();
+              .AddConfigurationStore(options =>
+              {
+                  options.ConfigureDbContext = builder =>
+                      builder.UseSqlServer(connectionString,
+                          sql => sql.MigrationsAssembly(migrationsAssembly));
+              })
+                .AddOperationalStore(options =>
+                {
+                // this adds the operational data from DB (codes, tokens, consents)
+                    options.ConfigureDbContext = builder =>
+                        builder.UseSqlServer(connectionString,
+                            sql => sql.MigrationsAssembly(migrationsAssembly));
+
+                    // this enables automatic token cleanup. this is optional.
+                    options.EnableTokenCleanup = true;
+                    options.TokenCleanupInterval = 30;
+                });
+        }
+
+        public static void InitializeDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                serviceScope.ServiceProvider.GetRequiredService<PersistedGrantDbContext>().Database.Migrate();
+
+                var context = serviceScope.ServiceProvider.GetRequiredService<ConfigurationDbContext>();
+                context.Database.Migrate();
+                if (!context.Clients.Any())
+                {
+                    foreach (var client in IdentityServerConfig.GetClients())
+                    {
+                        context.Clients.Add(client.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
+
+                if (!context.IdentityResources.Any())
+                {
+                    foreach (var resource in IdentityServerConfig.GetIdentityResources())
+                    {
+                        context.IdentityResources.Add(resource.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
+
+                if (!context.ApiResources.Any())
+                {
+                    foreach (var resource in IdentityServerConfig.GetApis())
+                    {
+                        context.ApiResources.Add(resource.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
+
+                if (!context.ApiScopes.Any())
+                {
+                    foreach (var resource in IdentityServerConfig.GetApiScopes())
+                    {
+                        context.ApiScopes.Add(resource.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
+            
+            }
         }
 
         public static IEnumerable<IdentityResource> GetIdentityResources() => new List<IdentityResource>
