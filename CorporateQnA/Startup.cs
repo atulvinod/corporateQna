@@ -6,7 +6,10 @@ using CorporateQnA.Services;
 using CorporateQnA.Services.Auth;
 using CorporateQnA.Services.ModelMaps;
 using IdentityServer4;
+using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.Services;
+using IdentityServer4.EntityFramework.Mappers;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -33,8 +36,7 @@ namespace CorporateQnA
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
-
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();            
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(
@@ -66,14 +68,7 @@ namespace CorporateQnA
              .AddEntityFrameworkStores<AppDbContext>()
              .AddDefaultTokenProviders();
 
-            services
-              .AddIdentityServer()
-              .AddAspNetIdentity<AppIdentityUser>()
-              .AddInMemoryApiResources(IdentityServerConfig.GetApis())
-              .AddInMemoryClients(IdentityServerConfig.GetClients())
-              .AddInMemoryApiScopes(IdentityServerConfig.GetApiScopes())
-              .AddInMemoryIdentityResources(IdentityServerConfig.GetIdentityResources())
-              .AddDeveloperSigningCredential();
+            IdentityServerConfig.InitializeIdentityServerConfig(services, configuration);
 
             services.AddDbContext<AppDbContext>(options =>
             {
@@ -88,6 +83,7 @@ namespace CorporateQnA
 
                 //to logout
                 config.LogoutPath = "/Auth/Logout";
+
             });
 
             services.AddScoped<IAuthService, AuthService>();
@@ -101,6 +97,8 @@ namespace CorporateQnA
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            IdentityServerConfig.InitializeDatabase(app);
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
