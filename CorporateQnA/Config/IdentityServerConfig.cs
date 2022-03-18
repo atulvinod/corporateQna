@@ -3,14 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CorporateQnA.Models;
 using IdentityModel;
 using IdentityServer4;
 using IdentityServer4.Models;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CorporateQnA.Config
 {
     public static class IdentityServerConfig
     {
+        
+        public static void InitializeIdentityServerConfig(IServiceCollection services, IConfiguration configuration)
+        {
+            services
+             .AddIdentityServer()
+             .AddAspNetIdentity<AppIdentityUser>()
+             //.AddInMemoryApiResources(IdentityServerConfig.GetApis())
+             //.AddInMemoryClients(IdentityServerConfig.GetClients())
+             .AddInMemoryApiScopes(IdentityServerConfig.GetApiScopes())
+             //.AddInMemoryIdentityResources(IdentityServerConfig.GetIdentityResources())
+             .AddDeveloperSigningCredential();
+        }
+
         public static IEnumerable<IdentityResource> GetIdentityResources() => new List<IdentityResource>
         {
             new IdentityResources.OpenId(),
@@ -26,7 +42,6 @@ namespace CorporateQnA.Config
 
         public static IEnumerable<ApiScope> GetApiScopes() => new List<ApiScope>
         {
-            new ApiScope("BookMyShow"),
             new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
         };
 
@@ -52,7 +67,8 @@ namespace CorporateQnA.Config
                 },
                 PostLogoutRedirectUris =
                 {
-                    "http://localhost:4200"
+                    "http://localhost:4200",
+                    "https://localhost:5001",
                 },
                 AllowedScopes =
                 {
