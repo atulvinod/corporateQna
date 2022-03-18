@@ -89,7 +89,6 @@ namespace CorporateQnA.Services.Auth
             {
                 UserId = userId,
                 Email = email,
-                UserName = username
             };
 
             var result = await this.userManager.CreateAsync(newUser, password);
@@ -106,8 +105,8 @@ namespace CorporateQnA.Services.Auth
                     errors.Add(i.Description);
                 }
             }
-            //as there are no errors
-            return null;
+
+            return errors;
         }
 
         public async Task<string> Logout(string logoutId)

@@ -25,7 +25,8 @@ namespace CorporateQnA.Services
             var check = this.database.FirstOrDefault<Users>("WHERE Email = @0", user.Email);
             if (check == null)
             {
-                return (int)this.database.Insert(user);
+                var userId = (int)this.database.Insert(user);
+                return userId;
             }
             else
             {

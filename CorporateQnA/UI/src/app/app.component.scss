@@ -364,7 +364,7 @@ nav {
   grid-template-columns: $home-grid-width auto;
   grid-template-rows: auto;
   border-radius: 5px;
-  overflow: hidden;
+  overflow-y: visible;
   border: 1px solid lightgrey;
 }
 
@@ -772,17 +772,22 @@ nav {
   .editor-container {
     height: 100%;
   }
-  .NgxEditor__Wrapper {
-    border: none;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
 
-  .NgxEditor__MenuBar {
-    background-color: white;
-    border: none !important;
+  .NgxEditor{
+    height: 100%;
+
+    &__Wrapper{
+      border: none;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    &__MenuBar{
+      background-color: white;
+      border: none !important;
+    }
   }
 }
 
@@ -835,18 +840,29 @@ nav {
   .editor-container {
     height: 100%;
     background-color: #fff;
-    .NgxEditor__Wrapper {
+
+    ngx-editor {
       height: 100%;
-      display: flex;
-      justify-content: space-between;
-      flex-direction: column;
-      border: none;
     }
 
-    .NgxEditor__MenuBar {
-      background-color: white;
-      border: none !important;
+    .NgxEditor{
+      height: 100%;
+      &__Wrapper {
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        border: none;
+      }
+      &__MenuBar {
+        background-color: white;
+        border: none !important;
+      }
+      &__Content{
+        height: 100%;
+      }
     }
+
   }
 }
 
