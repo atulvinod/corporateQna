@@ -17,7 +17,7 @@ jobs:
         HEROKU_API_KEY: ${{secrets.HEROKU_API_KEY}}
       run: heroku container:login
     - name: Build the Docker image
-      run: docker build -t corporateqa https://github.com/atulvinod/corporateQna.git
+      run: docker build -t ../../
     - name: Publish to container repository
       env:
         HEROKU_API_KEY: ${{secrets.HEROKU_API_KEY}}
