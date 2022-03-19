@@ -27,7 +27,7 @@ namespace CorporateQnA.Controllers
         {
             try
             {
-                return Ok(this.categoryService.Create(category));
+                return Ok(this.categoryService.CreateCategory(category));
             }
             catch (Exception e)
             {
@@ -38,14 +38,14 @@ namespace CorporateQnA.Controllers
         [HttpGet]
         public  IEnumerable<Category> GetCategory()
         {
-            return this.categoryService.GetCategories();
+            return this.categoryService.GetAllCategories();
         }
 
         [HttpGet]
         [Route("details")]
         public IEnumerable<CategoryDetails> GetCategoryDetails()
         {
-            return this.categoryService.GetCategoryDetails();
+            return this.categoryService.GetAllCategoryDetails();
         }
     }
 }

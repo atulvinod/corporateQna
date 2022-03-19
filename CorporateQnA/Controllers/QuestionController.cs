@@ -28,7 +28,7 @@ namespace CorporateQnA.Controllers
         {
             try
             {
-                return Ok(this.questionService.Create(question));
+                return Ok(this.questionService.CreateQuestion(question));
             }
             catch (Exception e)
             {
@@ -39,7 +39,7 @@ namespace CorporateQnA.Controllers
         [HttpGet]
         public IEnumerable<QuestionDetails> GetQuestions()
         {
-            return this.questionService.GetQuestions();
+            return this.questionService.GetAllQuestions();
         }
 
         [HttpPost]
@@ -60,7 +60,7 @@ namespace CorporateQnA.Controllers
         [HttpGet]
         public IEnumerable<QuestionDetails> UserQuestions(int userId)
         {
-            return this.questionService.QuestionsByUser(userId);
+            return this.questionService.FindQuestionsByUser(userId);
 
         }
     }

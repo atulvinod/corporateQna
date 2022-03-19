@@ -1,4 +1,5 @@
 ﻿using CorporateQnA.Models;
+using CorporateQnA.Models.ViewModels;
 using CorporateQnA.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -21,11 +22,11 @@ namespace CorporateQnA.Controllers
         }
 
         [HttpPost]
-        public IActionResult Answer(Answer answer)
+        public IActionResult CreateAnswer(Answer answer)
         {
             try
             {
-                return Ok(this.answerService.Create(answer));
+                return Ok(this.answerService.CreateAnswer(answer));
             }
             catch (Exception e)
             {
@@ -35,7 +36,7 @@ namespace CorporateQnA.Controllers
 
         [HttpPost]
         [Route("list")]
-        public IActionResult GetAnswersForQuestion(GetAnswer answer)
+        public IActionResult GetAnswersForQuestion(GetAnswerForQuestion answer)
         {
             try
             {

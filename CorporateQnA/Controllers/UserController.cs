@@ -24,14 +24,14 @@ namespace CorporateQnA.Controllers
         [Route("all")]
         public IEnumerable<UserDetails> GetAllUsersDetails()
         {
-            return this.userService.GetUsersDetails();
+            return this.userService.GetAllUsersDetails();
         }
 
         [HttpGet]
         [Route("user")]
         public UserDetails GetSingleUserDetails(int userId)
         {
-            return this.userService.GetSingleUserDetails(userId);
+            return this.userService.GetUserDetailsById(userId);
         }
     }
 }
