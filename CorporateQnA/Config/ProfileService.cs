@@ -30,7 +30,7 @@ namespace CorporateQnA.Config
         {
             var sub = context.Subject.GetSubjectId();
             var user = await this.userManager.FindByIdAsync(sub);
-            var userData = this.userService.GetUser(user.UserId);
+            var userData = this.userService.GetUserById(user.UserId);
             var principal = await userClaimsPrincipalFactory.CreateAsync(user);
 
             var claims = principal.Claims.ToList();
