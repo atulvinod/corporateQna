@@ -1,27 +1,18 @@
-using AutoMapper;
 using CorporateQnA.Config;
 using CorporateQnA.Data;
 using CorporateQnA.Models;
 using CorporateQnA.Services;
 using CorporateQnA.Services.Auth;
-using CorporateQnA.Services.ModelMaps;
 using IdentityServer4;
-using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.Services;
-using IdentityServer4.EntityFramework.Mappers;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CorporateQnA
 {
