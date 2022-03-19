@@ -17,4 +17,4 @@ WORKDIR /source
 RUN dotnet publish -c Release -o out
 WORKDIR /source/out
 EXPOSE 80 443 5000 5001
-ENTRYPOINT ["dotnet","CorporateQnA.dll"]
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet CorporateQnA.dll

@@ -19,7 +19,7 @@ export function configureAuth(oidcConfigService: OidcConfigService) {
   return () =>
     oidcConfigService.withConfig({
       clientId: 'angular',
-      stsServer: 'https://localhost:5001',
+      stsServer: window.location.origin,
       responseType: 'code',
       redirectUrl: window.location.origin,
       postLogoutRedirectUri: window.location.origin,
