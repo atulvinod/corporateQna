@@ -14,4 +14,4 @@ RUN node_modules/.bin/ng build --prod
 WORKDIR /source
 RUN dotnet publish -c Release -o out
 WORKDIR /source/out
-CMD ASPNETCORE_URLS=https://*:$PORT dotnet CorporateQnA.dll
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet CorporateQnA.dll
