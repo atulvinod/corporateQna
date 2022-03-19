@@ -10,18 +10,26 @@ using AutoMapper;
 using static CorporateQnA.Models.Enums.SearchFilterTypes;
 using CorporateQnA.Models.Enums;
 using CorporateQnA.Services.ModelMaps.Extensions;
+using CorporateQnA.Services.Services;
 
 namespace CorporateQnA.Services
 {
-    public class QuestionService : IQuestionService
+    public class QuestionService : BaseService, IQuestionService
     {
-        private readonly PetaPoco.Database database;
-        public QuestionService(IConfiguration configuration)
+        /// <summary>
+        /// Initializes an instance of QuestionService
+        /// </summary>
+        /// <param name="configuration">The configuration</param>
+        public QuestionService(IConfiguration configuration) : base(configuration)
         {
-            this.database = new PetaPoco.Database(configuration.GetConnectionString("DB"), "System.Data.SqlClient");
         }
 
-        public int Create(Question question)
+        /// <summary>
+        /// Creates a new question
+        /// </summary>
+        /// <param name="question">The question model</param>
+        /// <returns>The created question identifier</returns>
+        public int CreateQuestion(Question question)
         {
             try
             {
@@ -35,25 +43,44 @@ namespace CorporateQnA.Services
             }
         }
 
-        public IEnumerable<QuestionDetails> GetQuestions()
+        /// <summary>
+        /// Gets all the questions available
+        /// </summary>
+        /// <returns>The question list</returns>
+        public IEnumerable<QuestionDetails> GetAllQuestions()
         {
             return this.database.Fetch<Models.QuestionDetails>("ORDER BY LikeCount DESC").MapCollectionTo<QuestionDetails>();
         }
 
-        public IEnumerable<QuestionDetails> SearchQuestion(SearchFilter search)
+        /// <summary>
+        /// Searches a question
+        /// </summary>
+        /// <param name="searchFilter">The search filter</param>
+        /// <returns>The found questions</returns>
+        public IEnumerable<QuestionDetails> SearchQuestion(SearchFilter searchFilter)
         {
             //check if searchInput is not null
-            search.searchInput = search.searchInput ?? "";
+            searchFilter.searchInput = searchFilter.searchInput ?? "";
 
             //query database for show values
-            return this.database.FetchProc<Models.QuestionDetails>("SearchQuestion", new { userId = search.userId, keyword = search.searchInput, categoryId = search.categoryId, sortBy = (short)search.SortBy, show = (short)search.Show }).MapCollectionTo<QuestionDetails>();
+            return this.database.FetchProc<Models.QuestionDetails>("SearchQuestion", new { userId = searchFilter.userId, keyword = searchFilter.searchInput, categoryId = searchFilter.categoryId, sortBy = (short)searchFilter.SortBy, show = (short)searchFilter.Show }).MapCollectionTo<QuestionDetails>();
         }
 
-        public IEnumerable<QuestionDetails> QuestionsByUser(int userId)
+        /// <summary>
+        /// Gets the questions found by user
+        /// </summary>
+        /// <param name="userId">The user id</param>
+        /// <returns>The found questions</returns>
+        public IEnumerable<QuestionDetails> FindQuestionsByUser(int userId)
         {
             return this.database.Fetch<Models.QuestionDetails>("WHERE AskedBy = @0", userId).MapCollectionTo<QuestionDetails>();
         }
 
+        /// <summary>
+        /// The questions answered by the user
+        /// </summary>
+        /// <param name="userId">The user id</param>
+        /// <returns>The questions</returns>
         public IEnumerable<QuestionDetails> QuestionsAnsweredByUser(int userId)
         {
             return this.database.Fetch<Models.QuestionDetails>("WHERE EXISTS(SELECT * FROM Answer a WHERE a.AnsweredBy = @0  AND a.QuestionId = QuestionDetails.QuestionId);", userId).MapCollectionTo<QuestionDetails>();

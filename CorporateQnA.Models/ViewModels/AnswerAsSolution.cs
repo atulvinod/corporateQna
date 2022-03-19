@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CorporateQnA.Models
+namespace CorporateQnA.Models.ViewModels
 {
     public class AnswerAsSolution
     {

@@ -1,58 +1,64 @@
 ﻿using CorporateQnA.Models;
 using CorporateQnA.Models.Enums;
 using CorporateQnA.Services.ModelMaps.Extensions;
+using CorporateQnA.Services.Services;
 using Microsoft.Extensions.Configuration;
 using System;
 
 namespace CorporateQnA.Services
 {
-    public class ActivityService : IActivityService
+    public class ActivityService : BaseService, IActivityService
     {
-        private readonly PetaPoco.Database database;
 
-        public ActivityService(IConfiguration configuration)
-        {
-            this.database = new PetaPoco.Database(configuration.GetConnectionString("DB"), "System.Data.SqlClient");
-        }
+        /// <summary>
+        /// Initializes an instance of Activity service
+        /// </summary>
+        /// <param name="configuration">The configuration</param>
+        public ActivityService(IConfiguration configuration) : base(configuration){}
 
+        /// <summary>
+        /// Creates answer activity
+        /// </summary>
+        /// <param name="answerActivity">The answer activity</param>
+        /// <returns>The identifier</returns>
         public int CreateAnswerActivity(AnswerActivity answerActivity)
         {
             try
             {
 
-                var d = answerActivity.MapTo<Models.AnswerActivity>();
-                var check = this.database.FirstOrDefault<Models.AnswerActivity>("WHERE UserId = @0 AND AnswerId = @1", d.UserId, d.AnswerId);
+                var answerActivityModel = answerActivity.MapTo<Models.AnswerActivity>();
+                var existingAnswerActivity = this.database.FirstOrDefault<Models.AnswerActivity>("WHERE UserId = @0 AND AnswerId = @1", answerActivityModel.UserId, answerActivityModel.AnswerId);
 
-                if (check == null)
+                if (existingAnswerActivity == null)
                 {
-                    d.ActivityType = (short)answerActivity.ActivityType;
-                    d.CreatedAt = DateTime.Now;
-                    this.database.Insert(d);
+                    answerActivityModel.ActivityType = (short)answerActivity.ActivityType;
+                    answerActivityModel.CreatedAt = DateTime.Now;
+                    this.database.Insert(answerActivityModel);
                     return 1;
                 }
 
                 //both activity are the same, then remove the activity to set the state to neutral
-                if (check.ActivityType == (short)answerActivity.ActivityType)
+                if (existingAnswerActivity.ActivityType == (short)answerActivity.ActivityType)
                 {
-                    this.database.Delete(check);
+                    this.database.Delete(existingAnswerActivity);
                     return 0;
                 }
 
                 //user has liked before, next state is dislike
-                if (check.ActivityType == (short)ActivityTypes.Like && answerActivity.ActivityType == ActivityTypes.Dislike)
+                if (existingAnswerActivity.ActivityType == (short)ActivityTypes.Like && answerActivity.ActivityType == ActivityTypes.Dislike)
                 {
-                    check.ActivityType = (short)ActivityTypes.Dislike;
-                    check.CreatedAt = DateTime.Now;
-                    this.database.Update(check);
+                    existingAnswerActivity.ActivityType = (short)ActivityTypes.Dislike;
+                    existingAnswerActivity.CreatedAt = DateTime.Now;
+                    this.database.Update(existingAnswerActivity);
                     return 2;
                 }
 
                 //user has disliked before, next state is like
-                if (check.ActivityType == (short)ActivityTypes.Dislike && answerActivity.ActivityType == ActivityTypes.Like)
+                if (existingAnswerActivity.ActivityType == (short)ActivityTypes.Dislike && answerActivity.ActivityType == ActivityTypes.Like)
                 {
-                    check.ActivityType = (short)ActivityTypes.Like;
-                    check.CreatedAt = DateTime.Now;
-                    this.database.Update(check);
+                    existingAnswerActivity.ActivityType = (short)ActivityTypes.Like;
+                    existingAnswerActivity.CreatedAt = DateTime.Now;
+                    this.database.Update(existingAnswerActivity);
                     return 3;
                 }
             }
@@ -64,16 +70,21 @@ namespace CorporateQnA.Services
             return 0;
         }
 
+        /// <summary>
+        /// Creates question activity
+        /// </summary>
+        /// <param name="questionActivity">The question activity</param>
+        /// <returns>The identifier</returns>
         public int CreateQuestionActivity(QuestionActivity questionActivity)
         {
             try
             {
                 var dataModel = questionActivity.MapTo<Models.QuestionActivity>();
-                var activity = this.database.FirstOrDefault<Models.QuestionActivity>("WHERE UserId = @0 AND QuestionId = @1 AND ActivityType = @2", dataModel.UserId, dataModel.QuestionId, dataModel.ActivityType);
+                var existingActivity = this.database.FirstOrDefault<Models.QuestionActivity>("WHERE UserId = @0 AND QuestionId = @1 AND ActivityType = @2", dataModel.UserId, dataModel.QuestionId, dataModel.ActivityType);
 
                 if (questionActivity.ActivityType == ActivityTypes.Resolved)
                 {
-                    if (activity == null)
+                    if (existingActivity == null)
                     {
                         dataModel.CreatedAt = DateTime.Now;
                         this.database.Insert(dataModel);
@@ -81,7 +92,7 @@ namespace CorporateQnA.Services
                     }
                     else
                     {
-                        this.database.Delete(activity);
+                        this.database.Delete(existingActivity);
                         this.database.Update<Answer>("SET IsBestSolution = 0 WHERE Id = @0", questionActivity.AnswerId);
                     }
 
@@ -89,7 +100,7 @@ namespace CorporateQnA.Services
                 }
                 else
                 {
-                    if (activity == null)
+                    if (existingActivity == null)
                     {
                         dataModel.CreatedAt = DateTime.Now;
                         this.database.Insert(dataModel);

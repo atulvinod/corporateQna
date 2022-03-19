@@ -14,6 +14,13 @@ namespace CorporateQnA.Services.Auth
         private readonly IIdentityServerInteractionService interactionService;
         private readonly IUserService userService;
 
+        /// <summary>
+        /// Initializes an instance of AuthService
+        /// </summary>
+        /// <param name="signInManager">The signin manager</param>
+        /// <param name="userManager">The user manager</param>
+        /// <param name="interactionService">Identity interaction service</param>
+        /// <param name="userService">The user service</param>
         public AuthService(SignInManager<AppIdentityUser> signInManager, UserManager<AppIdentityUser> userManager,
               IIdentityServerInteractionService interactionService, IUserService userService)
         {
@@ -26,6 +33,12 @@ namespace CorporateQnA.Services.Auth
             this.signInManager = signInManager;
         }
 
+        /// <summary>
+        /// Initiates user login
+        /// </summary>
+        /// <param name="email">The user email</param>
+        /// <param name="password">The user password</param>
+        /// <returns>true if user has successfully logged in</returns>
         public async Task<bool> Login(string email, string password)
         {
             var getUser = await this.userManager.FindByEmailAsync(email);
@@ -43,16 +56,47 @@ namespace CorporateQnA.Services.Auth
             return false;
         }
 
+        /// <summary>
+        /// Initiates user registration
+        /// </summary>
+        /// <param name="name">The user's name</param>
+        /// <param name="username">The users' username</param>
+        /// <param name="email">The email</param>
+        /// <param name="password">The user password</param>
+        /// <param name="location">The user location</param>
+        /// <param name="position">The user position</param>
+        /// <param name="department">The user department</param>
+        /// <returns>null if successful registration, else validation errors</returns>
         public async Task<List<string>> Register(string name, string username, string email, string password, string location, string position, string department)
         {
-            List<string> errors = new List<string>();
-            var user = await this.userManager.FindByEmailAsync(email);
+            List<string> validationErrors = new();
+            bool isUserAvailable = (await this.userManager.FindByEmailAsync(email)) != null || (await this.userManager.FindByNameAsync(username)) != null;
 
             //if the user already exits
-            if (user != null)
+            if (isUserAvailable)
             {
-                errors.Add("User already exists");
-                return errors; ;
+                validationErrors.Add("User already exists");
+                return validationErrors;
+            }
+
+            var passwordValidators = this.userManager.PasswordValidators;
+
+            foreach (var validator in passwordValidators)
+            {
+                var passwordResult = await validator.ValidateAsync(this.userManager, null, password);
+
+                if (!passwordResult.Succeeded)
+                {
+                    foreach (var error in passwordResult.Errors)
+                    {
+                        validationErrors.Add(error.Description);
+                    }
+                }
+            }
+            //check if password validation didnt add any errors
+            if(validationErrors.Count != 0)
+            {
+                return validationErrors;
             }
 
             var appUser = new Users
@@ -64,52 +108,38 @@ namespace CorporateQnA.Services.Auth
                 Position = position
             };
 
-            var validators = this.userManager.PasswordValidators;
-
-            foreach (var validator in validators)
-            {
-                var passwordResult = await validator.ValidateAsync(this.userManager, null, password);
-
-                if (!passwordResult.Succeeded)
-                {
-                    foreach (var error in passwordResult.Errors)
-                    {
-                        errors.Add(error.Description);
-                    }
-                }
-            }
-            //check if password validation didnt add any errors
-            if(errors.Count != 0)
-            {
-                return errors;
-            }
-
-            var userId = this.userService.Create(appUser);
-            var newUser = new AppIdentityUser
+            var userId = this.userService.CreateUser(appUser);
+            
+            var newIdentityUser = new AppIdentityUser
             {
                 UserId = userId,
                 UserName = username,
                 Email = email,
             };
 
-            var result = await this.userManager.CreateAsync(newUser, password);
+            var createUserResult = await this.userManager.CreateAsync(newIdentityUser, password);
 
-            if (result.Succeeded)
+            if (createUserResult.Succeeded)
             {
-                await this.signInManager.SignInAsync(newUser, false);
+                await this.signInManager.SignInAsync(newIdentityUser, false);
                 return null;
             }
             else
             {
-                foreach(var i in result.Errors)
+                foreach(var i in createUserResult.Errors)
                 {
-                    errors.Add(i.Description);
+                    validationErrors.Add(i.Description);
                 }
             }
 
-            return errors;
+            return validationErrors;
         }
 
+        /// <summary>
+        /// Initiates user logout
+        /// </summary>
+        /// <param name="logoutId">The logout id</param>
+        /// <returns>The post logout redirect uri</returns>
         public async Task<string> Logout(string logoutId)
         {
             await signInManager.SignOutAsync();
