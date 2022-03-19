@@ -69,6 +69,10 @@ namespace CorporateQnA
             services.ConfigureApplicationCookie(config =>
             {
                 config.Cookie.Name = "IdentityServer.Cookie";
+
+                //set same site as unspecified to fix cookie rejection, might have to change this
+                config.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Unspecified;
+
                 //the login path which serves the cookie
                 config.LoginPath = "/Auth/Login";
 
