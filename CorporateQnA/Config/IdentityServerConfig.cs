@@ -38,7 +38,7 @@ namespace CorporateQnA.Config
               })
                 .AddOperationalStore(options =>
                 {
-                // this adds the operational data from DB (codes, tokens, consents)
+                    // this adds the operational data from DB (codes, tokens, consents)
                     options.ConfigureDbContext = builder =>
                         builder.UseSqlServer(connectionString,
                             sql => sql.MigrationsAssembly(migrationsAssembly));
@@ -92,7 +92,7 @@ namespace CorporateQnA.Config
                     }
                     context.SaveChanges();
                 }
-            
+
             }
         }
 
@@ -125,19 +125,24 @@ namespace CorporateQnA.Config
                 RequireClientSecret=false,
                 AllowedCorsOrigins =
                 {
-                    "http://localhost:4200"
+                    "http://localhost:4200",
+                    "http://localhost:5000",
+                    "http://localhost:5001",
+                    "https://localhost:5000",
+                    "https://localhost:5001"
                 },
                 RedirectUris =
                 {
                     "http://localhost:4200",
                     "https://localhost:44384/Home/Signin",
                     "https://localhost:5001",
-
+                    "http://localhost:5000",
                 },
                 PostLogoutRedirectUris =
                 {
                     "http://localhost:4200",
                     "https://localhost:5001",
+                    "http://localhost:5000",
                 },
                 AllowedScopes =
                 {
